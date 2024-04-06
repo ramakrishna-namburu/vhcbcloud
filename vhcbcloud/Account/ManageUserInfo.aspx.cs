@@ -141,6 +141,7 @@ namespace vhcbcloud.Account
             cbLead.Checked = false;
             cbConservation.Checked = false;
             cbAdmin.Checked = false;
+            cbWQ.Checked = false;
         }
 
         protected void btnUserInfoSubmit_Click(object sender, EventArgs e)
@@ -163,7 +164,7 @@ namespace vhcbcloud.Account
                 {
                     AccountData.AddUserInfo(txtFname.Text, txtLname.Text, txtPassword.Text, txt1Email.Text, dfltPrg, dfltSecGrp, txtProjectNum.Text, txtPrimaryApplicant.Text, 
                         cbDashBoard.Checked, ddlDashBoard.SelectedValue.ToString(), isReceivePDF.Checked, 
-                        cbHousing.Checked, cbViability.Checked, cbConservation.Checked, cbAdmin.Checked, cbLead.Checked);
+                        cbHousing.Checked, cbViability.Checked, cbConservation.Checked, cbAdmin.Checked, cbLead.Checked, cbWQ.Checked);
                     BindUserInfo();
                     ClearFields();
                     lblErrorMsg.Text = "User Information added successfully";
@@ -172,7 +173,7 @@ namespace vhcbcloud.Account
                 {
                     AccountData.UpdateUserInfo(DataUtils.GetInt(hfUserId.Value), txtFname.Text, txtLname.Text, txtPassword.Text, txt1Email.Text, dfltPrg, dfltSecGrp, 
                         txtProjectNum.Text, txtPrimaryApplicant.Text, chkActive.Checked, cbDashBoard.Checked, ddlDashBoard.SelectedValue.ToString(), isReceivePDF.Checked,
-                        cbHousing.Checked, cbViability.Checked, cbConservation.Checked, cbAdmin.Checked, cbLead.Checked);
+                        cbHousing.Checked, cbViability.Checked, cbConservation.Checked, cbAdmin.Checked, cbLead.Checked, cbWQ.Checked);
 
                     gvUserInfo.EditIndex = -1;
                     BindUserInfo();
@@ -221,7 +222,7 @@ namespace vhcbcloud.Account
                 int dfltPgr = ((DropDownList)gvUserInfo.Rows[rowIndex].FindControl("ddlEditVhcbPrg")).SelectedIndex != 0 ? Convert.ToInt32(((DropDownList)gvUserInfo.Rows[rowIndex].FindControl("ddlEditVhcbPrg")).SelectedValue.ToString()) : 0;
                 int dflSecGrp = ((DropDownList)gvUserInfo.Rows[rowIndex].FindControl("ddlEditSecGroup")).SelectedIndex != 0 ? Convert.ToInt32(((DropDownList)gvUserInfo.Rows[rowIndex].FindControl("ddlEditSecGroup")).SelectedValue.ToString()) : 0;
 
-                AccountData.UpdateUserInfo(UserlId, strFirstName, strLastName, strPassword, strEmail, dfltPgr, dflSecGrp, "", "", chkActive.Checked, cbDashBoard.Checked, ddlDashBoard.SelectedValue.ToString(), isReceivePDF.Checked, false, false, false, false, false);
+                AccountData.UpdateUserInfo(UserlId, strFirstName, strLastName, strPassword, strEmail, dfltPgr, dflSecGrp, "", "", chkActive.Checked, cbDashBoard.Checked, ddlDashBoard.SelectedValue.ToString(), isReceivePDF.Checked, false, false, false, false, false, false);
 
                 gvUserInfo.EditIndex = -1; 
                 BindUserInfo();

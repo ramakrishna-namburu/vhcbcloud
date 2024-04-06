@@ -195,6 +195,16 @@
                                     <tr>
                                         <td colspan="3" style="height: 5px"></td>
                                     </tr>
+                                      <tr>
+                                        <td><span class="labelClass">Multi Racial</span>&nbsp;</td>
+                                        <td>
+                                            <asp:TextBox ID="txtMultiRacial" CssClass="clsTextBoxBlueSm" runat="server"></asp:TextBox>
+                                        </td>
+                                        <td>&nbsp;<span class="labelClass" id="spnMultiRacial" runat="server"></span></td>
+                                    </tr>
+                                     <tr>
+                                        <td colspan="3" style="height: 5px"></td>
+                                    </tr>
                                     <tr>
                                         <td><span class="labelClass">Unknown</span></td>
                                         <td>
@@ -416,6 +426,7 @@
             var NonHisp = parseInt($('#<%=txtNonHisp.ClientID%>').val(), 10);
             var UnknownEthnicity = parseInt($('#<%=txtUnknownEthnicity.ClientID%>').val(), 10);
             var Homeless = parseInt($('#<%=txtHomeless.ClientID%>').val(), 10);
+            var MultiRacial = parseInt($('#<%=txtMultiRacial.ClientID%>').val(), 10);
 
             var MarketRate = parseInt($('#<%=txtMarketRate.ClientID%>').val(), 10);
             var I100 = parseInt($('#<%=txtI100.ClientID%>').val(), 10);
@@ -440,6 +451,7 @@
             $('#<%= spnNonHisp.ClientID%>').text(parseFloat((NonHisp / TotalUnits) * 100).toFixed(2) + ' %');
             $('#<%= spnUnknownEthnicity.ClientID%>').text(parseFloat((UnknownEthnicity / TotalUnits) * 100).toFixed(2) + ' %');
             $('#<%= spnHomeless.ClientID%>').text(parseFloat((Homeless / TotalUnits) * 100).toFixed(2) + ' %');
+            $('#<%= spnMultiRacial.ClientID%>').text(parseFloat((MultiRacial / TotalUnits) * 100).toFixed(2) + ' %');
 
             $('#<%= spntMarketRate.ClientID%>').text(parseFloat((MarketRate / TotalUnits) * 100).toFixed(2) + ' %');
             $('#<%= spnI100.ClientID%>').text(parseFloat((I100 / TotalUnits) * 100).toFixed(2) + ' %');

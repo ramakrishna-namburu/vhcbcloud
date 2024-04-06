@@ -46,7 +46,13 @@
     <Reference Include="AjaxControlToolkit">
       <HintPath>..\packages\AjaxControlToolkit-1.0.20229.24049.1.0.20229.24049\lib\net40\AjaxControlToolkit.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.Web.Optimization.WebForms, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.WebForms.1.1.3\lib\net45\Microsoft.AspNet.Web.Optimization.WebForms.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.2.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
     <Reference Include="NodaTime, Version=2.4.4.0, Culture=neutral, PublicKeyToken=4226afe0d9b296d1, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\NodaTime.dll</HintPath>
@@ -60,6 +66,9 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -67,8 +76,13 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
-    <Reference Include="WebReportsApi">
-      <HintPath>..\..\..\..\Program Files\Exago\ExagoWebAPI\Bin\WebReportsApi.dll</HintPath>
+    <Reference Include="WebGrease, Version=1.5.2.14234, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="WebReportsApi, Version=2023.1.2.7, Culture=neutral, PublicKeyToken=3be9896d52b1d3a4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Program Files\Exago\ExagoWeb\Bin\WebReportsApi.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -77,6 +91,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AdditionalInfo.aspx" />
+    <Content Include="Attachments.aspx" />
     <Content Include="Content\Absolute.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -90,6 +106,8 @@
     <Content Include="Content\StyleSheet.css" />
     <Content Include="Content\Tabs.css" />
     <Content Include="EasementConfig.aspx" />
+    <Content Include="EasementTerms.aspx" />
+    <Content Include="FarmOperation.aspx" />
     <Content Include="FirstPage.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -104,11 +122,13 @@
     <Content Include="Login.aspx" />
     <Content Include="Page4.aspx" />
     <Content Include="FarmManagement.aspx" />
+    <Content Include="Page4new.aspx" />
     <Content Include="Scripts\accounting.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\chosen.jquery.js" />
     <Content Include="Scripts\CurrencyController.js" />
     <Content Include="Scripts\gridviewScroll.min.js" />
+    <Content Include="libman.json" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -144,16 +164,49 @@
     <None Include="Scripts\_references.js" />
     <Content Include="SecondPage.aspx" />
     <Content Include="ThirdPage.aspx" />
+    <Content Include="TownPlaning.aspx" />
     <Content Include="WaterManagement.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdditionalInfo.aspx.cs">
+      <DependentUpon>AdditionalInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdditionalInfo.aspx.designer.cs">
+      <DependentUpon>AdditionalInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Attachments.aspx.cs">
+      <DependentUpon>Attachments.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Attachments.aspx.designer.cs">
+      <DependentUpon>Attachments.aspx</DependentUpon>
+    </Compile>
     <Compile Include="EasementConfig.aspx.cs">
       <DependentUpon>EasementConfig.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="EasementConfig.aspx.designer.cs">
       <DependentUpon>EasementConfig.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EasementTerms.aspx.cs">
+      <DependentUpon>EasementTerms.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EasementTerms.aspx.designer.cs">
+      <DependentUpon>EasementTerms.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FarmOperation.aspx.cs">
+      <DependentUpon>FarmOperation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FarmOperation.aspx.designer.cs">
+      <DependentUpon>FarmOperation.aspx</DependentUpon>
     </Compile>
     <Compile Include="FirstPage.aspx.cs">
       <DependentUpon>FirstPage.aspx</DependentUpon>
@@ -187,6 +240,13 @@
     <Compile Include="FarmManagement.aspx.designer.cs">
       <DependentUpon>FarmManagement.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Page4new.aspx.cs">
+      <DependentUpon>Page4new.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page4new.aspx.designer.cs">
+      <DependentUpon>Page4new.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SecondPage.aspx.cs">
       <DependentUpon>SecondPage.aspx</DependentUpon>
@@ -208,6 +268,13 @@
     </Compile>
     <Compile Include="ThirdPage.aspx.designer.cs">
       <DependentUpon>ThirdPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TownPlaning.aspx.cs">
+      <DependentUpon>TownPlaning.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TownPlaning.aspx.designer.cs">
+      <DependentUpon>TownPlaning.aspx</DependentUpon>
     </Compile>
     <Compile Include="WaterManagement.aspx.cs">
       <DependentUpon>WaterManagement.aspx</DependentUpon>

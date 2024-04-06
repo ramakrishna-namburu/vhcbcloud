@@ -320,7 +320,7 @@ namespace VHCBCommon.DataAccessLayer
 
         public static LoadDetailsResult AddLoanDetail(int LoanId, int LegalDoc, int LoanCat, DateTime NoteDate, DateTime MaturityDate,
             decimal IntRate, int Compound, int Frequency, int PaymentType, DateTime WatchDate, string URL, 
-            DateTime EffectiveDate, DateTime BoardApproveDate, decimal? NoteAmt)
+            DateTime EffectiveDate, DateTime BoardApproveDate, decimal? NoteAmt, int UserID)
         {
             try
             {
@@ -348,6 +348,7 @@ namespace VHCBCommon.DataAccessLayer
                         command.Parameters.Add(new SqlParameter("EffectiveDate", EffectiveDate.ToShortDateString() == "1/1/0001" ? System.Data.SqlTypes.SqlDateTime.Null : EffectiveDate));
                         command.Parameters.Add(new SqlParameter("BoardApproveDate", BoardApproveDate.ToShortDateString() == "1/1/0001" ? System.Data.SqlTypes.SqlDateTime.Null : BoardApproveDate));
                         command.Parameters.Add(new SqlParameter("NoteAmt", NoteAmt));
+                        command.Parameters.Add(new SqlParameter("UserID", UserID));
 
                         SqlParameter parmMessage = new SqlParameter("@IsExist", SqlDbType.Bit);
                         parmMessage.Direction = ParameterDirection.Output;
@@ -379,7 +380,7 @@ namespace VHCBCommon.DataAccessLayer
 
         public static void UpdateLoanDetail(int LoanDetailID, int LegalDoc, int LoanCat, DateTime NoteDate, DateTime MaturityDate,
             decimal IntRate, int Compound, int Frequency, int PaymentType, DateTime WatchDate, string URL,
-            DateTime EffectiveDate, DateTime BoardApproveDate, decimal? NoteAmt, bool RowIsActive)
+            DateTime EffectiveDate, DateTime BoardApproveDate, decimal? NoteAmt, bool RowIsActive, int UserID)
         {
             try
             {
@@ -408,6 +409,7 @@ namespace VHCBCommon.DataAccessLayer
                         command.Parameters.Add(new SqlParameter("EffectiveDate", EffectiveDate.ToShortDateString() == "1/1/0001" ? System.Data.SqlTypes.SqlDateTime.Null : EffectiveDate));
                         command.Parameters.Add(new SqlParameter("BoardApproveDate", BoardApproveDate.ToShortDateString() == "1/1/0001" ? System.Data.SqlTypes.SqlDateTime.Null : BoardApproveDate));
                         command.Parameters.Add(new SqlParameter("NoteAmt", NoteAmt));
+                        command.Parameters.Add(new SqlParameter("UserID", UserID));
 
                         command.CommandTimeout = 60 * 5;
 

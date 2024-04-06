@@ -618,7 +618,34 @@ namespace VHCBCommon.DataAccessLayer
                 connection.Close();
             }
         }
+        public static void SubmitApplication(string ProjectNumber, string Year, int PortfolioType)
+        {
+            var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["dbConnection"].ConnectionString);
+            try
+            {
+                SqlCommand command = new SqlCommand();
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = "PortfolioSubmitApplication";
+                command.Parameters.Add(new SqlParameter("ProjectNumber", ProjectNumber));
+                command.Parameters.Add(new SqlParameter("Year", Year));
+                command.Parameters.Add(new SqlParameter("PortfolioType", PortfolioType));
 
+                using (connection)
+                {
+                    connection.Open();
+                    command.Connection = connection;
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
         public static DataTable GetMailAddressesForPDFEmail(string Project_Number)
         {
             DataTable dt = null;

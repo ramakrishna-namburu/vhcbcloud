@@ -312,6 +312,24 @@ namespace vhcbcloud.Housing
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl spnHawaiian;
 
         /// <summary>
+        /// txtMultiRacial control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtMultiRacial;
+
+        /// <summary>
+        /// spnMultiRacial control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl spnMultiRacial;
+
+        /// <summary>
         /// txtUnknownRace control.
         /// </summary>
         /// <remarks>

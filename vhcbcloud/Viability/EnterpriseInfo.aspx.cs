@@ -37,6 +37,7 @@ namespace vhcbcloud.Viability
                 BindProductGrid();
                 BindAttributeGrid();
                 BindWatershedGrid();
+                BindRaceEthnicutyGrid();
             }
             //GetRoleAuth();
         }
@@ -269,7 +270,27 @@ namespace vhcbcloud.Viability
                 tblForectAcres.Visible = true;
             }
 
+            if (EnterpriseType == "Viability Grant")
+            {
+                dvAcres.Visible = true;
+                tblAcres.Visible = true;
+            }
             LoadAcresForm();
+
+            if (EnterpriseType == "Viability Grant" || EnterpriseType == "Viability Food Enterprise" || EnterpriseType == "Forest Products" || EnterpriseType == "Viability Farm Enterprise")
+            {
+                spnAttributeAcres.Visible = false;
+                txtAttributeAcres.Visible = false;
+            }
+            else
+            {
+                spnAttributeAcres.Visible = true;
+                txtAttributeAcres.Visible = true;
+            }
+            if (EnterpriseType == "Viability Food Enterprise" || EnterpriseType == "Forest Products" || EnterpriseType == "Viability Farm Enterprise")
+            {
+                divDemographics.Visible = true;
+            }
         }
 
         private void PopulateDropDown(DropDownList ddl, string DBSelectedvalue)
@@ -315,6 +336,12 @@ namespace vhcbcloud.Viability
                 EnterpriseTypeId = 377;
                 EnterpriseType = "Forest Landowner";
             }
+            else if (LkProjectType == 26598)
+            {
+                //AttributeTypeId = 203;
+                //EnterpriseTypeId = 377;
+                EnterpriseType = "Viability Grant";
+            }
         }
 
         private void BindControls()
@@ -323,7 +350,8 @@ namespace vhcbcloud.Viability
             BindLookUP(ddlFarmSize, 2277);
             BindLookUP(ddlWaterShedNew, 143);
             BindHUC12CheckBoxList();
-            BindLookUP(ddlEnterPriseType, 72); 
+            BindLookUP(ddlEnterPriseType, 72);
+            BindLookUP(ddlRaceEthnicity, 10);
         }
 
         private void BindLookupSubWatershed(int TypeId)
@@ -455,6 +483,7 @@ namespace vhcbcloud.Viability
             BindProductGrid();
             BindAttributeGrid();
             BindWatershedGrid();
+            BindRaceEthnicutyGrid();
         }
 
         protected void btnAddProducts_Click(object sender, EventArgs e)
@@ -549,17 +578,17 @@ namespace vhcbcloud.Viability
                     EnterpriseInfoData.UpdateEnterpriseAcres(EnterpriseAcresId, DataUtils.GetInt(txtAcresInProd.Text),
                         DataUtils.GetInt(txtAcresOwned.Text), DataUtils.GetInt(txtAcresLeased.Text),
                         DataUtils.GetInt(txtForestAcres.Text), DataUtils.GetInt(txtTotalAcres.Text),
-                        DataUtils.GetInt(txtAccAcres.Text));
+                        DataUtils.GetInt(txtAccAcres.Text), txtSpan.Text);
 
                     LogMessage("Acres updated successfully");
                 }
                 else //add
                 {
-                    ViabilityMaintResult objViabilityMaintResult = EnterpriseInfoData.AddEnterpriseAttributes(ProjectId, 
+                    ViabilityMaintResult objViabilityMaintResult = EnterpriseInfoData.AddEnterpriseAcres(ProjectId, 
                         DataUtils.GetInt(txtAcresInProd.Text),
                         DataUtils.GetInt(txtAcresOwned.Text), DataUtils.GetInt(txtAcresLeased.Text),
                         DataUtils.GetInt(txtForestAcres.Text), DataUtils.GetInt(txtTotalAcres.Text),
-                        DataUtils.GetInt(txtAccAcres.Text));
+                        DataUtils.GetInt(txtAccAcres.Text), txtSpan.Text);
 
                     if (objViabilityMaintResult.IsDuplicate && !objViabilityMaintResult.IsActive)
                         LogMessage("Acres already exist as in-active");
@@ -591,7 +620,11 @@ namespace vhcbcloud.Viability
                 txtAcresLeased.Text = drEntImpGrant["AcresLeased"].ToString();
                 txtAcresOwned.Text = drEntImpGrant["AcresOwned"].ToString();
                 spnTotalAcres.InnerText = drEntImpGrant["TotalAcres"].ToString();
-                txtAccAcres.Text = drEntImpGrant["AccessAcres"].ToString(); 
+                txtAccAcres.Text = drEntImpGrant["AccessAcres"].ToString();
+
+                txtForestAcres.Text = drEntImpGrant["ForestAcres"].ToString();
+                txtTotalAcres.Text = drEntImpGrant["ForestTotalAcres"].ToString();
+                txtSpan.Text = drEntImpGrant["Span"].ToString();
                 btnAddAcres.Text = "Update";
             }
             else
@@ -635,12 +668,12 @@ namespace vhcbcloud.Viability
             }
 
             ViabilityMaintResult objViabilityMaintResult = EnterpriseInfoData.AddEnterpriseAttributes(DataUtils.GetInt(hfProjectId.Value),
-                DataUtils.GetInt(ddlAttribute.SelectedValue.ToString()), DataUtils.GetDate(txtDate.Text));
+                DataUtils.GetInt(ddlAttribute.SelectedValue.ToString()), DataUtils.GetDate(txtDate.Text), DataUtils.GetDecimal(txtAttributeAcres.Text));
 
             ddlAttribute.SelectedIndex = -1;
             cbAddAttribute.Checked = false;
             txtDate.Text = "";
-
+            txtAttributeAcres.Text = "";
             BindAttributeGrid();
 
             if (objViabilityMaintResult.IsDuplicate && !objViabilityMaintResult.IsActive)
@@ -670,8 +703,9 @@ namespace vhcbcloud.Viability
             int EnterpriseAttributeID = DataUtils.GetInt(((Label)gvAttribute.Rows[rowIndex].FindControl("lblEnterpriseAttributeID")).Text);
             bool RowIsActive = Convert.ToBoolean(((CheckBox)gvAttribute.Rows[rowIndex].FindControl("chkActive")).Checked);
             DateTime Date = DataUtils.GetDate(((TextBox)gvAttribute.Rows[rowIndex].FindControl("txtGridDate")).Text);
+            decimal AttributeAcres = DataUtils.GetDecimal(((TextBox)gvAttribute.Rows[rowIndex].FindControl("txtAttributeAcres")).Text);
 
-            EnterpriseInfoData.UpdateEnterpriseAttributes(EnterpriseAttributeID, Date, RowIsActive);
+            EnterpriseInfoData.UpdateEnterpriseAttributes(EnterpriseAttributeID, Date, AttributeAcres, RowIsActive);
             gvAttribute.EditIndex = -1;
 
             BindAttributeGrid();
@@ -855,6 +889,83 @@ namespace vhcbcloud.Viability
 
             LogMessage("Enterprise Type Updated");
             Response.Redirect(Request.RawUrl);
+        }
+
+        protected void btnRaceEthnicity_Click(object sender, EventArgs e)
+        {
+            if (ddlRaceEthnicity.SelectedIndex == 0)
+            {
+                LogMessage("Select Race & Ethnicity");
+                ddlProducts.Focus();
+                return;
+            }
+
+            ViabilityMaintResult objViabilityMaintResult = EnterpriseInfoData.AddProjectEthnicity(DataUtils.GetInt(hfProjectId.Value), DataUtils.GetInt(ddlRaceEthnicity.SelectedValue.ToString()));
+
+            ddlRaceEthnicity.SelectedIndex = -1;
+            cbAddRaceEthnicity.Checked = false;
+
+
+            BindRaceEthnicutyGrid();
+
+            if (objViabilityMaintResult.IsDuplicate && !objViabilityMaintResult.IsActive)
+                LogMessage("Race & Ethnicity already exist as in-active");
+            else if (objViabilityMaintResult.IsDuplicate)
+                LogMessage("Race & Ethnicity already exist");
+            else
+                LogMessage("New Race & Ethnicity added successfully");
+        }
+
+        protected void gvRE_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            gvRE.EditIndex = e.NewEditIndex;
+            BindRaceEthnicutyGrid();
+        }
+
+        private void BindRaceEthnicutyGrid()
+        {
+            try
+            {
+                DataTable dt = EnterpriseInfoData.GetProjectEthnicityList(DataUtils.GetInt(hfProjectId.Value), cbActiveOnly.Checked);
+
+                if (dt.Rows.Count > 0)
+                {
+                    dvRaceEthnicityGrid.Visible = true;
+                    gvRE.DataSource = dt;
+                    gvRE.DataBind();
+                }
+                else
+                {
+                    dvRaceEthnicityGrid.Visible = false;
+                    gvRE.DataSource = null;
+                    gvRE.DataBind();
+                }
+            }
+            catch (Exception ex)
+            {
+                LogError(Pagename, "BindRaceEthnicutyGrid", "", ex.Message);
+            }
+        }
+
+        protected void gvRE_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            gvRE.EditIndex = -1;
+            BindRaceEthnicutyGrid();
+        }
+
+        protected void gvRE_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            int rowIndex = e.RowIndex;
+
+            int ProjectEthnicityID = DataUtils.GetInt(((Label)gvRE.Rows[rowIndex].FindControl("lblProjectEthnicityID")).Text);
+            bool RowIsActive = Convert.ToBoolean(((CheckBox)gvRE.Rows[rowIndex].FindControl("chkActive")).Checked);
+
+            EnterpriseInfoData.UpdateRaceEthnicity(ProjectEthnicityID, RowIsActive);
+            gvRE.EditIndex = -1;
+
+            BindRaceEthnicutyGrid();
+
+            LogMessage("Race & Ethnicity updated successfully");
         }
     }
 }

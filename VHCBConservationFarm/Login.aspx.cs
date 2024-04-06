@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Data;
 using VHCBCommon.DataAccessLayer;
 using DataAccessLayer;
+using VHCBCommon.DataAccessLayer.Conservation;
 
 namespace VHCBConservationFarm
 {
@@ -36,12 +37,13 @@ namespace VHCBConservationFarm
                 FormsAuthentication.SetAuthCookie(UserId.Text, true);
                 string url = "";
 
-                url = FormsAuthentication.DefaultUrl;
-                if (Request["ReturnUrl"] != null)
-                    url = Request["ReturnUrl"];
-                else
+                //url = FormsAuthentication.DefaultUrl;
+                //if (Request["ReturnUrl"] != null)
+                  //  url = Request["ReturnUrl"];
+                //else
                     url = "FirstPage.aspx";
 
+                InsertConserve(ddlProjectNumber.SelectedValue);
 
                 string script = "window.open('" + url + "', '" + "_self" + "', '');";
                 this.ClientScript.RegisterClientScriptBlock(this.GetType(), "_self", script, true);
@@ -53,6 +55,11 @@ namespace VHCBConservationFarm
                 FailureText.Text = "Invalid login attempt";
                 ErrorMessage.Visible = true;
             }
+        }
+
+        private void InsertConserve(string ProjectNumber)
+        {
+            ConservationSummaryData.CheckConserveForOnLineApp(ProjectNumber);
         }
 
         private void IsLoginValid(string ProjectNumber, string UserName, string Password)

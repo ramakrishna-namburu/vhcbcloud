@@ -216,7 +216,7 @@
                             <asp:Panel runat="server" ID="Panel1">
                                 <table style="width: 100%">
                                     <tr>
-                                        <td style="width: 140px"><span class="labelClass">VHCB</span></td>
+                                        <td style="width: 140px"><span class="labelClass">Use</span></td>
                                         <td style="width: 215px">
                                             <asp:DropDownList ID="ddlVHCBUses" CssClass="clsDropDown" runat="server">
                                             </asp:DropDownList>

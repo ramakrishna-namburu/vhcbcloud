@@ -116,7 +116,7 @@
       <HintPath>..\packages\Microsoft.AspNet.FriendlyUrls.Core.1.0.2\lib\net45\Microsoft.AspNet.FriendlyUrls.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
- <Reference Include="WebGrease, Version=1.5.2.14234, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="WebGrease, Version=1.5.2.14234, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
     </Reference>
@@ -199,9 +199,11 @@
     <Content Include="Conservation\ConservationSourcesUses.aspx" />
     <Content Include="Conservation\ConservationStewardship.aspx" />
     <Content Include="Conservation\ConservationSummary.aspx" />
+    <Content Include="Conservation\FarmOperationTownPlanning.aspx" />
     <Content Include="Content\Tabs.css" />
     <Content Include="Dashboard.aspx" />
     <Content Include="DefaultSecurityValues.aspx" />
+    <Content Include="Deliverables.aspx" />
     <Content Include="Entity.aspx" />
     <Content Include="EntityMaintenance.aspx" />
     <Content Include="EntityNotes.aspx" />
@@ -297,6 +299,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="ExistingReallocations.aspx" />
+    <Content Include="PerformanceMeasures.aspx" />
     <Content Include="PoolAssignments.aspx" />
     <Content Include="ProjectCheckRequestNew.aspx" />
     <Content Include="ProjectDesc.aspx" />
@@ -361,6 +364,8 @@
     <Content Include="SQL\Milestone-New.sql" />
     <Content Include="SQL\ProjectEvent.sql" />
     <Content Include="SQL\ProjectNotes.sql" />
+    <Content Include="WQMilestones.aspx" />
+    <Content Include="WQWaterSheds.aspx" />
     <None Include="Properties\PublishProfiles\PublishtoRackspace.pubxml" />
     <None Include="Properties\PublishProfiles\VHCBPublish.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -426,6 +431,7 @@
     <Content Include="TestExago.aspx" />
     <Content Include="TransferDisbursements.aspx" />
     <Content Include="TransferVoids.aspx" />
+    <Content Include="UnusedOnlineProjects.aspx" />
     <Content Include="UpdateLeadSpecCosts.aspx" />
     <Content Include="UserSecurity.aspx" />
     <Content Include="Viability\EnterpriseEvaluations.aspx" />
@@ -435,6 +441,7 @@
     <Content Include="Viability\EnterpriseInfo.aspx" />
     <Content Include="Viability\EnterpriseServiceProviders.aspx" />
     <Content Include="ViewSwitcher.ascx" />
+    <Content Include="WaterQuality\WQSummary.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -536,6 +543,13 @@
     <Compile Include="CheckRequestDates.aspx.designer.cs">
       <DependentUpon>CheckRequestDates.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Conservation\FarmOperationTownPlanning.aspx.cs">
+      <DependentUpon>FarmOperationTownPlanning.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Conservation\FarmOperationTownPlanning.aspx.designer.cs">
+      <DependentUpon>FarmOperationTownPlanning.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Dashboard.aspx.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -549,6 +563,13 @@
     </Compile>
     <Compile Include="DefaultSecurityValues.aspx.designer.cs">
       <DependentUpon>DefaultSecurityValues.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Deliverables.aspx.cs">
+      <DependentUpon>Deliverables.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Deliverables.aspx.designer.cs">
+      <DependentUpon>Deliverables.aspx</DependentUpon>
     </Compile>
     <Compile Include="ExecSummary.aspx.cs">
       <DependentUpon>ExecSummary.aspx</DependentUpon>
@@ -1036,6 +1057,13 @@
       <DependentUpon>MilestonesQuickentry.aspx</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="PerformanceMeasures.aspx.cs">
+      <DependentUpon>PerformanceMeasures.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PerformanceMeasures.aspx.designer.cs">
+      <DependentUpon>PerformanceMeasures.aspx</DependentUpon>
+    </Compile>
     <Compile Include="PoolAssignments.aspx.cs">
       <DependentUpon>PoolAssignments.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1220,6 +1248,13 @@
     <Compile Include="TransferVoids.aspx.designer.cs">
       <DependentUpon>TransferVoids.aspx</DependentUpon>
     </Compile>
+    <Compile Include="UnusedOnlineProjects.aspx.cs">
+      <DependentUpon>UnusedOnlineProjects.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UnusedOnlineProjects.aspx.designer.cs">
+      <DependentUpon>UnusedOnlineProjects.aspx</DependentUpon>
+    </Compile>
     <Compile Include="UpdateLeadSpecCosts.aspx.cs">
       <DependentUpon>UpdateLeadSpecCosts.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1285,6 +1320,27 @@
     </Compile>
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WaterQuality\WQSummary.aspx.cs">
+      <DependentUpon>WQSummary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WaterQuality\WQSummary.aspx.designer.cs">
+      <DependentUpon>WQSummary.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WQMilestones.aspx.cs">
+      <DependentUpon>WQMilestones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WQMilestones.aspx.designer.cs">
+      <DependentUpon>WQMilestones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WQWaterSheds.aspx.cs">
+      <DependentUpon>WQWaterSheds.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WQWaterSheds.aspx.designer.cs">
+      <DependentUpon>WQWaterSheds.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

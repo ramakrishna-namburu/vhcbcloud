@@ -226,8 +226,8 @@ namespace VHCBConservationApp
                     txtFundsRequested.Text,
                     txtTotalExpenses.Text,
                     txtAppOrgan.Text, txtProjectManager.Text, txtAppPhone.Text, txtAppEmail.Text,
-                    txtLONames.Text, txtloStreetNo.Text, txtLoAddress1.Text, txtLoAddress2.Text, ddlLoTown.Text, txtLOZipCode.Text, "", lblLoCounty.Text, txtLOEmail.Text, txtLOHomephone.Text, txtLoCellPhone.Text,
-                    txtFarmerName.Text, "","","","","", "", "", txtFarmerEmail.Text, txtFarmerHomePhone.Text, txtFarmerCell.Text,
+                    txtLONames.Text, txtloStreetNo.Text, txtLoAddress1.Text, txtLoAddress2.Text, ddlLoTown.Text, txtLOZipCode.Text, "", lblLoCounty.Text, txtLOEmail.Text, txtLOHomephone.Text == "0000000000" ? "" : txtLOHomephone.Text, txtLoCellPhone.Text == "0000000000" ? "" : txtLoCellPhone.Text,
+                    txtFarmerName.Text, "","","","","", "", "", txtFarmerEmail.Text, txtFarmerHomePhone.Text == "0000000000" ? "" : txtFarmerHomePhone.Text, txtFarmerCell.Text == "0000000000" ? "" : txtFarmerCell.Text,
                     txtPropertyStreet.Text, txtPropertyAdd1.Text, ddlPropertyTown.Text, txtPropertyOtherTown.Text, txtPropertyZip.Text);
                 
                 LogMessage("Conservation Application Data Added Successfully");

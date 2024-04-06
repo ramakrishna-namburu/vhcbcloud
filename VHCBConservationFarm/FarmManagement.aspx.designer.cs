@@ -51,6 +51,15 @@ namespace VHCBConservationFarm
         protected global::System.Web.UI.WebControls.Label lblErrorMsg;
 
         /// <summary>
+        /// cbActiveOnly control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbActiveOnly;
+
+        /// <summary>
         /// ddlFarmSize control.
         /// </summary>
         /// <remarks>
@@ -60,13 +69,13 @@ namespace VHCBConservationFarm
         protected global::System.Web.UI.WebControls.DropDownList ddlFarmSize;
 
         /// <summary>
-        /// ddlRAPCompliance control.
+        /// rdbtnRAPCompliance control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlRAPCompliance;
+        protected global::System.Web.UI.WebControls.RadioButtonList rdbtnRAPCompliance;
 
         /// <summary>
         /// txtRentedLand control.
@@ -132,6 +141,42 @@ namespace VHCBConservationFarm
         protected global::System.Web.UI.WebControls.TextBox txtGrossIncomeDescription;
 
         /// <summary>
+        /// txtProductsSold control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtProductsSold;
+
+        /// <summary>
+        /// rdbtWorkedWithVHCB control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList rdbtWorkedWithVHCB;
+
+        /// <summary>
+        /// spanVHCBDesc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl spanVHCBDesc;
+
+        /// <summary>
+        /// txtVHCBWorkDescription control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtVHCBWorkDescription;
+
+        /// <summary>
         /// rdbtWrittenLease control.
         /// </summary>
         /// <remarks>
@@ -141,76 +186,22 @@ namespace VHCBConservationFarm
         protected global::System.Web.UI.WebControls.RadioButtonList rdbtWrittenLease;
 
         /// <summary>
-        /// rdbtCompletedBusinessPlan control.
+        /// rdbtnHEL control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rdbtCompletedBusinessPlan;
+        protected global::System.Web.UI.WebControls.RadioButtonList rdbtnHEL;
 
         /// <summary>
-        /// rdbtShareBusinessPlan control.
+        /// rdbtnNutrientPlan control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rdbtShareBusinessPlan;
-
-        /// <summary>
-        /// tblOptinalQuestions control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTable tblOptinalQuestions;
-
-        /// <summary>
-        /// rdbtOtherTechnicalAdvisors control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rdbtOtherTechnicalAdvisors;
-
-        /// <summary>
-        /// rdbtnCurrentBusinessPlan control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rdbtnCurrentBusinessPlan;
-
-        /// <summary>
-        /// txtMitigateClimate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMitigateClimate;
-
-        /// <summary>
-        /// ddlHEL control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlHEL;
-
-        /// <summary>
-        /// ddlNutrientPlan control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlNutrientPlan;
+        protected global::System.Web.UI.WebControls.RadioButtonList rdbtnNutrientPlan;
 
         /// <summary>
         /// ddlDumps control.
@@ -222,6 +213,96 @@ namespace VHCBConservationFarm
         protected global::System.Web.UI.WebControls.DropDownList ddlDumps;
 
         /// <summary>
+        /// dvNewCM control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvNewCM;
+
+        /// <summary>
+        /// cbAddCM control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbAddCM;
+
+        /// <summary>
+        /// dvCMForm control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvCMForm;
+
+        /// <summary>
+        /// Panel1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel Panel1;
+
+        /// <summary>
+        /// ddlCM control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlCM;
+
+        /// <summary>
+        /// btnAddCM control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAddCM;
+
+        /// <summary>
+        /// dvPAGrid control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvPAGrid;
+
+        /// <summary>
+        /// Panel2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel Panel2;
+
+        /// <summary>
+        /// gvCM control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvCM;
+
+        /// <summary>
+        /// txtMitigateClimate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtMitigateClimate;
+
+        /// <summary>
         /// rdbExistingInfrastructure control.
         /// </summary>
         /// <remarks>
@@ -231,31 +312,22 @@ namespace VHCBConservationFarm
         protected global::System.Web.UI.WebControls.RadioButtonList rdbExistingInfrastructure;
 
         /// <summary>
-        /// txtInfrastructureDescription control.
+        /// spanExistingInfra control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtInfrastructureDescription;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl spanExistingInfra;
 
         /// <summary>
-        /// cblConservationMeasures control.
+        /// txtExistingInfrastuctureDescription control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList cblConservationMeasures;
-
-        /// <summary>
-        /// txtOtherConservationMeasures control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtOtherConservationMeasures;
+        protected global::System.Web.UI.WebControls.TextBox txtExistingInfrastuctureDescription;
 
         /// <summary>
         /// txtFarmOperation control.
@@ -301,5 +373,14 @@ namespace VHCBConservationFarm
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlGoto;
+
+        /// <summary>
+        /// hfConserveId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfConserveId;
     }
 }

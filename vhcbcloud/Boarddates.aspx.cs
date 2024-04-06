@@ -124,8 +124,9 @@ namespace vhcbcloud
                 int typeId = Convert.ToInt32(((Label)gvBoardDates.Rows[rowIndex].FindControl("lblTypeId")).Text);
                 string mType = ((TextBox)gvBoardDates.Rows[rowIndex].FindControl("txtMeetType")).Text;
                 DateTime bDate = Convert.ToDateTime(((TextBox)gvBoardDates.Rows[rowIndex].FindControl("txtBoardDate")).Text);
+                bool RowIsActive = Convert.ToBoolean(((CheckBox)gvBoardDates.Rows[rowIndex].FindControl("chkActive")).Checked);
 
-                BoarddatesData.UpdateBoardDates(mType, bDate, typeId);
+                BoarddatesData.UpdateBoardDates(mType, bDate, typeId, RowIsActive);
                 gvBoardDates.EditIndex = -1;
                 BindBoardDates();
                 lblErrorMsg.Text = "Board details updated successfully";

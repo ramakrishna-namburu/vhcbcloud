@@ -42,5 +42,37 @@ namespace VHCBConservationFarm
             sb.Append("</script>");
             return sb.ToString();
         }
+
+        public static string GetExagoURLForConservationFarm(string Projnum, string ReportName)
+        {
+            string URL = string.Empty;
+            Api api = new Api(@"/eWebReports");
+
+            DataSource ds = api.DataSources.GetDataSource("VHCB");
+            ds.DataConnStr = ConfigurationManager.ConnectionStrings["dbConnection"].ConnectionString;
+
+            // Set the action to execute the report
+            api.Action = wrApiAction.ExecuteReport;
+            WebReports.Api.Common.Parameter parameter = api.Parameters.GetParameter("Projnum");
+            parameter.Value = Projnum;
+            parameter.IsHidden = false;
+            parameter.PromptText = "";
+
+            ReportObject report = api.ReportObjectFactory.LoadFromRepository(@"Conservation\Farm Online App\" + ReportName);
+
+
+            if (report != null)
+                api.ReportObjectFactory.SaveToApi(report);
+
+            URL = ConfigurationManager.AppSettings["ExagoURL"] + api.GetUrlParamString("ExagoHome", true);
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append("<script type = 'text/javascript'>");
+            sb.Append("window.open('");
+            sb.Append(URL);
+            sb.Append("', '_blank');");
+            sb.Append("</script>");
+            return sb.ToString();
+        }
     }
 }

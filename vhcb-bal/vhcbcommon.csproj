@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="AccountData.cs" />
     <Compile Include="ConservationApplicationData.cs" />
+    <Compile Include="ConserveNatRecData.cs" />
     <Compile Include="Housing\PortfolioDataData.cs" />
     <Compile Include="ImpGrantApplicationData.cs" />
     <Compile Include="InactiveProjectData.cs" />
@@ -103,6 +104,7 @@
     <Compile Include="Viability\EnterpriseInfoData.cs" />
     <Compile Include="Viability\EnterpriseServiceProvidersData.cs" />
     <Compile Include="Viability\GrantEvaluationsData.cs" />
+    <Compile Include="WaterQualityData.cs" />
     <Compile Include="YearQuarterData.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

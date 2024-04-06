@@ -436,15 +436,15 @@
                                   &nbsp; &nbsp; 
                                                     <asp:Label runat="server" ID="Label1" class="labelClass" Text ="Go To"></asp:Label>
                                  <asp:DropDownList ID="ddlGoto" CssClass="clsDropDown" runat="server" Height="23px" Width="185px" AutoPostBack="true" OnSelectedIndexChanged="ddlGoto_SelectedIndexChanged">
-                                     <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
-                                                        <asp:ListItem Text="FirstPage" Value="FirstPage.aspx"></asp:ListItem>
-                                                        <asp:ListItem Text="Farm Conservation Application" Value="SecondPage.aspx"></asp:ListItem>
-                                                        <asp:ListItem Text="Project Summary" Value="ThirdPage.aspx"></asp:ListItem>
-                                                        <asp:ListItem Text="Land Resources" Value="Page4.aspx"></asp:ListItem>
+                                                        <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
+                                                        <asp:ListItem Text="Applicant Information" Value="FirstPage.aspx"></asp:ListItem>
+                                                        <asp:ListItem Text="Executive Summary and Farm Transfer" Value="ThirdPage.aspx"></asp:ListItem>
+                                                        <asp:ListItem Text="Land & Water Resources" Value="Page4New.aspx"></asp:ListItem>
                                                         <asp:ListItem Text="Farm Management" Value="FarmManagement.aspx"></asp:ListItem>
-                                                        <asp:ListItem Text="Water Management" Value="WaterManagement.aspx"></asp:ListItem>
-                                                       
-
+                                                        <asp:ListItem Text="Easement Terms" Value="EasementTerms.aspx"></asp:ListItem>
+                                                        <asp:ListItem Text="Town Planning" Value="TownPlaning.aspx"></asp:ListItem>
+                                                        <asp:ListItem Text="Additional Info" Value="Additionalinfo.aspx"></asp:ListItem>
+                                                        <asp:ListItem Text="Attachments" Value="Attachments.aspx"></asp:ListItem>
                                                     </asp:DropDownList>
                             </td>
                         </tr>

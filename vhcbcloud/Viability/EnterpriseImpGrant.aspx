@@ -486,7 +486,7 @@
                             </div>
                         </div>
 
-                        <div class="panel-width" runat="server" id="dvAttribute">
+                        <div class="panel-width" runat="server" id="dvAttribute" visible="false">
                             <div class="panel panel-default" style="margin-bottom: 2px;">
                                 <div class="panel-heading" style="padding: 5px 5px 1px 5px">
                                     <table style="width: 100%;">

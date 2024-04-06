@@ -57,6 +57,7 @@ namespace vhcbcloud
                 }
                 //BindApplicantsForCurrentProject(ddlEventEntity);
                 //GetRoleAuth();
+                LoadProjectGoal();
             }
 
             if (DataUtils.GetInt(hfProjectId.Value) != 0)
@@ -72,6 +73,14 @@ namespace vhcbcloud
             //    }
             //    else
             //        chkApprove.Enabled = false;
+        }
+
+        private void LoadProjectGoal()
+        {
+            if (ddlProjectType.SelectedValue == "40420")
+                BindLookUP(ddlProjectGoal, 2292);
+            else
+                BindLookUP(ddlProjectGoal, 201);
         }
 
         protected bool GetIsVisibleBasedOnRole()
@@ -171,7 +180,7 @@ namespace vhcbcloud
             if (dr != null)
             {
                 bool IsUserHasSameProgram = UserSecurityData.IsUserHasSameProgramId(DataUtils.GetInt(dr["userid"].ToString()), DataUtils.GetInt(Request.QueryString["ProjectId"]));
-                
+
 
                 //if (ddlManager.SelectedValue == dr["userid"].ToString())
                 //    chkApprove.Enabled = true;
@@ -186,7 +195,7 @@ namespace vhcbcloud
                 }
                 else if (dr["usergroupid"].ToString() == "1") // Program Admin Only
                 {
-                   // if (dr["dfltprg"].ToString() != hfProgramId.Value)
+                    // if (dr["dfltprg"].ToString() != hfProgramId.Value)
                     if (!IsUserHasSameProgram)
                     {
                         RoleViewOnly();
@@ -308,7 +317,7 @@ namespace vhcbcloud
             BindLookUP(ddlApplicantRole, 56);
             ddlApplicantRole.Items.Remove(ddlApplicantRole.Items.FindByValue("358"));
             //BindLookUP(ddlAddressType, 1);
-            BindLookUP(ddlProjectGoal, 201);
+            //BindLookUP(ddlProjectGoal, 201);
             BindLookUP(ddlEntityRole, 170);
             BindTown();
             BindLookUP(ddlTargetYear, 2272);
@@ -750,6 +759,10 @@ namespace vhcbcloud
 
             if (drProjectDetails != null)
             {
+                if (drProjectDetails["LkProgram"].ToString() == "39932")
+                {
+                    ddlProjectType.Enabled = false;
+                }
                 PopulateDropDown(ddlProgram, drProjectDetails["LkProgram"].ToString());
                 //ddlProgram.Enabled = false;
                 hfProgramId.Value = drProjectDetails["LkProgram"].ToString();
@@ -803,6 +816,7 @@ namespace vhcbcloud
 
             li.Controls.Add(anchor);
             bool isGrants = false;
+
             DataTable dtTabs = TabsData.GetProgramTabsForViability(DataUtils.GetInt(hfProjectId.Value), ProgramId);
             foreach (DataRow dr in dtTabs.Rows)
             {
@@ -818,6 +832,7 @@ namespace vhcbcloud
                 if (dr["TabName"].ToString() == "Viability Grants")
                     isGrants = true;
             }
+
             if (isGrants)
             {
                 DataRow drEntImpGrant = EnterpriseImpGrantData.GetEnterpriseImpGrantsById(DataUtils.GetInt(hfProjectId.Value));
@@ -1015,7 +1030,7 @@ namespace vhcbcloud
                     {
                         LogMessage("Finance transactions already exist for this Project, so you can't de-activate.");
                     }
-                    else if(cbProjectNumEdit.Checked && CheckEditProjectnumberAccess())
+                    else if (cbProjectNumEdit.Checked && CheckEditProjectnumberAccess())
                     {
                         ProjectMaintenanceData.UpdateProjectNumber(DataUtils.GetInt(hfProjectId.Value), txtProjectNumDDL.Text);
 
@@ -1040,7 +1055,7 @@ namespace vhcbcloud
                         //if (!cbProjectActive.Checked)
                         //    LogMessage("Project has been inactivated - if this was in error, re - activate now");
                         //else
-                            LogMessage("Project updated successfully");
+                        LogMessage("Project updated successfully");
 
                         GenerateTabs(DataUtils.GetInt(hfProjectId.Value), DataUtils.GetInt(hfProgramId.Value));
                         PopulateForm(DataUtils.GetInt(hfProjectId.Value));
@@ -2412,8 +2427,10 @@ namespace vhcbcloud
         {
             if (ddlProgram.SelectedItem != null)
             {
-                if (ddlProgram.SelectedItem.Text.ToLower() == "conservation")
+                if (ddlProgram.SelectedItem.Text.ToLower() == "conservation" || (ddlProgram.SelectedValue == "39932" && ddlProjectType.SelectedValue == "40420")) // project type=GLFC TypeID=40420 Water Quality = 39932
+                {
                     dvConserOnly.Visible = true;
+                }
                 else
                     dvConserOnly.Visible = false;
             }

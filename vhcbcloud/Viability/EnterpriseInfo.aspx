@@ -2,7 +2,7 @@
     Inherits="vhcbcloud.Viability.EnterpriseInfo" MaintainScrollPositionOnPostback="true" %>
 
 <asp:Content ID="EventContent" ContentPlaceHolderID="MainContent" runat="server">
-     <style type="text/css">
+    <style type="text/css">
         .scroll_checkboxes {
             height: 100px;
             padding: 1px;
@@ -298,7 +298,8 @@
                                             <asp:TextBox ID="txtAcresLeased" CssClass="clsTextBoxBlue1" runat="server" Width="100px" TabIndex="2"></asp:TextBox>
                                         </td>
                                         <td style="width: 129px"><span class="labelClass">Access Acres</span></td>
-                                        <td style="width: 136px"><asp:TextBox ID="txtAccAcres" CssClass="clsTextBoxBlue1" runat="server" Width="100px" TabIndex="4"></asp:TextBox></td>
+                                        <td style="width: 136px">
+                                            <asp:TextBox ID="txtAccAcres" CssClass="clsTextBoxBlue1" runat="server" Width="100px" TabIndex="4"></asp:TextBox></td>
                                         <td style="width: 115px"><span class="labelClass"></span></td>
                                         <td style="width: 140px"></td>
                                         <td style="width: 100px"><span class="labelClass"></span></td>
@@ -327,8 +328,8 @@
                                         <td colspan="10" style="height: 5px"></td>
                                     </tr>
                                 </table>
-                                 <table style="width: 100%" runat="server" id="tblForectAcres" visible="false">
-                                      <tr>
+                                <table style="width: 100%" runat="server" id="tblForectAcres" visible="false">
+                                    <tr>
                                         <td class="modal-sm" style="width: 97px">
                                             <span class="labelClass">Forest acres</span></td>
                                         <td class="modal-sm" style="width: 129px">
@@ -338,8 +339,10 @@
                                         <td style="width: 136px">
                                             <asp:TextBox ID="txtTotalAcres" CssClass="clsTextBoxBlue1" runat="server" Width="100px" TabIndex="1"></asp:TextBox>
                                         </td>
-                                        <td style="width: 115px"><span class="labelClass"></span></td>
-                                        <td style="width: 140px"></td>
+                                        <td style="width: 115px"><span class="labelClass">Span #(s)</span></td>
+                                        <td style="width: 140px">
+                                            <asp:TextBox ID="txtSpan" CssClass="clsTextBoxBlue1" runat="server" Width="100px" TabIndex="1"></asp:TextBox>
+                                        </td>
                                         <td style="width: 100px"><span class="labelClass"></span></td>
                                         <td style="width: 100px"></td>
                                         <td style="width: 15px"></td>
@@ -348,7 +351,7 @@
                                     <tr>
                                         <td colspan="10" style="height: 5px"></td>
                                     </tr>
-                                     </table>
+                                </table>
                                 <table>
                                     <tr>
                                         <td class="modal-sm" style="width: 97px">
@@ -394,6 +397,12 @@
                                             <asp:TextBox ID="txtDate" CssClass="clsTextBoxBlue1" runat="server"></asp:TextBox>
                                             <ajaxToolkit:CalendarExtender runat="server" ID="CalendarExtender1" TargetControlID="txtDate">
                                             </ajaxToolkit:CalendarExtender>
+                                        </td>
+                                        <td>
+                                            <span class="labelClass" runat="server" id="spnAttributeAcres">Acres</span>
+                                        </td>
+                                        <td>
+                                            <asp:TextBox ID="txtAttributeAcres" CssClass="clsTextBoxBlue1" runat="server"></asp:TextBox>
                                         </td>
                                         <td style="width: 58px"><span class="labelClass">Active</span></td>
                                         <td>
@@ -443,6 +452,14 @@
                                                 </ajaxToolkit:CalendarExtender>
                                             </EditItemTemplate>
                                         </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Acres">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblAttributeAcres" runat="Server" Text='<%# Eval("Acres") %>' />
+                                            </ItemTemplate>
+                                            <EditItemTemplate>
+                                                <asp:TextBox ID="txtAttributeAcres" CssClass="clsTextBoxBlue1" runat="server" Text='<%# Eval("Acres") %>'></asp:TextBox>
+                                            </EditItemTemplate>
+                                        </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Active">
                                             <ItemTemplate>
                                                 <asp:CheckBox ID="chkActive" Enabled="false" runat="server" Checked='<%# Eval("RowIsActive") %>' />
@@ -490,9 +507,7 @@
                                             </asp:DropDownList>
                                         </td>
                                         <td style="width: 129px"><span class="labelClass"></span></td>
-                                        <td style="width: 136px">
-                                            
-                                        </td>
+                                        <td style="width: 136px"></td>
                                         <td style="width: 115px">
                                             <asp:Button ID="btnAddFarmSize" runat="server" Text="Update" class="btn btn-info" OnClick="btnAddFarmSize_Click" TabIndex="4" />
                                         </td>
@@ -596,7 +611,7 @@
                                 <asp:GridView ID="gvWatershed" runat="server" AutoGenerateColumns="False"
                                     Width="100%" CssClass="gridView" PageSize="50" PagerSettings-Mode="NextPreviousFirstLast"
                                     GridLines="None" EnableTheming="True" AllowPaging="false" AllowSorting="true"
-                                    OnRowEditing="gvWatershed_RowEditing" 
+                                    OnRowEditing="gvWatershed_RowEditing"
                                     OnRowUpdating="gvWatershed_RowUpdating"
                                     OnRowCancelingEdit="gvWatershed_RowCancelingEdit">
                                     <AlternatingRowStyle CssClass="alternativeRowStyle" />
@@ -610,7 +625,7 @@
                                                 <asp:Label ID="lblEnterpriseWaterShedID" runat="Server" Text='<%# Eval("EnterpriseWaterShedID") %>' />
                                             </ItemTemplate>
                                         </asp:TemplateField>
-                                         <asp:TemplateField HeaderText="EntetrpriseHUCID" Visible="false">
+                                        <asp:TemplateField HeaderText="EntetrpriseHUCID" Visible="false">
                                             <ItemTemplate>
                                                 <asp:Label ID="lblEntetrpriseHUCID" runat="Server" Text='<%# Eval("EntetrpriseHUCID") %>' />
                                             </ItemTemplate>
@@ -625,7 +640,7 @@
                                                 <asp:Label ID="lblSubWatershed" runat="Server" Text='<%# Eval("WatershedSubDesc") %>' />
                                             </ItemTemplate>
                                         </asp:TemplateField>
-                                         <asp:TemplateField HeaderText="HUC-12">
+                                        <asp:TemplateField HeaderText="HUC-12">
                                             <ItemTemplate>
                                                 <asp:Label ID="lblHUC12" runat="Server" Text='<%# Eval("HUC12Name") %>' />
                                             </ItemTemplate>
@@ -634,7 +649,7 @@
                                             <ItemTemplate>
                                                 <asp:CheckBox ID="chkActive" Enabled="false" runat="server" Checked='<%# Eval("RowIsActive") %>' />
                                             </ItemTemplate>
-                                             <EditItemTemplate>
+                                            <EditItemTemplate>
                                                 <asp:CheckBox ID="chkActive" runat="server" Checked='<%# Eval("RowIsActive") %>' />
                                             </EditItemTemplate>
                                         </asp:TemplateField>
@@ -653,6 +668,105 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="panel-width" runat="server" id="divDemographics" visible="false">
+                    <div class="panel panel-default ">
+                        <div class="panel-heading ">
+                            <table style="width: 100%;">
+                                <tr>
+                                    <td>
+                                        <h3 class="panel-title">Demographics</h3>
+                                    </td>
+                                    <td style="text-align: right"></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="panel-width" runat="server" id="div77">
+                            <div class="panel panel-default ">
+                                <div class="panel-heading ">
+                                    <table style="width: 100%;">
+                                        <tr>
+                                            <td>
+                                                <h3 class="panel-title">Race & Ethnicity</h3>
+                                            </td>
+                                            <td style="text-align: right">
+                                                <asp:CheckBox ID="cbAddRaceEthnicity" runat="server" Text="Add New Race & Ethnicity" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                                <div class="panel-body" runat="server" id="dvRaceEthnicityForm">
+                                    <asp:Panel runat="server" ID="Panel10">
+                                        <table style="width: 100%">
+                                            <tr>
+                                                <td class="modal-sm" style="width: 144px"><span class="labelClass">Race & Ethnicity</span></td>
+                                                <td class="modal-sm" style="width: 164px">
+                                                    <asp:DropDownList ID="ddlRaceEthnicity" CssClass="clsDropDown" runat="server" Style="margin-left: 0">
+                                                    </asp:DropDownList>
+                                                </td>
+
+                                                <td>
+                                                    <asp:Button ID="btnRaceEthnicity" runat="server" Text="Add" class="btn btn-info" OnClick="btnRaceEthnicity_Click" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="8" style="height: 5px"></td>
+                                            </tr>
+                                        </table>
+                                    </asp:Panel>
+                                </div>
+
+                                <div class="panel-body" id="dvRaceEthnicityGrid" runat="server">
+                                    <asp:Panel runat="server" ID="Panel11" Width="100%" Height="150px" ScrollBars="Vertical">
+                                        <asp:GridView ID="gvRE" runat="server" AutoGenerateColumns="False"
+                                            Width="100%" CssClass="gridView" PageSize="50" PagerSettings-Mode="NextPreviousFirstLast"
+                                            GridLines="None" EnableTheming="True" AllowPaging="false" AllowSorting="true" ShowFooter="False"
+                                            OnRowEditing="gvRE_RowEditing" OnRowCancelingEdit="gvRE_RowCancelingEdit"
+                                            OnRowUpdating="gvRE_RowUpdating">
+                                            <AlternatingRowStyle CssClass="alternativeRowStyle" />
+                                            <PagerStyle CssClass="pagerStyle" ForeColor="#F78B0E" />
+                                            <HeaderStyle CssClass="headerStyle" />
+                                            <PagerSettings Mode="NumericFirstLast" FirstPageText="&amp;lt;" LastPageText="&amp;gt;" PageButtonCount="5" />
+                                            <RowStyle CssClass="rowStyle" />
+                                            <FooterStyle CssClass="footerStyleTotals" />
+                                            <Columns>
+                                                <asp:TemplateField HeaderText="ProjectEthnicityID" Visible="false">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblProjectEthnicityID" runat="Server" Text='<%# Eval("ProjectEthnicityID") %>' />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Race & Ethnicity">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblRaceEthnicityID" runat="Server" Text='<%# Eval("RaceEthnicity") %>' />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                              
+                                                <asp:TemplateField HeaderText="Active">
+                                                    <ItemTemplate>
+                                                        <asp:CheckBox ID="chkActive" Enabled="false" runat="server" Checked='<%# Eval("RowIsActive") %>' />
+                                                    </ItemTemplate>
+                                                    <EditItemTemplate>
+                                                        <asp:CheckBox ID="chkActive" runat="server" Checked='<%# Eval("RowIsActive") %>' />
+                                                    </EditItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField ShowHeader="False">
+                                                    <EditItemTemplate>
+                                                        <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="True" CommandName="Update" Text="Update"></asp:LinkButton>
+                                                        &nbsp;<asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel"></asp:LinkButton>
+                                                    </EditItemTemplate>
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Edit" Text="Edit" ></asp:LinkButton>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                            </Columns>
+                                        </asp:GridView>
+                                    </asp:Panel>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -662,6 +776,14 @@
 
     <script language="javascript">
         $(document).ready(function () {
+
+
+            $('#<%= dvRaceEthnicityForm.ClientID%>').toggle($('#<%= cbAddRaceEthnicity.ClientID%>').is(':checked'));
+
+            $('#<%= cbAddRaceEthnicity.ClientID%>').click(function () {
+                $('#<%= dvRaceEthnicityForm.ClientID%>').toggle(this.checked);
+            }).change();
+
             $('#<%= dvProductForm.ClientID%>').toggle($('#<%= cbAddProduct.ClientID%>').is(':checked'));
 
             $('#<%= cbAddProduct.ClientID%>').click(function () {
@@ -710,8 +832,7 @@
             if (!isNaN(Year)) {
                 $('#<%= spnYearsManagedBusiness.ClientID%>').text(currentYear - Year);
             }
-            else
-            {
+            else {
                 $('#<%= spnYearsManagedBusiness.ClientID%>').text("");
             }
         };
@@ -720,7 +841,7 @@
             var Owned = parseInt($('#<%=txtAcresOwned.ClientID%>').val(), 10);
             var Leased = parseInt($('#<%=txtAcresLeased.ClientID%>').val(), 10);
             var Access = parseInt($('#<%=txtAccAcres.ClientID%>').val(), 10);
-            
+
             if (isNaN(Owned)) {
                 var Owned = 0;
             }
@@ -735,10 +856,10 @@
 
             var Total = Owned + Leased + Access;
             $('#<%= spnTotalAcres.ClientID%>').text(Total);
-            };
+        };
 
-            function PopupAwardSummary() {
-                window.open('../awardsummary.aspx?projectid=' + $('#<%=hfProjectId.ClientID%>').val());
+        function PopupAwardSummary() {
+            window.open('../awardsummary.aspx?projectid=' + $('#<%=hfProjectId.ClientID%>').val());
         };
     </script>
 </asp:Content>

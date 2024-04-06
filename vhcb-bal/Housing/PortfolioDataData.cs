@@ -44,7 +44,7 @@ namespace VHCBCommon.DataAccessLayer.Housing
         }
 
         public static void AddProjectPortfolio(int PortfolioType, string  Year, int  ProjectID,  int TotalUnits, 
-            int MGender, int FGender, int UGender, int White, int Black, int Asian, int Indian, int Hawaiian, int UnknownRace, int Hispanic, int NonHisp, int UnknownEthnicity, int Homeless,
+            int MGender, int FGender, int UGender, int White, int Black, int Asian, int Indian, int Hawaiian, int MultiRacial, int UnknownRace, int Hispanic, int NonHisp, int UnknownEthnicity, int Homeless,
             int MarketRate, int I100, int I80, int I75, int I60, int I50, int I30, int I120, bool IsSubmit)
         {
             try
@@ -71,6 +71,7 @@ namespace VHCBCommon.DataAccessLayer.Housing
                         command.Parameters.Add(new SqlParameter("Asian", Asian));
                         command.Parameters.Add(new SqlParameter("Indian", Indian));
                         command.Parameters.Add(new SqlParameter("Hawaiian", Hawaiian));
+                        command.Parameters.Add(new SqlParameter("MultiRacial", MultiRacial));
                         command.Parameters.Add(new SqlParameter("UnknownRace", UnknownRace));
                         command.Parameters.Add(new SqlParameter("Hispanic", Hispanic));
                         command.Parameters.Add(new SqlParameter("NonHisp", NonHisp));
@@ -99,7 +100,7 @@ namespace VHCBCommon.DataAccessLayer.Housing
         }
 
         public static void UpdateProjectPortfolio(int ProjectPortfolioID, int PortfolioType, string Year, int TotalUnits,
-            int MGender, int FGender, int UGender, int White, int Black, int Asian, int Indian, int Hawaiian, int UnknownRace, int Hispanic, int NonHisp, int UnknownEthnicity, int Homeless,
+            int MGender, int FGender, int UGender, int White, int Black, int Asian, int Indian, int Hawaiian, int MultiRacial, int UnknownRace, int Hispanic, int NonHisp, int UnknownEthnicity, int Homeless,
             int MarketRate, int I100, int I80, int I75, int I60, int I50, int I30, int I120, int ProjectID)
         {
             try
@@ -127,6 +128,7 @@ namespace VHCBCommon.DataAccessLayer.Housing
                         command.Parameters.Add(new SqlParameter("Asian", Asian));
                         command.Parameters.Add(new SqlParameter("Indian", Indian));
                         command.Parameters.Add(new SqlParameter("Hawaiian", Hawaiian));
+                        command.Parameters.Add(new SqlParameter("MultiRacial", MultiRacial));
                         command.Parameters.Add(new SqlParameter("UnknownRace", UnknownRace));
                         command.Parameters.Add(new SqlParameter("Hispanic", Hispanic));
                         command.Parameters.Add(new SqlParameter("NonHisp", NonHisp));

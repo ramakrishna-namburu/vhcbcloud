@@ -738,7 +738,7 @@ namespace vhcbcloud
                         DataUtils.GetInt(ddlPaymentType.SelectedValue.ToString()),
                         DataUtils.GetDate(txtWatchDate.Text),
                         URL, EffDate, DocDate,
-                        DataUtils.GetDecimal(Regex.Replace(txtNoteAmountLoanDetails.Text, "[^0-9a-zA-Z.]+", "")));
+                        DataUtils.GetDecimal(Regex.Replace(txtNoteAmountLoanDetails.Text, "[^0-9a-zA-Z.]+", "")), GetUserId());
 
                     if (objLoadDetailsResult.IsExist)
                         LogMessage("Loan details already exists");
@@ -762,7 +762,7 @@ namespace vhcbcloud
                         URL, EffDate,
                         DataUtils.GetDate(txtBoardApprovalDate.Text),
                         DataUtils.GetDecimal(Regex.Replace(txtNoteAmountLoanDetails.Text, "[^0-9a-zA-Z.]+", "")),
-                        isActive);
+                        isActive, GetUserId());
 
                     LogMessage("Loan details updated successfully");
                     UpdateLoanMasterGrid(DataUtils.GetInt(hfLoanDetailID.Value));

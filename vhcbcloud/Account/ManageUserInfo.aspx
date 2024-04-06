@@ -112,6 +112,7 @@
                                         <asp:CheckBox ID="cbConservation" runat="server" Text ="Conservation" Checked="false" CssClass="labelClass" />
                                         <asp:CheckBox ID="cbAdmin" runat="server" Text="Admin" Checked="false" CssClass="labelClass" />
                                         <asp:CheckBox ID="cbLead" runat="server" Text="Lead" Checked="false" CssClass="labelClass" />
+                                        <asp:CheckBox ID="cbWQ" runat="server" Text="WQ" Checked="false" CssClass="labelClass" />
                                     </td>
 
                                 </tr>

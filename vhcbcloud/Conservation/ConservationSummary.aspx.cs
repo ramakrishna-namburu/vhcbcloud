@@ -238,7 +238,7 @@ namespace vhcbcloud.Conservation
                     pctWooded.InnerText = (Math.Round(DataUtils.GetDecimal(txtWooded.Text) / Total * 100)).ToString() + " %";
                 }
 
-                if(DataUtils.GetDecimal(drConserve["SugarBush"].ToString()) != 0)
+                if(DataUtils.GetDecimal(drConserve["Wooded"].ToString()) != 0)
                 {
                     pctSugarBush.InnerText = (Math.Round(DataUtils.GetDecimal(drConserve["Sugarbush"].ToString()) / DataUtils.GetDecimal(txtWooded.Text) * 100)).ToString() + " %";
                 }

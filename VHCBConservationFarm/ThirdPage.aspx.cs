@@ -36,7 +36,7 @@ namespace VHCBConservationFarm
                 {
                     txtExecSummary.Text = drPage3tDetails["ExecSummary"].ToString();
                     txtFarmerPlans.Text = drPage3tDetails["FarmerPlans"].ToString();
-                   
+
                     //foreach (ListItem li in cblFarmerTransfer.Items)
                     //{
                     //    if (drPage3tDetails["FarmerTransfer"].ToString().Split(',').ToList().Contains(li.Value))
@@ -44,25 +44,27 @@ namespace VHCBConservationFarm
                     //        li.Selected = true;
                     //    }
                     //}
-
+                    txtSellorPlans.Text = drPage3tDetails["SellorPlans"].ToString();
                     if (DataUtils.GetBool(drPage3tDetails["SellorConvey"].ToString()))
                     {
                         rdBtnSellorConvey.SelectedIndex = 0;
-                        part2.Visible = true;
+                        txtSellorPlans.Visible = true;
+
                     }
                     else
                     {
                         rdBtnSellorConvey.SelectedIndex = 1;
-                        part2.Visible = false;
+                        txtSellorPlans.Visible = false;
+
                     }
-                    }
+                }
             }
         }
-            protected void btnPrevious_Click(object sender, EventArgs e)
-            {
-                saveData();
-                Response.Redirect("SecondPage.aspx");
-            }
+        protected void btnPrevious_Click(object sender, EventArgs e)
+        {
+            saveData();
+            Response.Redirect("FirstPage.aspx");
+        }
 
         private void saveData()
         {
@@ -87,7 +89,7 @@ namespace VHCBConservationFarm
                     strFarmerTransfer = string.Empty;
                 }
 
-                ConservationApplicationData.ConservationFarmApplicationPage3(projectNumber, txtExecSummary.Text, DataUtils.GetBool(rdBtnSellorConvey.SelectedValue.Trim()), txtFarmerPlans.Text);
+                ConservationApplicationData.ConservationFarmApplicationPage3(projectNumber, txtExecSummary.Text, DataUtils.GetBool(rdBtnSellorConvey.SelectedValue.Trim()), txtSellorPlans.Text, txtFarmerPlans.Text);
 
 
                 LogMessage("Conservation Application Data Added Successfully");
@@ -96,23 +98,23 @@ namespace VHCBConservationFarm
         }
 
         protected void btnNext_Click(object sender, EventArgs e)
-            {
-                saveData();
-                Response.Redirect("Page4.aspx");
-            }
+        {
+            saveData();
+            Response.Redirect("Page4New.aspx");
+        }
 
-            protected void rdBtnSellorConvey_SelectedIndexChanged(object sender, EventArgs e)
-            {
-                if (rdBtnSellorConvey.SelectedItem.Value.Trim() == "Yes")
-                    part2.Visible = true;
-                else
-                    part2.Visible = false;
-            }
-            private void LogMessage(string message)
-            {
-                dvMessage.Visible = true;
-                lblErrorMsg.Text = message;
-            }
+        protected void rdBtnSellorConvey_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (rdBtnSellorConvey.SelectedItem.Value.Trim() == "Yes")
+                txtSellorPlans.Visible = true;
+            else
+                txtSellorPlans.Visible = false;
+        }
+        private void LogMessage(string message)
+        {
+            dvMessage.Visible = true;
+            lblErrorMsg.Text = message;
+        }
 
         protected void ddlGoto_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -120,4 +122,4 @@ namespace VHCBConservationFarm
             Response.Redirect(ddlGoto.SelectedItem.Value);
         }
     }
-    }
+}

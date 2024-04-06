@@ -209,7 +209,7 @@ namespace vhcbcloud.Housing
                     {
                         PortfolioDataData.AddProjectPortfolio(DataUtils.GetInt(ddlPortfolioType.SelectedValue), ddlyear.SelectedItem.Text, DataUtils.GetInt(hfProjectId.Value), DataUtils.GetInt(txtTotalUnits.Text),
                             DataUtils.GetInt(txtMGender.Text), DataUtils.GetInt(txtFGender.Text), DataUtils.GetInt(txtUGender.Text), DataUtils.GetInt(txtWhite.Text),
-                            DataUtils.GetInt(txtBlack.Text), DataUtils.GetInt(txtAsian.Text), DataUtils.GetInt(txtIndian.Text), DataUtils.GetInt(txtHawaiian.Text),
+                            DataUtils.GetInt(txtBlack.Text), DataUtils.GetInt(txtAsian.Text), DataUtils.GetInt(txtIndian.Text), DataUtils.GetInt(txtHawaiian.Text), DataUtils.GetInt(txtMultiRacial.Text),
                             DataUtils.GetInt(txtUnknownRace.Text), DataUtils.GetInt(txtHispanic.Text), DataUtils.GetInt(txtNonHisp.Text), DataUtils.GetInt(txtUnknownEthnicity.Text),
                             DataUtils.GetInt(txtHomeless.Text), DataUtils.GetInt(txtMarketRate.Text), DataUtils.GetInt(txtI100.Text), DataUtils.GetInt(txtI80.Text),
                             DataUtils.GetInt(txtI75.Text), DataUtils.GetInt(txtI60.Text), DataUtils.GetInt(txtI50.Text), DataUtils.GetInt(txtI30.Text), DataUtils.GetInt(txtI20.Text), false);
@@ -223,7 +223,7 @@ namespace vhcbcloud.Housing
                     {
                     PortfolioDataData.UpdateProjectPortfolio(DataUtils.GetInt(hfProjectPortfolioID.Value), DataUtils.GetInt(ddlPortfolioType.SelectedValue), ddlyear.SelectedItem.Text, DataUtils.GetInt(txtTotalUnits.Text),
                        DataUtils.GetInt(txtMGender.Text), DataUtils.GetInt(txtFGender.Text), DataUtils.GetInt(txtUGender.Text), DataUtils.GetInt(txtWhite.Text),
-                       DataUtils.GetInt(txtBlack.Text), DataUtils.GetInt(txtAsian.Text), DataUtils.GetInt(txtIndian.Text), DataUtils.GetInt(txtHawaiian.Text),
+                       DataUtils.GetInt(txtBlack.Text), DataUtils.GetInt(txtAsian.Text), DataUtils.GetInt(txtIndian.Text), DataUtils.GetInt(txtHawaiian.Text), DataUtils.GetInt(txtMultiRacial.Text),
                        DataUtils.GetInt(txtUnknownRace.Text), DataUtils.GetInt(txtHispanic.Text), DataUtils.GetInt(txtNonHisp.Text), DataUtils.GetInt(txtUnknownEthnicity.Text),
                        DataUtils.GetInt(txtHomeless.Text), DataUtils.GetInt(txtMarketRate.Text), DataUtils.GetInt(txtI100.Text), DataUtils.GetInt(txtI80.Text),
                        DataUtils.GetInt(txtI75.Text), DataUtils.GetInt(txtI60.Text), DataUtils.GetInt(txtI50.Text), DataUtils.GetInt(txtI30.Text), DataUtils.GetInt(txtI20.Text), DataUtils.GetInt(hfProjectId.Value));
@@ -242,7 +242,7 @@ namespace vhcbcloud.Housing
             //ddlPortfolioType.SelectedIndex = -1;
             txtTotalUnits.Text = "";
             txtMGender.Text = ""; txtFGender.Text = ""; txtUGender.Text = ""; txtWhite.Text = "";
-            txtBlack.Text = ""; txtAsian.Text = ""; txtIndian.Text = ""; txtHawaiian.Text = "";
+            txtBlack.Text = ""; txtAsian.Text = ""; txtIndian.Text = ""; txtHawaiian.Text = ""; txtMultiRacial.Text = "";
             txtUnknownRace.Text = ""; txtHispanic.Text = ""; txtNonHisp.Text = ""; txtUnknownEthnicity.Text = "";
             txtHomeless.Text = ""; txtMarketRate.Text = ""; txtI100.Text = ""; txtI80.Text = "";
             txtI75.Text = ""; txtI60.Text = ""; txtI50.Text = ""; txtI30.Text = ""; txtI20.Text = "";
@@ -268,6 +268,7 @@ namespace vhcbcloud.Housing
             spnUnknownEthnicity.InnerHtml = "";
             spnUnknownRace.InnerHtml = "";
             spnWhite.InnerHtml = "";
+            spnMultiRacial.InnerHtml = "";
         }
 
         protected void cbActiveOnly_CheckedChanged(object sender, EventArgs e)
@@ -346,6 +347,10 @@ namespace vhcbcloud.Housing
                         txtHawaiian.Text = drPortfolioData["Hawaiian"].ToString();
                         decimal perHawaiian = Math.Round((DataUtils.GetDecimal(drPortfolioData["Hawaiian"].ToString()) / Totalunits) * 100, 2);
                         spnHawaiian.InnerText = perHawaiian.ToString() + " %";
+
+                        txtMultiRacial.Text = drPortfolioData["MultiRacial"].ToString();
+                        decimal perMultiRacial = Math.Round((DataUtils.GetDecimal(drPortfolioData["MultiRacial"].ToString()) / Totalunits) * 100, 2);
+                        spnMultiRacial.InnerText = perMultiRacial.ToString() + " %";
 
                         txtUnknownRace.Text = drPortfolioData["UnknownRace"].ToString();
                         decimal perUnknownRace = Math.Round((DataUtils.GetDecimal(drPortfolioData["UnknownRace"].ToString()) / Totalunits) * 100, 2);

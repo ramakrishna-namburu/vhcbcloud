@@ -1,4 +1,5 @@
 ﻿using DataAccessLayer;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -22,9 +23,54 @@ namespace vhcbcloud
             if (!IsPostBack)
             {
                 BindControls();
+                BindEntityNotesGrid();
+
+                CheckNewProjectAccess();
+                hfIsVisibleBasedOnRole.Value = "true";
             }
         }
 
+        private void CheckNewProjectAccess()
+        {
+            DataTable dt = new DataTable();
+            dt = UserSecurityData.GetUserFxnSecurity(GetUserId());
+
+            foreach (DataRow row in dt.Rows)
+            {
+                if (row["FxnID"].ToString() == "40394")
+                    RoleReadOnly();
+            }
+        }
+
+        protected bool GetIsVisibleBasedOnRole()
+        {
+            return DataUtils.GetBool(hfIsVisibleBasedOnRole.Value);
+        }
+
+        protected void RoleReadOnly()
+        {
+            hfIsVisibleBasedOnRole.Value = "false";
+            cbAddFund.Enabled = false;
+            btnSubmitFund.Visible = false;
+            btnCancel.Visible = false;
+            cbAddAttachedGrants.Enabled = false;
+            btnAddAttachGrant.Visible = false;
+            cbAddnotes.Enabled = false;
+            btnAddNotes.Visible = false;
+        }
+
+        protected int GetUserId()
+        {
+            try
+            {
+                DataTable dtUser = ProjectCheckRequestData.GetUserByUserName(Context.User.Identity.GetUserName());
+                return dtUser != null ? Convert.ToInt32(dtUser.Rows[0][0].ToString()) : 0;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
         private void BindControls()
         {
             LoadFundNames();
@@ -268,6 +314,7 @@ namespace vhcbcloud
             cbAddFund.Checked = false;
             dvfundf.Visible = false;
             SearchFund();
+            BindEntityNotesGrid();
         }
 
         protected void ddlAcctNum_SelectedIndexChanged(object sender, EventArgs e)
@@ -277,6 +324,7 @@ namespace vhcbcloud
             cbAddFund.Checked = false;
             dvfundf.Visible = false;
             SearchFund();
+            BindEntityNotesGrid();
         }
 
         private void SearchFund()
@@ -319,6 +367,130 @@ namespace vhcbcloud
         protected void gvAttachedGrants_RowDataBound(object sender, GridViewRowEventArgs e)
         {
 
+        }
+
+        protected void ImgNotesReport_Click(object sender, ImageClickEventArgs e)
+        {
+            //ClientScript.RegisterStartupScript(this.GetType(),
+            //        "script", Helper.GetAttachedProjectsReportPDF(hfApplicatId.Value, "Entity Notes"));
+        }
+
+        private bool IsEntityNotesValid()
+        {
+            if (txtEntityNotes.Text.Trim() == "")
+            {
+                LogMessage("Enter Notes");
+                txtEntityNotes.Focus();
+                return false;
+            }
+
+            return true;
+        }
+
+        protected void btnAddNotes_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (btnAddNotes.Text.ToLower() == "submit")
+                {
+                    if (IsEntityNotesValid())
+                    {
+                        EntityNotesData.AddFundNotes(Convert.ToInt32(ddlFundName.SelectedValue.ToString()),
+                               Context.User.Identity.GetUserName().Trim(), txtEntityNotes.Text);
+
+                        LogMessage("Fund Notes Added Successfully");
+                    }
+                }
+                else
+                {
+                    EntityNotesData.UpdateFundNotes(DataUtils.GetInt(hfFundNoteID.Value), txtEntityNotes.Text, cbNotesActive.Checked);
+                    hfEntityNotesId.Value = "";
+
+                    gvNotes.EditIndex = -1;
+                    LogMessage("Fund Notes Updated Successfully");
+                    btnAddNotes.Text = "Submit";
+                }
+                BindEntityNotesGrid();
+                cbAddnotes.Checked = false;
+                cbNotesActive.Enabled = false;
+                cbNotesActive.Checked = true;
+                txtEntityNotes.Text = "";
+            }
+            catch (Exception ex)
+            {
+                LogError(Pagename, "btnAddNotes_Click", null, ex.Message);
+            }
+        }
+
+        private void BindEntityNotesGrid()
+        {
+            DataTable dt = EntityNotesData.GetFundNotesList(DataUtils.GetInt(ddlFundName.SelectedValue.ToString()), cbActiveOnly.Checked);
+
+            if (dt.Rows.Count > 0)
+            {
+                dvNotesGrid.Visible = true;
+                gvNotes.DataSource = dt;
+                gvNotes.DataBind();
+            }
+            else
+            {
+                dvNotesGrid.Visible = false;
+                gvNotes.DataSource = null;
+                gvNotes.DataBind();
+            }
+
+        }
+
+        protected void gvNotes_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            btnAddNotes.Text = "Submit";
+            txtEntityNotes.Text = "";
+            hfFundNoteID.Value = "";
+            cbAddnotes.Checked = false;
+            gvNotes.EditIndex = -1;
+            BindEntityNotesGrid();
+        }
+
+        protected void gvNotes_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            gvNotes.EditIndex = e.NewEditIndex;
+            BindEntityNotesGrid();
+        }
+
+        protected void gvNotes_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+
+        }
+
+        protected void gvNotes_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            try
+            {
+                if ((e.Row.RowState & DataControlRowState.Edit) == DataControlRowState.Edit)
+                {
+                    CommonHelper.GridViewSetFocus(e.Row);
+
+                    //Checking whether the Row is Data Row
+                    if (e.Row.RowType == DataControlRowType.DataRow)
+                    {
+                        //e.Row.Cells[5].Controls[0].Visible = false;
+                        btnAddNotes.Text = "Update";
+
+                        Label lblFundNoteID = e.Row.FindControl("lblFundNoteID") as Label;
+                        DataRow dr = EntityNotesData.GetFundNotesById(DataUtils.GetInt(lblFundNoteID.Text));
+
+                        hfFundNoteID.Value = lblFundNoteID.Text;
+                        txtEntityNotes.Text = dr["Note"].ToString();
+                        cbAddnotes.Checked = true;
+                        cbNotesActive.Checked = DataUtils.GetBool(dr["RowIsActive"].ToString());
+                        cbNotesActive.Enabled = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogError(Pagename, "gvNotes_RowDataBound", "", ex.Message);
+            }
         }
     }
 }

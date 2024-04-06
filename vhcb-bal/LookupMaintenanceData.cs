@@ -365,5 +365,113 @@ namespace VHCBCommon.DataAccessLayer
             }
             return dtProjects;
         }
+
+        public static string GetLkLookupSubValue(int typeId)
+        {
+            string SubDescription = "";
+            var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["dbConnection"].ConnectionString);
+            try
+            {
+                SqlCommand command = new SqlCommand();
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = "GetLkLookupSubValue";
+                command.Parameters.Add(new SqlParameter("typeId", typeId));
+
+                using (connection)
+                {
+                    connection.Open();
+                    command.Connection = connection;
+
+                    var ds = new DataSet();
+                    var da = new SqlDataAdapter(command);
+                    da.Fill(ds);
+                    if (ds.Tables.Count == 1 && ds.Tables[0].Rows != null)
+                    {
+                        SubDescription = ds.Tables[0].Rows[0][0].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return SubDescription;
+        }
+
+        public static DataTable GetWQSubWatershedsForWatershed(int WaterShed)
+        {
+            DataTable dtProjects = null;
+            var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["dbConnection"].ConnectionString);
+            try
+            {
+                SqlCommand command = new SqlCommand();
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = "GetWQSubWatershedsForWatershed";
+                command.Parameters.Add(new SqlParameter("WaterShed", WaterShed));
+
+                using (connection)
+                {
+                    connection.Open();
+                    command.Connection = connection;
+
+                    var ds = new DataSet();
+                    var da = new SqlDataAdapter(command);
+                    da.Fill(ds);
+                    if (ds.Tables.Count == 1 && ds.Tables[0].Rows != null)
+                    {
+                        dtProjects = ds.Tables[0];
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return dtProjects;
+        }
+
+        public static DataTable GetHUC12ForSubWatershed(string SubWaterhed)
+        {
+            DataTable dtProjects = null;
+            var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["dbConnection"].ConnectionString);
+            try
+            {
+                SqlCommand command = new SqlCommand();
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = "GetHUC12ForSubWatershed";
+                command.Parameters.Add(new SqlParameter("SubWaterhed", SubWaterhed));
+
+                using (connection)
+                {
+                    connection.Open();
+                    command.Connection = connection;
+
+                    var ds = new DataSet();
+                    var da = new SqlDataAdapter(command);
+                    da.Fill(ds);
+                    if (ds.Tables.Count == 1 && ds.Tables[0].Rows != null)
+                    {
+                        dtProjects = ds.Tables[0];
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return dtProjects;
+        }
     }
 }

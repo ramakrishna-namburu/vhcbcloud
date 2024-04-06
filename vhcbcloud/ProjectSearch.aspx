@@ -120,7 +120,7 @@
                             <tr>
                                 <td><span class="labelClass">Program</span></td>
                                 <td>
-                                    <asp:DropDownList ID="ddlProgram" CssClass="clsDropDown" runat="server">
+                                    <asp:DropDownList ID="ddlProgram" CssClass="clsDropDown" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlProgram_SelectedIndexChanged">
                                     </asp:DropDownList>
                                 </td>
                                 <td>

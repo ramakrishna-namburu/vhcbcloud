@@ -65,6 +65,14 @@
                                             <asp:Label ID="lblTypeId" runat="Server" Text='<%# Eval("TypeId") %>' />
                                         </ItemTemplate>
                                     </asp:TemplateField>
+                                      <asp:TemplateField HeaderText="Active">
+                                            <ItemTemplate>
+                                                <asp:CheckBox ID="chkActive" Enabled="false" runat="server" Checked='<%# Eval("RowIsActive") %>' />
+                                            </ItemTemplate>
+                                            <EditItemTemplate>
+                                                <asp:CheckBox ID="chkActive" runat="server" Checked='<%# Eval("RowIsActive") %>' />
+                                            </EditItemTemplate>
+                                        </asp:TemplateField>
                                     <asp:BoundField DataField="typeId" HeaderText="type ID" ReadOnly="True" Visible="false" SortExpression="typeid" />
                                     <asp:CommandField ShowEditButton="True" />
                                 </Columns>

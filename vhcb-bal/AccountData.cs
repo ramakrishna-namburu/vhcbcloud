@@ -145,7 +145,7 @@ namespace VHCBCommon.DataAccessLayer
 
         public static void AddUserInfo(string firstName, string lastName, string password, 
             string email, int DfltPrg, int dfltSecGrp, string NumbProj, string HostSite, bool Dashboard, string DashboardName, bool isReceivePDF,
-            bool isHousing, bool isViability, bool isConservation, bool isAdmin, bool isLead)
+            bool isHousing, bool isViability, bool isConservation, bool isAdmin, bool isLead, bool isWQ)
         {
             var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["dbConnection"].ConnectionString);
             try
@@ -169,6 +169,8 @@ namespace VHCBCommon.DataAccessLayer
                 command.Parameters.Add(new SqlParameter("isConservation", isConservation));
                 command.Parameters.Add(new SqlParameter("isAdmin", isAdmin));
                 command.Parameters.Add(new SqlParameter("isLead", isLead));
+                command.Parameters.Add(new SqlParameter("isWQ", isWQ));
+
                 using (connection)
                 {
                     connection.Open();
@@ -189,7 +191,7 @@ namespace VHCBCommon.DataAccessLayer
         public static void UpdateUserInfo(int UserId, string firstName, string lastName, string password, 
             string email, int DfltPrg, int dfltSecGrp, string NumbProj, string HostSite, bool RowIsActive, 
             bool Dashboard, string DashboardName, bool isReceivePDF,
-            bool isHousing, bool isViability, bool isConservation, bool isAdmin, bool isLead)
+            bool isHousing, bool isViability, bool isConservation, bool isAdmin, bool isLead, bool isWQ)
         {
             var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["dbConnection"].ConnectionString);
             try
@@ -215,7 +217,7 @@ namespace VHCBCommon.DataAccessLayer
                 command.Parameters.Add(new SqlParameter("isConservation", isConservation));
                 command.Parameters.Add(new SqlParameter("isAdmin", isAdmin));
                 command.Parameters.Add(new SqlParameter("isLead", isLead));
-
+                command.Parameters.Add(new SqlParameter("isWQ", isWQ));
                 using (connection)
                 {
                     connection.Open();

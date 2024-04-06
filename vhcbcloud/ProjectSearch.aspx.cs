@@ -580,6 +580,32 @@ namespace vhcbcloud
                 LogError(Pagename, "BindKeyStaff", "", ex.Message);
             }
         }
+
+        protected void ddlProgram_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(ddlProgram.SelectedItem.Value == "39932")
+            {
+                DataTable dataTable = new DataTable();
+
+                // Add columns to the DataTable
+                dataTable.Columns.Add("ID", typeof(int));
+                dataTable.Columns.Add("Name", typeof(string));
+
+                // Add rows to the DataTable
+                dataTable.Rows.Add("39933", "CWSP");
+                dataTable.Rows.Add("40420", "GLFC");
+
+                ddlProjectType.Items.Clear();
+                ddlProjectType.DataSource = dataTable;
+                ddlProjectType.DataValueField = "ID";
+                ddlProjectType.DataTextField = "Name";
+                ddlProjectType.DataBind();
+                ddlProjectType.Items.Insert(0, new ListItem("Select", "NA"));
+            }
+            else {
+                BindLookUP(ddlProjectType, 119);
+            }
+        }
     }
     public class MileStoneInput
     {

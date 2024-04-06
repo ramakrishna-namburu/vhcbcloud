@@ -1171,12 +1171,17 @@
 
                     var totPS = totPrime + totStateWide;
                     var pctPS = Math.round(totPS * 100 / Total);
-                    // console.log(pctPS);
-                    // console.log(pctPS.toPrecision(2));
+                  
                     $('#<%=pctPrimeStateWide.ClientID%>').text(pctPS + ' %');
 
+                    //console.log('Total is: '  + Total);
+                    
+        
                     var pctWooded = Math.round($('#<%=txtWooded.ClientID%>').val() * 100 / Total);
-                    $('#<%=pctWooded.ClientID%>').text(pctWooded.toPrecision(2) + ' %');
+                    //console.log('pctWooded: ' + pctWooded);
+                    //console.log(pctWooded.toPrecision(2) + ' %');
+                   $('#<%=pctWooded.ClientID%>').text(pctWooded.toPrecision(2) + ' %');
+                   // $('#<%=pctWooded.ClientID%>').text(pctWooded + ' %');
                 }
 
 

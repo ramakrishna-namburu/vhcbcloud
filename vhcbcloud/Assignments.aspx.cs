@@ -423,6 +423,17 @@ namespace vhcbcloud
             ///populate the form based on retrieved data
             getToDetails(dt);
         }
+        private void PopulateDropDown(DropDownList ddl, string DBSelectedvalue)
+        {
+            foreach (ListItem item in ddl.Items)
+            {
+                if (DBSelectedvalue.Trim() == item.Value.ToString())
+                {
+                    ddl.ClearSelection();
+                    item.Selected = true;
+                }
+            }
+        }
 
         /// <summary>
         /// Get Project To Details
@@ -435,7 +446,9 @@ namespace vhcbcloud
             DataTable dtProjects = FinancialTransactions.GetBoardCommitmentsByProject(Convert.ToInt32(hfToProjId.Value));
 
             lblProjName2.Text = dtProjects.Rows.Count > 0 ? dtProjects.Rows[0]["Description"].ToString() : "";
-            
+
+            PopulateDropDown(ddlTargetYear, dtProjects.Rows[0]["TargetYr"].ToString());
+
             //hfTransId.Value = ""; hfRFromTransId.Value = "";
             /*DO NOT Remove the below code*/
             //if (ddlRToProj.SelectedIndex != ddlRFromProj.SelectedIndex)
@@ -1236,6 +1249,18 @@ namespace vhcbcloud
                         return;
                     }
                 }
+
+                DataTable dtFundDet = FinancialTransactions.GetFundDetailsByFundId(Convert.ToInt32(ddlRFromFund.SelectedValue.ToString()));
+                if (dtFundDet.Rows[0]["mitfund"].ToString().ToLower() == "true")
+                {
+                    if (ddlUsePermit.Items.Count > 1 && ddlUsePermit.SelectedIndex == 0)
+                    {
+                        lblRErrorMsg.Text = "Select Assignment from Use Permit";
+                        ddlUsePermit.Focus();
+                        return;
+                    }
+                }
+
                 decimal n;
                 bool availFunds = decimal.TryParse(lblAvailFund.Text.Trim(), out n);
                 if (!availFunds || Convert.ToDecimal(txtRfromAmt.Text) > Convert.ToDecimal(lblAvailFund.Text))
@@ -1247,17 +1272,6 @@ namespace vhcbcloud
 
                     txtRfromAmt.Focus();
                     return;
-                }
-
-                DataTable dtFundDet = FinancialTransactions.GetFundDetailsByFundId(Convert.ToInt32(ddlRFromFund.SelectedValue.ToString()));
-                if (dtFundDet.Rows[0]["mitfund"].ToString().ToLower() == "true")
-                {
-                    if (ddlUsePermit.Items.Count > 1 && ddlUsePermit.SelectedIndex == 0)
-                    {
-                        lblRErrorMsg.Text = "Select reallocate from Use Permit";
-                        ddlUsePermit.Focus();
-                        return;
-                    }
                 }
 
                 if (txtRfromDate.Text == "")

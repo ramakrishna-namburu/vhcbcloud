@@ -199,8 +199,8 @@ namespace vhcbcloud.Conservation
 
             li.Controls.Add(anchor);
 
-            DataTable dtTabs = TabsData.GetProgramTabs(DataUtils.GetInt(ProgramId));
-
+            //DataTable dtTabs = TabsData.GetProgramTabs(DataUtils.GetInt(ProgramId));
+            DataTable dtTabs = TabsData.GetProgramTabsForViability(DataUtils.GetInt(hfProjectId.Value), DataUtils.GetInt(ProgramId));
             foreach (DataRow dr in dtTabs.Rows)
             {
                 HtmlGenericControl li1 = new HtmlGenericControl("li");

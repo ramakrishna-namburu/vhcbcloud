@@ -1132,6 +1132,503 @@ namespace VHCBCommon.DataAccessLayer.Conservation
             }
         }
         #endregion
+
+        public static void CheckConserveForOnLineApp(string ProjectNumber)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["dbConnection"].ConnectionString))
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.CommandText = "CheckConserveForOnLineApp";
+
+                        command.Parameters.Add(new SqlParameter("ProjectNumber", ProjectNumber));
+
+                        command.CommandTimeout = 60 * 5;
+
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static DataTable GetConserveAcresSPZList(int ProjectId, bool IsActiveOnly)
+        {
+            DataTable dt = null;
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["dbConnection"].ConnectionString))
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.CommandText = "GetConserveAcresSPZList";
+                        command.Parameters.Add(new SqlParameter("ProjectId", ProjectId));
+                        command.Parameters.Add(new SqlParameter("IsActiveOnly", IsActiveOnly));
+
+                        DataSet ds = new DataSet();
+                        var da = new SqlDataAdapter(command);
+                        da.Fill(ds);
+                        if (ds.Tables.Count == 1 && ds.Tables[0].Rows != null)
+                        {
+                            dt = ds.Tables[0];
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return dt;
+        }
+
+        public static void SubmitFarmOperation(int ProjectId, int FarmClassification, bool RAPCompliance, //int PrimStew, 
+            decimal RentedLand, decimal TotalEmployees, decimal PTyear, decimal FTyear, decimal FTSeasonal, decimal PTSeasonal, string ProductsSold, bool WorkedWithVHCB, string MitigateClimate, bool ExistingInfastructure, 
+            string InfrastuctureDescription, string ZoningDistrict, string MinLotSize, bool EnrolledUseValue)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["dbConnection"].ConnectionString))
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.CommandText = "SubmitFarmOperation";
+
+                        command.Parameters.Add(new SqlParameter("ProjectId", ProjectId));
+                        command.Parameters.Add(new SqlParameter("FarmClassification", FarmClassification));
+                        command.Parameters.Add(new SqlParameter("RAPCompliance", RAPCompliance));
+                        command.Parameters.Add(new SqlParameter("RentedLand", RentedLand));
+                        command.Parameters.Add(new SqlParameter("TotalEmployees", TotalEmployees));
+                        command.Parameters.Add(new SqlParameter("PTyear", PTyear));
+                        command.Parameters.Add(new SqlParameter("FTyear", FTyear));
+                        command.Parameters.Add(new SqlParameter("FTSeasonal", FTSeasonal));
+                        command.Parameters.Add(new SqlParameter("PTSeasonal", PTSeasonal));
+                        command.Parameters.Add(new SqlParameter("ProductsSold", ProductsSold));
+                        command.Parameters.Add(new SqlParameter("WorkedWithVHCB", WorkedWithVHCB));
+                        command.Parameters.Add(new SqlParameter("MitigateClimate", MitigateClimate));
+                        command.Parameters.Add(new SqlParameter("ExistingInfastructure", ExistingInfastructure));
+                        command.Parameters.Add(new SqlParameter("InfrastuctureDescription", InfrastuctureDescription));
+                        command.Parameters.Add(new SqlParameter("ZoningDistrict", ZoningDistrict));
+                        command.Parameters.Add(new SqlParameter("MinLotSize", MinLotSize));
+                        command.Parameters.Add(new SqlParameter("EnrolledUseValue", EnrolledUseValue));
+                        command.CommandTimeout = 60 * 5;
+
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static DataRow GetConserveFarm(int ProjectId)
+        {
+            DataRow dr = null;
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["dbConnection"].ConnectionString))
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.CommandText = "GetConserveFarm";
+                        command.Parameters.Add(new SqlParameter("ProjectId", ProjectId));
+
+                        DataSet ds = new DataSet();
+                        var da = new SqlDataAdapter(command);
+                        da.Fill(ds);
+                        if (ds.Tables.Count == 1 && ds.Tables[0].Rows.Count > 0)
+                        {
+                            dr = ds.Tables[0].Rows[0];
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return dr;
+        }
+
+        public static DataTable GetWQProjectPerformList(int ProjectID, bool IsActiveOnly)
+        {
+            DataTable dt = null;
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["dbConnection"].ConnectionString))
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.CommandText = "GetWQProjectPerformList";
+                        command.Parameters.Add(new SqlParameter("ProjectID", ProjectID));
+                        command.Parameters.Add(new SqlParameter("IsActiveOnly", IsActiveOnly));
+
+                        DataSet ds = new DataSet();
+                        var da = new SqlDataAdapter(command);
+                        da.Fill(ds);
+                        if (ds.Tables.Count == 1 && ds.Tables[0].Rows != null)
+                        {
+                            dt = ds.Tables[0];
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return dt;
+        }
+
+        public static void UpdateWQProjectPerform(int ProjectID, bool RowIsActive)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["dbConnection"].ConnectionString))
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.CommandText = "UpdateWQProjectPerform";
+
+                        command.Parameters.Add(new SqlParameter("ProjectID", ProjectID));
+                        command.Parameters.Add(new SqlParameter("RowIsActive", RowIsActive));
+
+                        command.CommandTimeout = 60 * 5;
+
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static AttributeResult AddWQProjectPerform(int ProjectID, int WQPerformanceTypeID, string Detail)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["dbConnection"].ConnectionString))
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.CommandText = "AddWQProjectPerform";
+
+                        command.Parameters.Add(new SqlParameter("ProjectID", ProjectID));
+                        command.Parameters.Add(new SqlParameter("WQPerformanceTypeID", WQPerformanceTypeID));
+                        command.Parameters.Add(new SqlParameter("Detail", Detail));
+
+                        SqlParameter parmMessage = new SqlParameter("@isDuplicate", SqlDbType.Bit);
+                        parmMessage.Direction = ParameterDirection.Output;
+                        command.Parameters.Add(parmMessage);
+
+                        SqlParameter parmMessage1 = new SqlParameter("@isActive", SqlDbType.Int);
+                        parmMessage1.Direction = ParameterDirection.Output;
+                        command.Parameters.Add(parmMessage1);
+
+                        command.CommandTimeout = 60 * 5;
+
+                        command.ExecuteNonQuery();
+
+                        AttributeResult acs = new AttributeResult();
+
+                        acs.IsDuplicate = DataUtils.GetBool(command.Parameters["@isDuplicate"].Value.ToString());
+                        acs.IsActive = DataUtils.GetBool(command.Parameters["@isActive"].Value.ToString());
+
+                        return acs;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static DataTable GetWQProjectMilestonesList(int ProjectID, bool IsActiveOnly)
+        {
+            DataTable dt = null;
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["dbConnection"].ConnectionString))
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.CommandText = "GetWQProjectMilestonesList";
+                        command.Parameters.Add(new SqlParameter("ProjectID", ProjectID));
+                        command.Parameters.Add(new SqlParameter("IsActiveOnly", IsActiveOnly));
+
+                        DataSet ds = new DataSet();
+                        var da = new SqlDataAdapter(command);
+                        da.Fill(ds);
+                        if (ds.Tables.Count == 1 && ds.Tables[0].Rows != null)
+                        {
+                            dt = ds.Tables[0];
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return dt;
+        }
+
+        public static AttributeResult AddWQProjectMilestones(int ProjectID, int WQProjectMSTypeID, DateTime Date)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["dbConnection"].ConnectionString))
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.CommandText = "AddWQProjectMilestones";
+
+                        command.Parameters.Add(new SqlParameter("ProjectID", ProjectID));
+                        command.Parameters.Add(new SqlParameter("WQProjectMSTypeID", WQProjectMSTypeID));
+                        command.Parameters.Add(new SqlParameter("Date", Date));
+
+                        SqlParameter parmMessage = new SqlParameter("@isDuplicate", SqlDbType.Bit);
+                        parmMessage.Direction = ParameterDirection.Output;
+                        command.Parameters.Add(parmMessage);
+
+                        SqlParameter parmMessage1 = new SqlParameter("@isActive", SqlDbType.Int);
+                        parmMessage1.Direction = ParameterDirection.Output;
+                        command.Parameters.Add(parmMessage1);
+
+                        command.CommandTimeout = 60 * 5;
+
+                        command.ExecuteNonQuery();
+
+                        AttributeResult acs = new AttributeResult();
+
+                        acs.IsDuplicate = DataUtils.GetBool(command.Parameters["@isDuplicate"].Value.ToString());
+                        acs.IsActive = DataUtils.GetBool(command.Parameters["@isActive"].Value.ToString());
+
+                        return acs;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static void AddWQWatershed(int WQProjectTypeID, string LKSubWatershed, string HUCID)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["dbConnection"].ConnectionString))
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.CommandText = "AddWQWatershed";
+                        command.Parameters.Add(new SqlParameter("WQProjectTypeID", WQProjectTypeID));
+                        command.Parameters.Add(new SqlParameter("LKSubWatershed", LKSubWatershed));
+                        command.Parameters.Add(new SqlParameter("HUCID", HUCID));
+
+                        command.CommandTimeout = 60 * 5;
+
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static DataTable GetWQWatershedList(int WQProjectTypeID, bool IsActiveOnly)
+        {
+            DataTable dt = null;
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["dbConnection"].ConnectionString))
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.CommandText = "GetWQWatershedList";
+                        command.Parameters.Add(new SqlParameter("WQProjectTypeID", WQProjectTypeID));
+                        command.Parameters.Add(new SqlParameter("IsActiveOnly", IsActiveOnly));
+
+                        DataSet ds = new DataSet();
+                        var da = new SqlDataAdapter(command);
+                        da.Fill(ds);
+                        if (ds.Tables.Count == 1 && ds.Tables[0].Rows != null)
+                        {
+                            dt = ds.Tables[0];
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return dt;
+        }
+        public static void UpdateWQWatershed(int WQWatershedID, bool RowIsActive)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["dbConnection"].ConnectionString))
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.CommandText = "UpdateWQWatershed";
+
+                        command.Parameters.Add(new SqlParameter("WQWatershedID", WQWatershedID));
+                        command.Parameters.Add(new SqlParameter("RowIsActive", RowIsActive));
+
+                        command.CommandTimeout = 60 * 5;
+
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static AttributeResult AddWQProjectDeliverables(int ProjectID, int WQDeliverablesID, DateTime Date)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["dbConnection"].ConnectionString))
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.CommandText = "AddWQProjectDeliverables";
+
+                        command.Parameters.Add(new SqlParameter("ProjectID", ProjectID));
+                        command.Parameters.Add(new SqlParameter("WQDeliverablesID", WQDeliverablesID));
+                        command.Parameters.Add(new SqlParameter("Date", Date));
+
+                        SqlParameter parmMessage = new SqlParameter("@isDuplicate", SqlDbType.Bit);
+                        parmMessage.Direction = ParameterDirection.Output;
+                        command.Parameters.Add(parmMessage);
+
+                        SqlParameter parmMessage1 = new SqlParameter("@isActive", SqlDbType.Int);
+                        parmMessage1.Direction = ParameterDirection.Output;
+                        command.Parameters.Add(parmMessage1);
+
+                        command.CommandTimeout = 60 * 5;
+
+                        command.ExecuteNonQuery();
+
+                        AttributeResult acs = new AttributeResult();
+
+                        acs.IsDuplicate = DataUtils.GetBool(command.Parameters["@isDuplicate"].Value.ToString());
+                        acs.IsActive = DataUtils.GetBool(command.Parameters["@isActive"].Value.ToString());
+
+                        return acs;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static DataTable GetWQProjectDeliverables(int ProjectID, bool IsActiveOnly)
+        {
+            DataTable dt = null;
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["dbConnection"].ConnectionString))
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.CommandText = "GetWQProjectDeliverables";
+                        command.Parameters.Add(new SqlParameter("ProjectID", ProjectID));
+                        command.Parameters.Add(new SqlParameter("IsActiveOnly", IsActiveOnly));
+
+                        DataSet ds = new DataSet();
+                        var da = new SqlDataAdapter(command);
+                        da.Fill(ds);
+                        if (ds.Tables.Count == 1 && ds.Tables[0].Rows != null)
+                        {
+                            dt = ds.Tables[0];
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return dt;
+        }
     }
     public class Result
     {

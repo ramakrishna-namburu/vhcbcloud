@@ -159,15 +159,22 @@
                                 <asp:TextBox ID="txtTotalExpenses" CssClass="clsTextBoxBlue1" runat="server" MaxLength="20"></asp:TextBox>
                             </td>
                         </tr>
-
+                    </table>
+                    <table style="width: 100%">
                         <tr>
-                            <td colspan="3" style="height: 10px">
-                                <span class="labelClass" style="margin-left: 10px">Because VHCB awards are a matter of public record, VHCB may describe this project in a press release following the Board's decision.  Should we notify you in advance before publicizing this project?
-                                   <asp:RadioButtonList ID="rdbtNotify" runat="server" CellPadding="2" CellSpacing="4"
-                                       RepeatDirection="Horizontal">
-                                       <asp:ListItem>Yes &nbsp;</asp:ListItem>
-                                       <asp:ListItem> No &nbsp;</asp:ListItem>
-                                   </asp:RadioButtonList></span>
+                            <td style="height: 10px; width: 90%">
+                                <div>
+                                    <span class="labelClass" style="margin-left: 10px">Because VHCB awards are a matter of public record, VHCB may describe this project in a press release following the Board's decision.  Should we notify you in advance before publicizing this project?
+                                    </span>
+
+                                </div>
+                            </td>
+                            <td style="height: 10px; width: 10%">
+                                <asp:RadioButtonList ID="rdbtNotify" runat="server"
+                                    RepeatDirection="Horizontal">
+                                    <asp:ListItem>Yes &nbsp;</asp:ListItem>
+                                    <asp:ListItem> No &nbsp;</asp:ListItem>
+                                </asp:RadioButtonList>
                             </td>
                         </tr>
                         <tr>
@@ -179,7 +186,7 @@
 
                     <table>
                         <tr>
-                            <td colspan="2" style="text-decoration: underline;" class="auto-style7"><strong>A.  Applicant Contact Information</strong></td>
+                            <td colspan="2" style="text-decoration: underline;" class="auto-style7"><strong>Applicant Contact Information</strong></td>
                         </tr>
                         <tr>
                             <td colspan="3" style="height: 10px"></td>
@@ -235,13 +242,13 @@
                     <div class="panel-width" runat="server" id="dvNew">
                         <table>
                             <tr>
-                                <td colspan="2" style="text-decoration: underline;" class="auto-style7"><strong>B.  LANDOWNER INFORMATION </strong></td>
+                                <td colspan="2" style="text-decoration: underline;" class="auto-style7"><strong>Landowner/Farmer Information</strong></td>
                             </tr>
                             <tr>
                                 <td colspan="3" style="height: 10px"></td>
                             </tr>
                             <tr>
-                                <td><span class="labelClass" style="margin-left: 10px">Name(s)</span></td>
+                                <td><span class="labelClass" style="margin-left: 10px">Name</span></td>
                                 <td colspan="2">
                                     <asp:TextBox ID="txtLONames" CssClass="clsTextBoxBlue1" runat="server" Width="253px"></asp:TextBox>
                                 <tr>
@@ -339,10 +346,10 @@
                             </div>
                         </div>
 
-                        <table>
+                        <%-- <table>
 
                             <tr>
-                                <td colspan="3" style="text-decoration: underline;"><strong>C.  Farmer/Landowner Mailing Address & Contact Information</strong></td>
+                                <td colspan="3" style="text-decoration: underline;"><strong>Farmer/Landowner Mailing Address & Contact Information</strong></td>
                             </tr>
                         </table>
                         <table>
@@ -356,9 +363,9 @@
                                 <tr>
                                     <td colspan="3" style="height: 10px"></td>
                                 </tr>
-                        </table>
-                        <div class="panel panel-default" style="margin-bottom: 2px;">
-                            <%-- <div class="panel-heading" style="padding: 5px 5px 1px 5px">
+                        </table>--%>
+                        <%--<div class="panel panel-default" style="margin-bottom: 2px;">
+                             <div class="panel-heading" style="padding: 5px 5px 1px 5px">
                                 <table style="width: 100%;">
                                     <tr>
                                         <td>
@@ -367,7 +374,7 @@
                                         <td style="text-align: right"></td>
                                     </tr>
                                 </table>
-                            </div>--%>
+                            </div>
                             <div class="panel-body" runat="server" id="Div1">
                                 <asp:Panel runat="server" ID="Panel1">
 
@@ -414,7 +421,7 @@
                                             </tr>
                                             <tr>
                                                 <td colspan="6" style="height: 5px"></td>
-                                            </tr>--%>
+                                            </tr>
                                             <tr>
                                                 <td style="width: 80px"><span class="labelClass" runat="server" id="Span1" visible="true">Email</span></td>
                                                 <td class="auto-style9">
@@ -448,14 +455,14 @@
                                     </div>
                                 </asp:Panel>
                             </div>
-                        </div>
+                        </div>--%>
 
                         <table>
                             <tr>
                                 <td colspan="6" style="height: 15px"></td>
                             </tr>
                             <tr>
-                                <td colspan="2" style="text-decoration: underline;" class="auto-style13"><strong>D. PROPERTY TO BE CONSERVED (if different from above) </strong></td>
+                                <td colspan="2" style="text-decoration: underline;" class="auto-style13"><strong>PROPERTY TO BE CONSERVED (if different from above) </strong></td>
                             </tr>
                             <tr>
                                 <td colspan="3" class="auto-style12"></td>
@@ -562,7 +569,7 @@
                                 <td colspan="6" style="height: 15px"></td>
                             </tr>
                             <tr>
-                                <td colspan="2" style="text-decoration: underline;" class="auto-style13"><strong>E. Contact of proposed new landowner or leasing farmer</strong></td>
+                                <td colspan="2" style="text-decoration: underline;" class="auto-style13"><strong>Contact of proposed new landowner or leasing farmer</strong></td>
                             </tr>
                             <tr>
                                 <td colspan="3" class="auto-style12"></td>
@@ -605,7 +612,7 @@
                                 <td colspan="4" style="height: 10px"></td>
                             </tr>
                             <tr>
-                                <td><span class="labelClass" style="margin-left: 10px">Relationship to project</span></td>
+                                <td><span class="labelClass" style="margin-left: 10px">Relationship to project (i.e., farmer, new owner)</span></td>
                                 <td style="margin-left: 30px">&nbsp;&nbsp;&nbsp;&nbsp;
                                     <asp:TextBox ID="txtProposedRelation" CssClass="clsTextBoxBlue1" runat="server" Width="253px"></asp:TextBox>
                                 </td>
@@ -618,8 +625,8 @@
                                 <td colspan="4" style="height: 10px"></td>
                             </tr>
                         </table>
-                        <div class="panel panel-default" style="margin-bottom: 2px;">
-                            <div class="panel-heading" style="padding: 5px 5px 1px 5px">
+                       <%-- <div class="panel panel-default" style="margin-bottom: 2px;">--%>
+                            <%--<div class="panel-heading" style="padding: 5px 5px 1px 5px">
                                 <table style="width: 100%;">
                                     <tr>
                                         <td>
@@ -628,14 +635,14 @@
                                         <td style="text-align: right"></td>
                                     </tr>
                                 </table>
-                            </div>
-                            <div class="panel-body" runat="server" id="Div5">
+                            </div>--%>
+                      <%--      <div class="panel-body" runat="server" id="Div5">
                                 <asp:Panel runat="server" ID="Panel4">
 
-                                    <div id="Div6" runat="server">
+                                    <div id="Div6" runat="server">--%>
 
                                         <table style="width: 100%">
-                                            <tr>
+                                           <%-- <tr>
                                                 <td style="width: 150px"><span class="labelClass">Street #</span></td>
                                                 <td class="auto-style9">
                                                     <asp:TextBox ID="txtProposedStreet" CssClass="clsTextBoxBlue1" runat="server" MaxLength="12"></asp:TextBox>
@@ -662,10 +669,7 @@
                                                         AutoPostBack="true" OnSelectedIndexChanged="ddlProposedTown_SelectedIndexChanged">
                                                     </asp:DropDownList>
                                                 </td>
-                                                <%-- <td style="width: 150px"><span class="labelClass">Other Town(s)</span></td>
-                                                <td style="width: 250px">
-                                                    <asp:TextBox ID="txtPropertyOtherTown" CssClass="clsTextBoxBlue1" runat="server" MaxLength="10"></asp:TextBox>
-                                                </td>--%>
+                                              
                                                 <td class="auto-style10">
                                                     <span class="labelClass">Zip</span>
                                                 </td>
@@ -683,12 +687,7 @@
                                                 <td colspan="6" style="height: 5px"></td>
                                             </tr>
                                             <tr>
-                                                <%-- <td class="auto-style10">
-                                                    <span class="labelClass">County</span>
-                                                </td>
-                                                <td style="width: 270px">
-                                                    <asp:Label runat="server" ID="lblPropertyCounty" class="labelClass"></asp:Label>
-                                                </td>--%>
+                                               
                                                 <td style="width: 100px">
                                                     <span class="labelClass" runat="server" id="Span3" visible="true"></span>
                                                 </td>
@@ -697,8 +696,13 @@
 
                                                 </td>
                                                 <td></td>
+                                            </tr>--%>
+                                             <tr>
+                                                <td colspan="6" style="height: 5px"></td>
                                             </tr>
-
+                                             <tr>
+                                                <td colspan="6" style="height: 5px"></td>
+                                            </tr>
                                             <tr>
                                                 <td colspan="6" style="height: 5px">
                                                     <asp:Button ID="btnPrint" runat="server" Text="Print Application PDF" class="btn btn-info" OnClick="btnPrint_Click" />
@@ -708,22 +712,25 @@
                                                     <asp:Label runat="server" ID="Label1" class="labelClass" Text="Go To"></asp:Label>
                                                     <asp:DropDownList ID="ddlGoto" CssClass="clsDropDown" runat="server" Height="23px" Width="185px" AutoPostBack="true" OnSelectedIndexChanged="ddlGoto_SelectedIndexChanged">
                                                         <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
-                                                        <asp:ListItem Text="Farm Conservation Application" Value="SecondPage.aspx"></asp:ListItem>
-                                                        <asp:ListItem Text="Project Summary" Value="ThirdPage.aspx"></asp:ListItem>
-                                                        <asp:ListItem Text="Land Resources" Value="Page4.aspx"></asp:ListItem>
+                                                        <asp:ListItem Text="Applicant Information" Value="FirstPage.aspx"></asp:ListItem>
+                                                        <asp:ListItem Text="Executive Summary and Farm Transfer" Value="ThirdPage.aspx"></asp:ListItem>
+                                                        <asp:ListItem Text="Land & Water Resources" Value="Page4New.aspx"></asp:ListItem>
                                                         <asp:ListItem Text="Farm Management" Value="FarmManagement.aspx"></asp:ListItem>
-                                                        <asp:ListItem Text="Water Management" Value="WaterManagement.aspx"></asp:ListItem>
-                                                        <asp:ListItem Text="Easement Config" Value="EasementConfig.aspx"></asp:ListItem>
-
+                                                        <asp:ListItem Text="Easement Terms" Value="EasementTerms.aspx"></asp:ListItem>
+                                                        <asp:ListItem Text="Town Planning" Value="TownPlaning.aspx"></asp:ListItem>
+                                                        <asp:ListItem Text="Additional Info" Value="Additionalinfo.aspx"></asp:ListItem>
+                                                        <asp:ListItem Text="Attachments" Value="Attachments.aspx"></asp:ListItem>
                                                     </asp:DropDownList>
                                                 </td>
                                             </tr>
-
+                                             <tr>
+                                                <td colspan="6" style="height: 5px"></td>
+                                            </tr>
                                         </table>
-                                    </div>
+                                   <%-- </div>
                                 </asp:Panel>
-                            </div>
-                        </div>
+                            </div>--%>
+                        <%--</div>--%>
                     </div>
 
                 </div>
