@@ -72,9 +72,9 @@ namespace Portfolio
         {
             hfPortfolioType.Value = "";
             hfYear.Value = "";
-            ClearForm();
+            
             DataRow drPortfolioData = PortfolioDataData.GetPortfolioDataForOnLineApp(Session["UserId"].ToString(), projectNumber, ddlYear.SelectedValue, ddlPortfolioType.SelectedValue);
-
+            ClearForm();
             if (drPortfolioData != null)
             {
                 hfProjectPortfolioID.Value = drPortfolioData["ProjectPortfolioID"].ToString();
@@ -89,7 +89,8 @@ namespace Portfolio
                 hfYear.Value = Year.ToString();
 
                     int Totalunits = DataUtils.GetInt(drPortfolioData["TotalUnits"].ToString());
-                    //PopulateDropDown(ddlPortfolioType, drPortfolioData["PortfolioType"].ToString());
+                PopulateDropDown(ddlPortfolioType, drPortfolioData["Year"].ToString());
+                PopulateDropDown(ddlPortfolioType, drPortfolioData["PortfolioType"].ToString());
                     txtTotalUnits.Text = drPortfolioData["TotalUnits"].ToString();
 
                     txtMGender.Text = drPortfolioData["MGender"].ToString();
@@ -120,10 +121,10 @@ namespace Portfolio
                 txtUnknownRace.Text = drPortfolioData["UnknownRace"].ToString();
                    
 
-                    txtHispanic.Text = drPortfolioData["Hispanic"].ToString();
+                    //txtHispanic.Text = drPortfolioData["Hispanic"].ToString();
                    
 
-                    txtNonHisp.Text = drPortfolioData["NonHisp"].ToString();
+                    //txtNonHisp.Text = drPortfolioData["NonHisp"].ToString();
                    
 
                     txtUnknownEthnicity.Text = drPortfolioData["UnknownEthnicity"].ToString();
@@ -165,7 +166,7 @@ namespace Portfolio
                     spnFeMale.InnerText = perFeMale.ToString() + " %";
 
                     decimal perUGender = Math.Round((DataUtils.GetDecimal(drPortfolioData["UGender"].ToString()) / Totalunits) * 100, 2);
-                    spnUgender.InnerText = perUGender.ToString() + " %";
+                    spnUGender.InnerText = perUGender.ToString() + " %";
 
                     decimal perWhite = Math.Round((DataUtils.GetDecimal(drPortfolioData["White"].ToString()) / Totalunits) * 100, 2);
                     spnWhite.InnerText = perWhite.ToString() + " %";
@@ -188,11 +189,11 @@ namespace Portfolio
                     decimal perUnknownRace = Math.Round((DataUtils.GetDecimal(drPortfolioData["UnknownRace"].ToString()) / Totalunits) * 100, 2);
                     spnUnknownRace.InnerText = perUnknownRace.ToString() + " %";
 
-                    decimal perHispanic = Math.Round((DataUtils.GetDecimal(drPortfolioData["Hispanic"].ToString()) / Totalunits) * 100, 2);
-                    spnHispanic.InnerText = perHispanic.ToString() + " %";
+                    //decimal perHispanic = Math.Round((DataUtils.GetDecimal(drPortfolioData["Hispanic"].ToString()) / Totalunits) * 100, 2);
+                    //spnHispanic.InnerText = perHispanic.ToString() + " %";
 
-                    decimal perNonHisp = Math.Round((DataUtils.GetDecimal(drPortfolioData["NonHisp"].ToString()) / Totalunits) * 100, 2);
-                    spnNonHisp.InnerText = perNonHisp.ToString() + " %";
+                    //decimal perNonHisp = Math.Round((DataUtils.GetDecimal(drPortfolioData["NonHisp"].ToString()) / Totalunits) * 100, 2);
+                    //spnNonHisp.InnerText = perNonHisp.ToString() + " %";
 
                     decimal perUnknownEthnicity = Math.Round((DataUtils.GetDecimal(drPortfolioData["UnknownEthnicity"].ToString()) / Totalunits) * 100, 2);
                     spnUnknownEthnicity.InnerText = perUnknownEthnicity.ToString() + " %";
@@ -231,6 +232,34 @@ namespace Portfolio
 
                     decimal perI120 = Math.Round((DataUtils.GetDecimal(drPortfolioData["I120"].ToString()) / Totalunits) * 100, 2);
                     spnI20.InnerText = perI120.ToString() + " %";
+
+                    txtOtherGender.Text = drPortfolioData["OtherGender"].ToString();
+                    decimal perOtherGender = Math.Round((DataUtils.GetDecimal(drPortfolioData["OtherGender"].ToString()) / Totalunits) * 100, 2);
+                    spnOtherGender.InnerText = perOtherGender.ToString() + " %";
+
+                    txtVacanciesGender.Text = drPortfolioData["VacanciesGender"].ToString();
+                    decimal perVacanciesGender = Math.Round((DataUtils.GetDecimal(drPortfolioData["VacanciesGender"].ToString()) / Totalunits) * 100, 2);
+                    spnVacanciesGender.InnerText = perVacanciesGender.ToString() + " %";
+
+                    txtVacanciesRace.Text = drPortfolioData["VacanciesRace"].ToString();
+                    decimal perVacanciesRace = Math.Round((DataUtils.GetDecimal(drPortfolioData["VacanciesRace"].ToString()) / Totalunits) * 100, 2);
+                    spnVacanciesRace.InnerText = perVacanciesRace.ToString() + " %";
+
+                    txtLatinx.Text = drPortfolioData["Latinx"].ToString();
+                    decimal perLatinx = Math.Round((DataUtils.GetDecimal(drPortfolioData["Latinx"].ToString()) / Totalunits) * 100, 2);
+                    spnLatinx.InnerText = perLatinx.ToString() + " %";
+
+                    txtNonLatinx.Text = drPortfolioData["NonLatinx"].ToString();
+                    decimal perNonLatinx = Math.Round((DataUtils.GetDecimal(drPortfolioData["NonLatinx"].ToString()) / Totalunits) * 100, 2);
+                    spnNonLatinx.InnerText = perNonLatinx.ToString() + " %";
+
+                    txtVacanciesEthnicity.Text = drPortfolioData["VacanciesEthnicity"].ToString();
+                    decimal perVacanciesEthnicity = Math.Round((DataUtils.GetDecimal(drPortfolioData["VacanciesEthnicity"].ToString()) / Totalunits) * 100, 2);
+                    spnVacanciesEthnicity.InnerText = perVacanciesEthnicity.ToString() + " %";
+
+                    txtNonbinary.Text = drPortfolioData["Nonbinary"].ToString();
+                    decimal nonBinary = Math.Round((DataUtils.GetDecimal(drPortfolioData["Nonbinary"].ToString()) / Totalunits) * 100, 2);
+                    spnNonbinary.InnerText = nonBinary.ToString() + " %";
                 }
 
             }
@@ -364,26 +393,39 @@ namespace Portfolio
             PortfolioDataData.UpdateProjectPortfolio(DataUtils.GetInt(hfProjectPortfolioID.Value), DataUtils.GetInt(ddlPortfolioType.SelectedValue), ddlYear.SelectedItem.Text, DataUtils.GetInt(txtTotalUnits.Text),
                      DataUtils.GetInt(txtMGender.Text), DataUtils.GetInt(txtFGender.Text), DataUtils.GetInt(txtUGender.Text), DataUtils.GetInt(txtWhite.Text),
                      DataUtils.GetInt(txtBlack.Text), DataUtils.GetInt(txtAsian.Text), DataUtils.GetInt(txtIndian.Text), DataUtils.GetInt(txtHawaiian.Text), DataUtils.GetInt(txtMultiRacial.Text),
-                     DataUtils.GetInt(txtUnknownRace.Text), DataUtils.GetInt(txtHispanic.Text), DataUtils.GetInt(txtNonHisp.Text), DataUtils.GetInt(txtUnknownEthnicity.Text),
+                     DataUtils.GetInt(txtUnknownRace.Text),0,0,// DataUtils.GetInt(txtHispanic.Text), DataUtils.GetInt(txtNonHisp.Text), 
+                     DataUtils.GetInt(txtUnknownEthnicity.Text),
                      DataUtils.GetInt(txtHomeless.Text), DataUtils.GetInt(txtMarketRate.Text), DataUtils.GetInt(txtI100.Text), DataUtils.GetInt(txtI80.Text),
-                     DataUtils.GetInt(txtI75.Text), DataUtils.GetInt(txtI60.Text), DataUtils.GetInt(txtI50.Text), DataUtils.GetInt(txtI30.Text), DataUtils.GetInt(txtI20.Text), ProjectId);
+                     DataUtils.GetInt(txtI75.Text), DataUtils.GetInt(txtI60.Text), DataUtils.GetInt(txtI50.Text), DataUtils.GetInt(txtI30.Text), DataUtils.GetInt(txtI20.Text), ProjectId,
+                      DataUtils.GetInt(txtOtherGender.Text), DataUtils.GetInt(txtNonbinary.Text), DataUtils.GetInt(txtVacanciesGender.Text), DataUtils.GetInt(txtVacanciesRace.Text), DataUtils.GetInt(txtLatinx.Text), DataUtils.GetInt(txtNonLatinx.Text), DataUtils.GetInt(txtVacanciesEthnicity.Text));
+                      ClearForm();
         }
 
         private void ClearForm()
         {
+            //ddlYear.SelectedIndex = -1;
             //ddlPortfolioType.SelectedIndex = -1;
             txtTotalUnits.Text = "";
             txtMGender.Text = ""; txtFGender.Text = ""; txtUGender.Text = ""; txtWhite.Text = "";
             txtBlack.Text = ""; txtAsian.Text = ""; txtIndian.Text = ""; txtHawaiian.Text = ""; txtMultiRacial.Text = "";
-            txtUnknownRace.Text = ""; txtHispanic.Text = ""; txtNonHisp.Text = ""; txtUnknownEthnicity.Text = "";
+            txtUnknownRace.Text = ""; //txtHispanic.Text = ""; txtNonHisp.Text = ""; 
+            txtUnknownEthnicity.Text = "";
             txtHomeless.Text = ""; txtMarketRate.Text = ""; txtI100.Text = ""; txtI80.Text = "";
             txtI75.Text = ""; txtI60.Text = ""; txtI50.Text = ""; txtI30.Text = ""; txtI20.Text = "";
+            txtNonbinary.Text = "";
+            txtOtherGender.Text = "";
+            txtVacanciesGender.Text = "";
+
+            txtVacanciesRace.Text = "";
+            txtLatinx.Text = "";
+            txtNonLatinx.Text = "";
+            txtVacanciesEthnicity.Text = "";
 
             spnAsian.InnerHtml = "";
             spnBlack.InnerHtml = "";
             spnFeMale.InnerHtml = "";
             spnHawaiian.InnerHtml = "";
-            spnHispanic.InnerHtml = "";
+            //spnHispanic.InnerHtml = "";
             spnHomeless.InnerHtml = "";
             spnI100.InnerHtml = "";
             spnI20.InnerHtml = "";
@@ -394,13 +436,21 @@ namespace Portfolio
             spnI80.InnerHtml = "";
             spnIndian.InnerHtml = "";
             spnMale.InnerHtml = "";
-            spnNonHisp.InnerHtml = "";
+            //spnNonHisp.InnerHtml = "";
             spntMarketRate.InnerHtml = "";
-            spnUgender.InnerHtml = "";
+            spnUGender.InnerHtml = "";
+            spnVacanciesGender.InnerHtml = "";
             spnUnknownEthnicity.InnerHtml = "";
             spnUnknownRace.InnerHtml = "";
             spnWhite.InnerHtml = "";
             spnMultiRacial.InnerHtml = "";
+
+            spnVacanciesRace.InnerHtml = "";
+            spnLatinx.InnerHtml = "";
+            spnNonLatinx.InnerHtml = "";
+            spnVacanciesEthnicity.InnerHtml = "";
+            spnOtherGender.InnerHtml = "";
+            spnNonbinary.InnerHtml = "";
         }
 
         private void LogError(string pagename, string method, string message, string error)

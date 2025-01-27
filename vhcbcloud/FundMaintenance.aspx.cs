@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -27,6 +28,7 @@ namespace vhcbcloud
 
                 CheckNewProjectAccess();
                 hfIsVisibleBasedOnRole.Value = "true";
+                hfLKMethod.Value = "0";
             }
         }
 
@@ -81,6 +83,7 @@ namespace vhcbcloud
             BindLookUP(ddlSOVDeptId, 209);
 
             BindFundType();
+            BindCommitmentType();
             LoadVHCBGrantNames();
         }
 
@@ -100,6 +103,21 @@ namespace vhcbcloud
             }
         }
 
+        private void BindCommitmentType()
+        {
+            try
+            {
+                ddlCommitmentType.DataSource = FundTypeData.GetCommitmentType();
+                ddlCommitmentType.DataValueField = "Id";
+                ddlCommitmentType.DataTextField = "description";
+                ddlCommitmentType.DataBind();
+                ddlCommitmentType.Items.Insert(0, new ListItem("Select", "NA"));
+            }
+            catch (Exception ex)
+            {
+                lblErrorMsg.Text = ex.Message;
+            }
+        }
         private void BindFundType()
         {
             try
@@ -186,7 +204,7 @@ namespace vhcbcloud
                 PopulateDropDown(ddlFundType, dr["LkFundType"].ToString());
                 txtFundNum.Text = dr["account"].ToString();
                 PopulateDropDown(ddlSOVFundCode, dr["VHCBCode"].ToString());
-                txtMIPFundNo.Text = dr["MIPFundnum"].ToString() == "0"? "" : dr["MIPFundnum"].ToString();
+                txtMIPFundNo.Text = dr["MIPFundnum"].ToString() == "0" ? "" : dr["MIPFundnum"].ToString();
                 //PopulateDropDown(ddlAcctMethod, dr["LkAcctMethod"].ToString());
                 PopulateDropDown(ddlSOVDeptId, dr["DeptID"].ToString());
                 cbMitFund.Checked = DataUtils.GetBool(dr["MitFund"].ToString());
@@ -195,8 +213,12 @@ namespace vhcbcloud
                 cbSecondapproval.Checked = DataUtils.GetBool(dr["Secondapproval"].ToString());
 
                 //txtFundName.Enabled = false;
-
+                txtBegAmount.Text = dr["BegAmt"].ToString();
+                txtAsofDate.Text = dr["AsOfDate"].ToString();
                 btnSubmitFund.Text = "Update";
+                PopulateDropDown(ddlCommitmentType, dr["Commit_Method"].ToString());
+                spnMethod.InnerHtml = dr["Source"].ToString();
+                spnFundId.InnerText = dr["FundId"].ToString();
             }
         }
 
@@ -225,6 +247,13 @@ namespace vhcbcloud
             ddlSOVDeptId.SelectedIndex = -1;
             cbFundActive.Checked = true;
             cbFundActive.Enabled = false;
+            txtAsofDate.Text = "";
+            txtBegAmount.Text = "";
+            spnBalance.InnerText = "";
+            spnCalculatedAmt.InnerText = "";
+            ddlCommitmentType.SelectedIndex = -1;
+            spnMethod.InnerText = "";
+            spnFundId.InnerText = "";
         }
 
         private void LogError(string pagename, string method, string message, string error)
@@ -270,18 +299,19 @@ namespace vhcbcloud
                 FundMaintenanceData.UpdateFund(Convert.ToInt32(ddlFundName.SelectedValue.ToString()), txtAbbrev.Text,
                     Convert.ToInt32(ddlFundType.SelectedValue.ToString()),
                     txtFundNum.Text, txtMIPFundNo.Text == "" ? 0 : Convert.ToInt32(txtMIPFundNo.Text),
-                    ddlSOVDeptId.SelectedValue.ToString(), ddlSOVFundCode.SelectedValue?.ToString(), cbFundActive.Checked, 
-                    cbMitFund.Checked, cbSecondapproval.Checked, txtFundName.Text);
+                    ddlSOVDeptId.SelectedValue.ToString(), ddlSOVFundCode.SelectedValue?.ToString(), cbFundActive.Checked,
+                    cbMitFund.Checked, cbSecondapproval.Checked, txtFundName.Text, DataUtils.GetDecimal(Regex.Replace(txtBegAmount.Text, "[^0-9a-zA-Z.]+", "")), DataUtils.GetDate(txtAsofDate.Text), DataUtils.GetInt(ddlCommitmentType.SelectedValue), DataUtils.GetInt(hfLKMethod.Value));
 
                 LogMessage("Fund updated successfully");
+                ClearForm();
             }
             else
             {
                 AddFund objAddFund = FundMaintenanceData.AddFund(txtFundName.Text, txtAbbrev.Text,
                     Convert.ToInt32(ddlFundType.SelectedValue?.ToString()),
                     txtFundNum.Text, txtMIPFundNo.Text == "" ? 0 : Convert.ToInt32(txtMIPFundNo.Text),
-                    ddlSOVDeptId.SelectedValue.ToString(), ddlSOVFundCode.SelectedValue?.ToString(), 
-                    cbMitFund.Checked, cbSecondapproval.Checked);
+                    ddlSOVDeptId.SelectedValue.ToString(), ddlSOVFundCode.SelectedValue?.ToString(),
+                    cbMitFund.Checked, cbSecondapproval.Checked, DataUtils.GetDecimal(Regex.Replace(txtBegAmount.Text, "[^0-9a-zA-Z.]+", "")), DataUtils.GetDate(txtAsofDate.Text), DataUtils.GetInt(ddlCommitmentType.SelectedValue), DataUtils.GetInt(hfLKMethod.Value));
 
                 if (objAddFund.IsDuplicate && !objAddFund.IsActive)
                     LogMessage("Fund already exist as in-active");
@@ -309,22 +339,26 @@ namespace vhcbcloud
 
         protected void ddlFundName_SelectedIndexChanged(object sender, EventArgs e)
         {
+            hfLKMethod.Value = "0";
             PopulateDropDown(ddlAcctNum, ddlFundName.SelectedValue);
             ClearForm();
             cbAddFund.Checked = false;
             dvfundf.Visible = false;
             SearchFund();
             BindEntityNotesGrid();
+            CalculateAsOfDateAmount();
         }
 
         protected void ddlAcctNum_SelectedIndexChanged(object sender, EventArgs e)
         {
+            hfLKMethod.Value = "0";
             PopulateDropDown(ddlFundName, ddlAcctNum.SelectedValue);
             ClearForm();
             cbAddFund.Checked = false;
             dvfundf.Visible = false;
             SearchFund();
             BindEntityNotesGrid();
+            CalculateAsOfDateAmount();
         }
 
         private void SearchFund()
@@ -341,7 +375,7 @@ namespace vhcbcloud
         {
             ClientScript.RegisterStartupScript(this.GetType(),
             "script", Helper.GetExagoURL("6588", "Fund Data"));
-            
+
         }
 
         protected void btnAddAttachGrant_Click(object sender, EventArgs e)
@@ -490,6 +524,46 @@ namespace vhcbcloud
             catch (Exception ex)
             {
                 LogError(Pagename, "gvNotes_RowDataBound", "", ex.Message);
+            }
+        }
+
+        protected void txtAsofDate_TextChanged(object sender, EventArgs e)
+        {
+            CalculateAsOfDateAmount();
+        }
+
+        private void CalculateAsOfDateAmount()
+        {
+            spnCalculatedAmt.InnerText = "";
+            spnBalance.InnerText = "";
+
+            if (DataUtils.GetDecimal(Regex.Replace(txtBegAmount.Text, "[^0-9a-zA-Z.]+", "")) > 0 && txtAsofDate.Text != "")
+            {
+                DataRow dr = EntityNotesData.GetCalculatedAsOfDateAmount(DataUtils.GetInt(ddlAcctNum.SelectedItem.Text), DataUtils.GetDate(txtAsofDate.Text),
+                    DataUtils.GetDecimal(Regex.Replace(txtBegAmount.Text, "[^0-9a-zA-Z.]+", "")));
+
+                if (dr != null)
+                {
+                    spnCalculatedAmt.InnerText = CommonHelper.myDollarFormat(dr["CalculatedAmt"].ToString());
+                    spnBalance.InnerText = CommonHelper.myDollarFormat(dr["Balance"].ToString());
+                }
+            }
+        }
+
+        protected void ddlCommitmentType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            spnMethod.InnerText = "";
+            hfLKMethod.Value = "0";
+
+            if (ddlCommitmentType.SelectedIndex > 0)
+            {
+                DataRow dr = FundMaintenanceData.GetLKMethod(DataUtils.GetInt(ddlCommitmentType.SelectedValue));
+
+                if (dr != null)
+                {
+                    spnMethod.InnerText = dr["Source"].ToString();
+                    hfLKMethod.Value = dr["LKMethod"].ToString();
+                }
             }
         }
     }

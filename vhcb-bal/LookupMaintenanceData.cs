@@ -473,5 +473,35 @@ namespace VHCBCommon.DataAccessLayer
             }
             return dtProjects;
         }
+
+        public static void AddNewLookup(string Viewname, bool Ordered, bool Tiered)
+        {
+
+            var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["dbConnection"].ConnectionString);
+            try
+            {
+                SqlCommand command = new SqlCommand();
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = "AddNewLookup";
+                command.Parameters.Add(new SqlParameter("Viewname", Viewname));
+                command.Parameters.Add(new SqlParameter("Ordered", Ordered));
+                command.Parameters.Add(new SqlParameter("Tiered", Tiered));
+
+                using (connection)
+                {
+                    connection.Open();
+                    command.Connection = connection;
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
     }
 }

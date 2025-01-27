@@ -604,7 +604,7 @@ namespace VHCBCommon.DataAccessLayer
 
         public static DataTable SubmitPCR(int ProjectID, DateTime InitDate, int LkProgram, bool LegalReview,
            string VendorID, decimal MatchAmt, int LkFVGrantMatch, decimal Disbursement, int PayeeApplicant, int LkStatus, string Notes, 
-           int UserID, string LKNODs, DateTime CRDate)
+           int UserID, string LKNODs, DateTime CRDate, bool ACHActive)
         {
             var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["dbConnection"].ConnectionString);
             DataTable dtPCRDet = null;
@@ -628,6 +628,7 @@ namespace VHCBCommon.DataAccessLayer
                 command.Parameters.Add(new SqlParameter("UserID", UserID));
                 command.Parameters.Add(new SqlParameter("LKNODs", LKNODs));
                 command.Parameters.Add(new SqlParameter("CRDate", CRDate));
+                command.Parameters.Add(new SqlParameter("ACHActive", ACHActive));
 
                 SqlParameter parmMessage = new SqlParameter("@ProjectCheckReqID", SqlDbType.Int);
                 parmMessage.Direction = ParameterDirection.Output;
@@ -667,7 +668,7 @@ namespace VHCBCommon.DataAccessLayer
         }
 
         public static DataTable UpdatePCR(int PRCID, int ProjectID, DateTime InitDate, int LkProgram, bool LegalReview,
-           string VendorID, decimal MatchAmt, int LkFVGrantMatch, decimal Disbursement, int PayeeApplicant, int LkStatus, string Notes, int UserID, string LKNODs, DateTime CRDate)
+           string VendorID, decimal MatchAmt, int LkFVGrantMatch, decimal Disbursement, int PayeeApplicant, int LkStatus, string Notes, int UserID, string LKNODs, DateTime CRDate, bool ACHActive)
         {
             var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["dbConnection"].ConnectionString);
             DataTable dtPCRDet = null;
@@ -692,6 +693,7 @@ namespace VHCBCommon.DataAccessLayer
                 command.Parameters.Add(new SqlParameter("UserID", UserID));
                 command.Parameters.Add(new SqlParameter("LKNODs", LKNODs));
                 command.Parameters.Add(new SqlParameter("CRDate", CRDate));
+                command.Parameters.Add(new SqlParameter("ACHActive", ACHActive));
 
                 SqlParameter parmMessage1 = new SqlParameter("@TransID", SqlDbType.Int);
                 parmMessage1.Direction = ParameterDirection.Output;
@@ -1165,6 +1167,41 @@ namespace VHCBCommon.DataAccessLayer
             }
         }
 
+        public static bool GetACHActiveVal(int ApplicantId)
+        {
+            var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["dbConnection"].ConnectionString);
+            try
+            {
+                bool IsACHActive = false;
+                SqlCommand command = new SqlCommand();
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = "GetACHActiveVal";
+                command.Parameters.Add(new SqlParameter("ApplicantId", ApplicantId));
+
+                SqlParameter parmMessage1 = new SqlParameter("@ACHActive", SqlDbType.Bit);
+                parmMessage1.Direction = ParameterDirection.Output;
+                command.Parameters.Add(parmMessage1);
+
+                using (connection)
+                {
+                    connection.Open();
+                    command.Connection = connection;
+                    command.ExecuteNonQuery();
+
+                    IsACHActive = bool.Parse(command.Parameters["@ACHActive"].Value.ToString());
+
+                    return IsACHActive;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
     }
 
     public class PCRDetails

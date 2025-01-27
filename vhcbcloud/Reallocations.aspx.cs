@@ -28,6 +28,12 @@ namespace vhcbcloud
                 hfReallocateGuid.Value = "";
                 BindProjects();
                 CheckPageAccess();
+
+                ddlRtoFundType.Items.Clear();
+                ddlRtoFundType.Items.Insert(0, new ListItem("Select", "NA"));
+                ddlRtoFundType.Items.Add(new ListItem("Grant", "241"));
+                ddlRtoFundType.Items.Add(new ListItem("Loan", "242"));
+                ddlRtoFundType.Items.Add(new ListItem("Contract", "243"));
             }
             if (rdBtnSelection.SelectedIndex == 0)
             {
@@ -653,7 +659,8 @@ namespace vhcbcloud
             {
                 if (ddlRFromFundType.SelectedIndex != 0)
                 {
-                    txtRtoFundType.Text = ddlRFromFundType.SelectedItem.ToString();
+                    //txtRtoFundType.Text = ddlRFromFundType.SelectedItem.ToString();
+                    ddlRtoFundType.SelectedIndex = ddlRFromFundType.SelectedIndex;
 
                     DataTable dtable = FinancialTransactions.GetFundDetailsByFundId(DataUtils.GetInt(ddlRFromFund.SelectedValue.ToString()));
 
@@ -682,7 +689,8 @@ namespace vhcbcloud
                 }
                 else
                 {
-                    txtRtoFundType.Text = "";
+                    //txtRtoFundType.Text = "";
+                    ddlRtoFundType.SelectedIndex = 0;
                     ddlUsePermit.Items.Clear();
                     lblUsePermit.Visible = false;
                     ddlUsePermit.Visible = false;
@@ -1228,12 +1236,12 @@ namespace vhcbcloud
                     ddlRToFund.Focus();
                     return;
                 }
-                //if (ddlRtoFundType.Items.Count > 1 && ddlRtoFundType.SelectedIndex == 0)
-                //{
-                //    lblRErrorMsg.Text = "Select fund type from reallocate to project";
-                //    ddlRtoFundType.Focus();
-                //    return;
-                //}
+                if (ddlRtoFundType.Items.Count > 1 && ddlRtoFundType.SelectedIndex == 0)
+                {
+                    lblRErrorMsg.Text = "Select fund type from reallocate to project";
+                    ddlRtoFundType.Focus();
+                    return;
+                }
                 if (Convert.ToDecimal(txtRfromAmt.Text) < Convert.ToDecimal(txtRToAmt.Text))
                 {
                     lblRErrorMsg.Text = "Reallocate to amount can't be more than available reallocation from amount";
@@ -1359,7 +1367,7 @@ namespace vhcbcloud
                                                                       Convert.ToInt32(ddlRFromFundType.SelectedValue.ToString()),
                                                                       Convert.ToDecimal(txtRfromAmt.Text),
                                                                       Convert.ToInt32(ddlRToFund.SelectedValue.ToString()),
-                                                                      Convert.ToInt32(ddlRFromFundType.SelectedValue.ToString()),
+                                                                      Convert.ToInt32(ddlRtoFundType.SelectedValue.ToString()),
                                                                       Convert.ToDecimal(txtRToAmt.Text),
                                                                       hfRFromTransId.Value == "" ? nullable : Convert.ToInt32(hfRFromTransId.Value),
                                                                       hfTransId.Value == "" ? nullable : Convert.ToInt32(hfTransId.Value),
@@ -1566,17 +1574,24 @@ namespace vhcbcloud
                 ddlRFromFundType.DataTextField = "fundtype";
                 ddlRFromFundType.DataBind();
 
+                ddlRtoFundType.DataSource = FinancialTransactions.GetAvailableTransTypesPerProjFundId(Convert.ToInt32(hfProjId.Value), Convert.ToInt32(ddlRFromFund.SelectedValue.ToString()));
+                ddlRtoFundType.DataValueField = "typeid";
+                ddlRtoFundType.DataTextField = "fundtype";
+                ddlRtoFundType.DataBind();
+
                 lblAvailVisibleFund.Text = "";
                 lblAvailFund.Text = "";
 
                 if (ddlRFromFundType.Items.Count > 1)
                 {
-                    txtRtoFundType.Text = "";
+                    //txtRtoFundType.Text = "";
                     ddlRFromFundType.Items.Insert(0, new ListItem("Select", "NA"));
+                    ddlRtoFundType.Items.Insert(0, new ListItem("Select", "NA"));
                 }
                 else if (ddlRFromFundType.Items.Count == 1)
                 {
-                    txtRtoFundType.Text = ddlRFromFundType.SelectedItem.ToString();
+                    //txtRtoFundType.Text = ddlRFromFundType.SelectedItem.ToString();
+                    ddlRtoFundType.SelectedIndex = ddlRFromFundType.SelectedIndex;
 
                     DataTable dtFundDet = new DataTable();
                     dtFundDet = FinancialTransactions.GetFundDetailsByFundId(Convert.ToInt32(ddlRFromFund.SelectedValue.ToString()));
@@ -1618,8 +1633,10 @@ namespace vhcbcloud
                 ddlAccountFrom.SelectedIndex = 0;
                 //txtRtoFundType.Text = "";
                 ddlRFromFundType.Items.Clear();
+                ddlRtoFundType.Items.Clear();
 
-                txtRtoFundType.Text = "";
+                //txtRtoFundType.Text = "";
+                ddlRtoFundType.SelectedIndex = 0;
 
                 ddlUsePermit.Items.Clear();
                 lblUsePermit.Visible = false;
@@ -1652,17 +1669,26 @@ namespace vhcbcloud
                 ddlRFromFundType.DataTextField = "fundtype";
                 ddlRFromFundType.DataBind();
 
+                //ddlRtoFundType.DataSource = FinancialTransactions.GetAvailableTransTypesPerProjFundId(Convert.ToInt32(hfProjId.Value), Convert.ToInt32(ddlAccountFrom.SelectedValue.ToString()));
+                //ddlRtoFundType.DataValueField = "typeid";
+                //ddlRtoFundType.DataTextField = "fundtype";
+                //ddlRtoFundType.DataBind();
+
+
                 lblAvailVisibleFund.Text = "";
                 lblAvailFund.Text = "";
 
                 if (ddlRFromFundType.Items.Count > 1)
                 {
-                    txtRtoFundType.Text = "";
+                    //txtRtoFundType.Text = "";
                     ddlRFromFundType.Items.Insert(0, new ListItem("Select", "NA"));
+                    //ddlRtoFundType.Items.Insert(0, new ListItem("Select", "NA"));
                 }
                 else if (ddlRFromFundType.Items.Count == 1)
                 {
-                    txtRtoFundType.Text = ddlRFromFundType.SelectedItem.ToString();
+                    //txtRtoFundType.Text = ddlRFromFundType.SelectedItem.ToString();
+                    ddlRtoFundType.SelectedIndex = ddlRFromFundType.SelectedIndex;
+
                     DataTable dtFundDet = new DataTable();
 
                     dtFundDet = FinancialTransactions.GetFundDetailsByFundId(Convert.ToInt32(ddlRFromFund.SelectedValue.ToString()));
@@ -1700,8 +1726,10 @@ namespace vhcbcloud
                 ddlAccountFrom.SelectedIndex = 0;
                 //txtRtoFundType.Text = "";
                 ddlRFromFundType.Items.Clear();
+                ddlRtoFundType.Items.Clear();
 
-                txtRtoFundType.Text = "";
+                //txtRtoFundType.Text = "";
+                ddlRtoFundType.SelectedIndex = 0;
 
                 ddlUsePermit.Items.Clear();
                 lblUsePermit.Visible = false;

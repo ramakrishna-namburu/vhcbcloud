@@ -284,6 +284,46 @@ namespace VHCBCommon.DataAccessLayer
             return dr;
         }
 
+        public static bool IsUserHasHousingProgram(string username)
+        {
+            try
+            {
+                DataTable dt = GetUserId(username);
+                if (dt != null && dt.Rows.Count > 0)
+                {
+
+                    using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["dbConnection"].ConnectionString))
+                    {
+                        connection.Open();
+
+                        using (SqlCommand command = new SqlCommand())
+                        {
+                            command.Connection = connection;
+                            command.CommandType = CommandType.StoredProcedure;
+                            command.CommandText = "IsUserHasHousingProgram";
+                            command.Parameters.Add(new SqlParameter("UserId", DataUtils.GetInt(dt.Rows[0]["userid"].ToString())));
+
+                            SqlParameter parmMessage = new SqlParameter("@IsValid", SqlDbType.Bit);
+                            parmMessage.Direction = ParameterDirection.Output;
+                            command.Parameters.Add(parmMessage);
+
+                            command.CommandTimeout = 60 * 5;
+
+                            command.ExecuteNonQuery();
+
+                            return DataUtils.GetBool(command.Parameters["@IsValid"].Value.ToString());
+                        }
+                    }
+                }
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public static bool GetRoleAuth(string username, int projId)
         {
             bool isVerified = false;

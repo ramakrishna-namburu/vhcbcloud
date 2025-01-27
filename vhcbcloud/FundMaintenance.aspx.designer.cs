@@ -69,6 +69,15 @@ namespace vhcbcloud
         protected global::System.Web.UI.WebControls.DropDownList ddlAcctNum;
 
         /// <summary>
+        /// spnFundId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl spnFundId;
+
+        /// <summary>
         /// dvfundf control.
         /// </summary>
         /// <remarks>
@@ -211,6 +220,69 @@ namespace vhcbcloud
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox cbSecondapproval;
+
+        /// <summary>
+        /// txtBegAmount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtBegAmount;
+
+        /// <summary>
+        /// txtAsofDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtAsofDate;
+
+        /// <summary>
+        /// ce_txtAsofDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender ce_txtAsofDate;
+
+        /// <summary>
+        /// spnCalculatedAmt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl spnCalculatedAmt;
+
+        /// <summary>
+        /// spnBalance control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl spnBalance;
+
+        /// <summary>
+        /// ddlCommitmentType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlCommitmentType;
+
+        /// <summary>
+        /// spnMethod control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl spnMethod;
 
         /// <summary>
         /// btnSubmitFund control.
@@ -418,6 +490,15 @@ namespace vhcbcloud
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hfFundNoteID;
+
+        /// <summary>
+        /// hfLKMethod control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfLKMethod;
 
         /// <summary>
         /// hfIsVisibleBasedOnRole control.

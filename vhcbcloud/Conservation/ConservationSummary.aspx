@@ -121,7 +121,10 @@
                                         <asp:DropDownList ID="ddlTacticalBasin" CssClass="clsDropDown" runat="server" Height="23px" Width="185px">
                                         </asp:DropDownList>
                                     </td>
-                                    <td colspan="4" style="height: 5px"></td>
+                                    <td style="height: 5px"><span class="labelClass" runat="server" id="spnFTE" visible="false">FTEs Hired:</span></td>
+                                    <td style="height: 5px"><asp:TextBox ID="txtFTEHired" CssClass="clsTextBoxBlueSm" runat="server" Visible="false"></asp:TextBox></td>
+                                    <td style="height: 5px"></td>
+                                    <td style="height: 5px"></td>
                                 </tr>
                                 <tr>
                                     <td colspan="6" style="height: 5px"></td>

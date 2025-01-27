@@ -351,7 +351,9 @@ namespace vhcbcloud.Viability
             BindLookUP(ddlWaterShedNew, 143);
             BindHUC12CheckBoxList();
             BindLookUP(ddlEnterPriseType, 72);
-            BindLookUP(ddlRaceEthnicity, 10);
+            //BindLookUP(ddlRaceEthnicity, 10);
+            BindLookUP(ddlRaceEthnicity, 2293);
+            
         }
 
         private void BindLookupSubWatershed(int TypeId)

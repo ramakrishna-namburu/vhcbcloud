@@ -41,10 +41,9 @@
                                 <asp:DropDownList ID="ddlAcctNum" CssClass="clsDropDown" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlAcctNum_SelectedIndexChanged">
                                 </asp:DropDownList>
                             </td>
-                            <td style="width: 1px"></td>
+                            <td style="width: 50px"><span class="labelClass">Fund ID</span></td>
                             <td>
-                                <%-- <asp:Button ID="btnFundSearch" runat="server" Text="Search" class="btn btn-info"
-                                    OnClick="btnFundSearch_Click" />--%>
+                              <span class="labelClass" runat="server" id="spnFundId"></span>
 
                             </td>
                         </tr>
@@ -124,7 +123,7 @@
                                     </td>
                                     <td><span class="labelClass">Mitigation Fund</span></td>
                                     <td>
-                                        <asp:CheckBox ID="cbMitFund" runat="server" Checked="true" />
+                                        <asp:CheckBox ID="cbMitFund" runat="server" Checked="false" />
                                     </td>
                                     <td>
                                         <span class="labelClass">Active:</span>
@@ -141,14 +140,48 @@
                                     <td>
                                         <asp:CheckBox ID="cbSecondapproval" runat="server" Checked="false" />
                                     </td>
-                                    <td colspan="2"></td>
+                                    <td><span class="labelClass">Beginning Amount $</span></td>
                                     <td>
-                                        <span class="labelClass"></span>
+                                        <asp:TextBox ID="txtBegAmount" CssClass="clsTextBoxBlueSm" Width="150px" Height="22px" runat="server" MaxLength="16"></asp:TextBox>
                                     </td>
-                                    <td></td>
+                                    <td><span class="labelClass">As of Date</span></td>
+                                    <td>
+                                        <asp:TextBox ID="txtAsofDate" CssClass="clsTextBoxBlue1" runat="server" Width="100px" Height="22px" AutoPostBack="true" OnTextChanged="txtAsofDate_TextChanged"></asp:TextBox>
+                                        <ajaxToolkit:CalendarExtender runat="server" ID="ce_txtAsofDate" TargetControlID="txtAsofDate">
+                                        </ajaxToolkit:CalendarExtender>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td colspan="6" style="height: 5px"></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 224px"></td>
+                                    <td></td>
+                                    <td><span class="labelClass">Committed $ Amount</span></td>
+                                    <td>
+                                        <span class="labelClass" id="spnCalculatedAmt" runat="server"></span>
+                                    </td>
+                                    <td><span class="labelClass">$ Balance</span></td>
+                                    <td><span class="labelClass" id="spnBalance" runat="server"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6" style="height: 5px"></td>
+                                </tr>
+                                 <tr>
+                                    <td colspan="6" style="height: 5px"></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 224px"></td>
+                                    <td></td>
+                                    <td><span class="labelClass">Commitment Method</span></td>
+                                    <td>
+                                        <asp:DropDownList ID="ddlCommitmentType" CssClass="clsDropDown" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlCommitmentType_SelectedIndexChanged">
+                                        </asp:DropDownList>
+                                    </td>
+                                    <td><span class="labelClass">Method</span></td>
+                                    <td><span class="labelClass" id="spnMethod" runat="server"></span>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td colspan="5" style="height: 5px">
@@ -356,7 +389,7 @@
                                             </asp:TemplateField>
                                             <asp:TemplateField ItemStyle-VerticalAlign="Top">
                                                 <ItemTemplate>
-                                                    <asp:LinkButton ID="lnkEdit" runat="server" CommandName="Edit" Text="Edit" Visible='<%# GetIsVisibleBasedOnRole() %>'/>
+                                                    <asp:LinkButton ID="lnkEdit" runat="server" CommandName="Edit" Text="Edit" Visible='<%# GetIsVisibleBasedOnRole() %>' />
                                                 </ItemTemplate>
                                                 <EditItemTemplate>
                                                     <%-- <asp:LinkButton ID="lnkEdit" runat="server" CommandName="Update" Text="Update" />--%>
@@ -368,17 +401,24 @@
                                 </asp:Panel>
                                 <asp:HiddenField ID="hfEntityNotesId" runat="server" />
                             </div>
-                             <asp:HiddenField ID="hfFundNoteID" runat="server" />
+                            <asp:HiddenField ID="hfFundNoteID" runat="server" />
+                             <asp:HiddenField ID="hfLKMethod" runat="server" />
                         </div>
                     </div>
 
                 </div>
             </div>
         </div>
-             <asp:HiddenField ID="hfIsVisibleBasedOnRole" runat="server" />
+        <asp:HiddenField ID="hfIsVisibleBasedOnRole" runat="server" />
     </div>
     <script language="javascript">
         $(document).ready(function () {
+            toCurrencyControl($('#<%= txtBegAmount.ClientID%>').val(), $('#<%= txtBegAmount.ClientID%>'));
+
+            $('#<%= txtBegAmount.ClientID%>').keyup(function () {
+                toCurrencyControl($('#<%= txtBegAmount.ClientID%>').val(), $('#<%= txtBegAmount.ClientID%>'));
+            });
+
             $('#<%= dvFundForm.ClientID%>').toggle($('#<%= cbAddFund.ClientID%>').is(':checked'));
 
             $('#<%= cbAddFund.ClientID%>').click(function () {
@@ -388,7 +428,7 @@
             $('#<%= dvNotesForm.ClientID%>').toggle($('#<%= cbAddnotes.ClientID%>').is(':checked'));
             $('#<%= cbAddnotes.ClientID%>').click(function () {
                 $('#<%= dvNotesForm.ClientID%>').toggle(this.checked);
-        }).change();
+            }).change();
         });
     </script>
 </asp:Content>

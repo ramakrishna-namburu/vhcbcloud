@@ -304,5 +304,40 @@ namespace VHCBCommon.DataAccessLayer
             }
             return dt.Rows[0];
         }
+
+        public static DataRow GetCalculatedAsOfDateAmount(int FundId, DateTime AsOfDate, decimal BeginingAmt)
+        {
+            DataTable dt = null;
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["dbConnection"].ConnectionString))
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.CommandText = "CalculatedAsOfDateAmount";
+                        command.Parameters.Add(new SqlParameter("FundId", FundId));
+                        command.Parameters.Add(new SqlParameter("AsOfDate", AsOfDate));
+                        command.Parameters.Add(new SqlParameter("BeginingAmt", BeginingAmt));
+
+                        DataSet ds = new DataSet();
+                        var da = new SqlDataAdapter(command);
+                        da.Fill(ds);
+                        if (ds.Tables.Count == 1 && ds.Tables[0].Rows != null)
+                        {
+                            dt = ds.Tables[0];
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return dt.Rows[0];
+        }
     }
 }

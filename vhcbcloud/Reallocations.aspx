@@ -216,9 +216,9 @@
                                     <tr>
                                         <td style="width: 10%; float: left"><span class="labelClass">Type :</span></td>
                                         <td style="width: 20%; float: left">
-                                            <%-- <asp:DropDownList ID="ddlRtoFundType" CssClass="clsDropDown" runat="server">
-                                            </asp:DropDownList>--%>
-                                            <asp:TextBox ID="txtRtoFundType" CssClass="clsTextBoxBlueSm" runat="server" Enabled="false"></asp:TextBox>
+                                            <asp:DropDownList ID="ddlRtoFundType" CssClass="clsDropDown" runat="server">
+                                            </asp:DropDownList>
+                                           <%-- <asp:TextBox ID="txtRtoFundType" CssClass="clsTextBoxBlueSm" runat="server" Enabled="false"></asp:TextBox>--%>
                                         </td>
                                         <td style="width: 10%; float: left"><span class="labelClass">Amount :</span></td>
                                         <td style="width: 20%; float: left">

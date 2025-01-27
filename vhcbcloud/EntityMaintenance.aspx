@@ -265,7 +265,7 @@
                                         </td>
                                         <td>
                                             <span class="labelClass" runat="server" id="Span2">EIN</span>
-                                            </td>
+                                        </td>
                                         <td>
                                             <asp:TextBox ID="txtEIN" runat="server" CssClass="clsTextBoxBlue1" MaxLength="10"></asp:TextBox>
                                         </td>
@@ -273,27 +273,46 @@
                                     <tr>
                                         <td colspan="6" style="height: 5px"></td>
                                     </tr>
-                                     <tr>
-                                         <td>
+                                    <tr>
+                                        <td>
                                             <span class="labelClass" runat="server" id="Span3">DUNS</span>
-                                            </td>
+                                        </td>
                                         <td class="modal-sm" style="width: 264px">
                                             <asp:TextBox ID="txtDUNS" runat="server" CssClass="clsTextBoxBlue1" MaxLength="9"></asp:TextBox>
                                         </td>
-                                          <td>
+                                        <td>
                                             <span class="labelClass" runat="server" id="Span4">Legal Name</span>
-                                            </td>
+                                        </td>
                                         <td>
                                             <asp:TextBox ID="txtLegalName" runat="server" CssClass="clsTextBoxBlue1" MaxLength="50"></asp:TextBox>
                                         </td>
-                                         <td> 
-                                             <span class="labelClass" runat="server" id="Span5">UEI</span>
-                                         </td>
-                                         <td> 
-                                              <asp:TextBox ID="txtUEI" runat="server" CssClass="clsTextBoxBlue1" MaxLength="12" oninput="this.value = this.value.toUpperCase()"></asp:TextBox>
-                                         </td>
+                                        <td>
+                                            <span class="labelClass" runat="server" id="Span5">UEI</span>
+                                        </td>
+                                        <td>
+                                            <asp:TextBox ID="txtUEI" runat="server" CssClass="clsTextBoxBlue1" MaxLength="12" oninput="this.value = this.value.toUpperCase()"></asp:TextBox>
+                                        </td>
                                     </tr>
-                                     <tr>
+                                    <tr>
+                                        <td colspan="6" style="height: 5px"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="labelClass" runat="server" id="Span6">ACH Active</span>
+                                        </td>
+                                        <td class="modal-sm" style="width: 264px">
+                                            <asp:CheckBox ID="ckbACHActive" CssClass="ChkBox" runat="server" Text="" Enabled="false" />
+                                        </td>
+                                        <td>
+                                            <span class="labelClass" runat="server" id="Span7"></span>
+                                        </td>
+                                        <td></td>
+                                        <td>
+                                            <span class="labelClass" runat="server" id="Span8"></span>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
                                         <td colspan="6" style="height: 5px"></td>
                                     </tr>
                                 </table>
@@ -452,11 +471,11 @@
                                     <tr>
                                         <td>
                                             <span class="labelClass">Active</span>
-                                           
-                                                <asp:CheckBox ID="cbNotesActive" CssClass="ChkBox" runat="server" Enabled="false" Checked="true" />
+
+                                            <asp:CheckBox ID="cbNotesActive" CssClass="ChkBox" runat="server" Enabled="false" Checked="true" />
                                         </td>
                                     </tr>
-                                    
+
                                     <tr>
                                         <td style="height: 5px"></td>
                                     </tr>
@@ -477,8 +496,8 @@
                                 <asp:GridView ID="gvNotes" runat="server" AutoGenerateColumns="False"
                                     Width="100%" CssClass="gridView" PageSize="50" PagerSettings-Mode="NextPreviousFirstLast"
                                     GridLines="None" EnableTheming="True" AllowPaging="false"
-                                    OnRowCancelingEdit="gvNotes_RowCancelingEdit" 
-                                    OnRowEditing="gvNotes_RowEditing" 
+                                    OnRowCancelingEdit="gvNotes_RowCancelingEdit"
+                                    OnRowEditing="gvNotes_RowEditing"
                                     OnRowUpdating="gvNotes_RowUpdating"
                                     OnRowDataBound="gvNotes_RowDataBound">
                                     <AlternatingRowStyle CssClass="alternativeRowStyle" />
@@ -487,46 +506,46 @@
                                     <PagerSettings Mode="NumericFirstLast" FirstPageText="&amp;lt;" LastPageText="&amp;gt;" PageButtonCount="5" />
                                     <RowStyle CssClass="rowStyle" />
                                     <Columns>
-                                            <asp:TemplateField HeaderText="Project Notes ID" Visible="false">
-                                                <ItemTemplate>
-                                                    <asp:Label ID="lblEntityNotesID" runat="Server" Text='<%# Eval("EntityNotesID") %>' />
-                                                </ItemTemplate>
-                                            </asp:TemplateField>
-                                           
-                                            <asp:TemplateField HeaderText="Date" ItemStyle-VerticalAlign="Top">
-                                                <ItemTemplate>
-                                                    <asp:Label ID="lblDate" runat="Server" Text='<%# Eval("Date") %>' />
-                                                </ItemTemplate>
-                                                <ItemStyle Width="100px" />
-                                            </asp:TemplateField>
-                                            <asp:TemplateField HeaderText="User Name" ItemStyle-VerticalAlign="Top">
-                                                <ItemTemplate>
-                                                    <asp:Label ID="lbluserName" runat="Server" Text='<%# Eval("username") %>' />
-                                                </ItemTemplate>
-                                                <ItemStyle Width="100px" />
-                                            </asp:TemplateField>
-                                            <asp:TemplateField HeaderText="Notes" HeaderStyle-HorizontalAlign="Center">
-                                                <ItemTemplate>
-                                                    <asp:Label ID="lblNotes" runat="Server" Font-Size ="Medium" Text='<%# Eval("FullNotes") %>' />
-                                                </ItemTemplate>
-                                            </asp:TemplateField>
-                                            
-                                            <asp:TemplateField HeaderText="Active" ItemStyle-VerticalAlign="Top">
+                                        <asp:TemplateField HeaderText="Project Notes ID" Visible="false">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblEntityNotesID" runat="Server" Text='<%# Eval("EntityNotesID") %>' />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+
+                                        <asp:TemplateField HeaderText="Date" ItemStyle-VerticalAlign="Top">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblDate" runat="Server" Text='<%# Eval("Date") %>' />
+                                            </ItemTemplate>
+                                            <ItemStyle Width="100px" />
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="User Name" ItemStyle-VerticalAlign="Top">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lbluserName" runat="Server" Text='<%# Eval("username") %>' />
+                                            </ItemTemplate>
+                                            <ItemStyle Width="100px" />
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Notes" HeaderStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblNotes" runat="Server" Font-Size="Medium" Text='<%# Eval("FullNotes") %>' />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+
+                                        <asp:TemplateField HeaderText="Active" ItemStyle-VerticalAlign="Top">
                                             <ItemTemplate>
                                                 &nbsp; &nbsp;<asp:CheckBox ID="chkActive" Enabled="false" runat="server" Checked='<%# Eval("RowIsActive") %>' />
                                             </ItemTemplate>
-                                                <ItemStyle Width="50px" />
+                                            <ItemStyle Width="50px" />
                                         </asp:TemplateField>
-                                            <asp:TemplateField ItemStyle-VerticalAlign="Top">
-                                                <ItemTemplate>
-                                                    <asp:LinkButton ID="lnkEdit" runat="server" CommandName="Edit" Text="Edit" />
-                                                </ItemTemplate>
-                                                <EditItemTemplate>
-                                                   <%-- <asp:LinkButton ID="lnkEdit" runat="server" CommandName="Update" Text="Update" />--%>
-                                                    <asp:LinkButton ID="LinkButton1" runat="server" CommandName="Cancel" Text="Cancel" />
-                                                </EditItemTemplate>
-                                            </asp:TemplateField>
-                                        </Columns>
+                                        <asp:TemplateField ItemStyle-VerticalAlign="Top">
+                                            <ItemTemplate>
+                                                <asp:LinkButton ID="lnkEdit" runat="server" CommandName="Edit" Text="Edit" />
+                                            </ItemTemplate>
+                                            <EditItemTemplate>
+                                                <%-- <asp:LinkButton ID="lnkEdit" runat="server" CommandName="Update" Text="Update" />--%>
+                                                <asp:LinkButton ID="LinkButton1" runat="server" CommandName="Cancel" Text="Cancel" />
+                                            </EditItemTemplate>
+                                        </asp:TemplateField>
+                                    </Columns>
                                 </asp:GridView>
                             </asp:Panel>
                             <asp:HiddenField ID="hfEntityNotesId" runat="server" />
@@ -1291,11 +1310,11 @@
 
         if ($('#<%=ddlEntityRole.ClientID %> option:selected').text() == 'Individual') {
             $('#<%= txtApplicantName.ClientID %>')
-                 .attr("disabled", "disabled")
+                .attr("disabled", "disabled")
         }
         else {
             $('#<%= txtApplicantName.ClientID %>')
-                     .removeAttr("disabled")
+                .removeAttr("disabled")
         }
 
         $('#<%= dvAttributeForm.ClientID%>').toggle($('#<%= cbAddAttribute.ClientID%>').is(':checked'));
@@ -1424,16 +1443,16 @@
                                 if (types == "administrative_area_level_1,political") {
                                     addr.state = results[0].address_components[ii].short_name;
                                     $('#<%= ddlState.ClientID%>').val(addr.state);
-                                 }
-                                 if (types == "postal_code" || types == "postal_code_prefix,postal_code") {
-                                     addr.zipcode = results[0].address_components[ii].long_name;
-                                 }
-                                 if (types == "country,political") {
-                                     addr.country = results[0].address_components[ii].long_name;
-                                 }
-                                 if (types == "administrative_area_level_2,political") {
-                                     addr.county = results[0].address_components[ii].short_name;
-                                     $('#<%= txtCounty.ClientID%>').val(addr.county.replace('County', ''));
+                                }
+                                if (types == "postal_code" || types == "postal_code_prefix,postal_code") {
+                                    addr.zipcode = results[0].address_components[ii].long_name;
+                                }
+                                if (types == "country,political") {
+                                    addr.country = results[0].address_components[ii].long_name;
+                                }
+                                if (types == "administrative_area_level_2,political") {
+                                    addr.county = results[0].address_components[ii].short_name;
+                                    $('#<%= txtCounty.ClientID%>').val(addr.county.replace('County', ''));
                                 }
                             }
                             addr.success = true;

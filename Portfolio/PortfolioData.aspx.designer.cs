@@ -132,6 +132,42 @@ namespace Portfolio
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl spnFeMale;
 
         /// <summary>
+        /// txtNonbinary control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNonbinary;
+
+        /// <summary>
+        /// spnNonbinary control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl spnNonbinary;
+
+        /// <summary>
+        /// txtOtherGender control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtOtherGender;
+
+        /// <summary>
+        /// spnOtherGender control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl spnOtherGender;
+
+        /// <summary>
         /// txtUGender control.
         /// </summary>
         /// <remarks>
@@ -141,13 +177,31 @@ namespace Portfolio
         protected global::System.Web.UI.WebControls.TextBox txtUGender;
 
         /// <summary>
-        /// spnUgender control.
+        /// spnUGender control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl spnUgender;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl spnUGender;
+
+        /// <summary>
+        /// txtVacanciesGender control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtVacanciesGender;
+
+        /// <summary>
+        /// spnVacanciesGender control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl spnVacanciesGender;
 
         /// <summary>
         /// txtWhite control.
@@ -276,40 +330,22 @@ namespace Portfolio
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl spnUnknownRace;
 
         /// <summary>
-        /// txtHispanic control.
+        /// txtVacanciesRace control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtHispanic;
+        protected global::System.Web.UI.WebControls.TextBox txtVacanciesRace;
 
         /// <summary>
-        /// spnHispanic control.
+        /// spnVacanciesRace control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl spnHispanic;
-
-        /// <summary>
-        /// txtNonHisp control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNonHisp;
-
-        /// <summary>
-        /// spnNonHisp control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl spnNonHisp;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl spnVacanciesRace;
 
         /// <summary>
         /// txtUnknownEthnicity control.
@@ -328,6 +364,60 @@ namespace Portfolio
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl spnUnknownEthnicity;
+
+        /// <summary>
+        /// txtLatinx control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtLatinx;
+
+        /// <summary>
+        /// spnLatinx control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl spnLatinx;
+
+        /// <summary>
+        /// txtNonLatinx control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNonLatinx;
+
+        /// <summary>
+        /// spnNonLatinx control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl spnNonLatinx;
+
+        /// <summary>
+        /// txtVacanciesEthnicity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtVacanciesEthnicity;
+
+        /// <summary>
+        /// spnVacanciesEthnicity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl spnVacanciesEthnicity;
 
         /// <summary>
         /// txtHomeless control.

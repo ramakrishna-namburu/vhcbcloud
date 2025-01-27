@@ -126,12 +126,42 @@
                                     <tr>
                                         <td colspan="3" style="height: 5px"></td>
                                     </tr>
+                                      <tr>
+                                        <td><span class="labelClass">Non-Binary</span></td>
+                                        <td>
+                                            <asp:TextBox ID="txtNonbinary" CssClass="clsTextBoxBlueSm" runat="server"></asp:TextBox>
+                                        </td>
+                                        <td>&nbsp;<span class="labelClass" id="spnNonbinary" runat="server"></span></td>
+                                    </tr>
                                     <tr>
-                                        <td><span class="labelClass">Other/Unknown</span></td>
+                                        <td colspan="3" style="height: 5px"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="labelClass">Other</span></td>
+                                        <td>
+                                            <asp:TextBox ID="txtOtherGender" CssClass="clsTextBoxBlueSm" runat="server"></asp:TextBox>
+                                        </td>
+                                        <td>&nbsp;<span class="labelClass" id="spnOtherGender" runat="server"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" style="height: 5px"></td>
+                                    </tr>
+                                     <tr>
+                                        <td><span class="labelClass">Unknown</span></td>
                                         <td>
                                             <asp:TextBox ID="txtUGender" CssClass="clsTextBoxBlueSm" runat="server"></asp:TextBox>
                                         </td>
-                                        <td>&nbsp;<span class="labelClass" id="spnUgender" runat="server"></span></td>
+                                        <td>&nbsp;<span class="labelClass" id="spnUGender" runat="server"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" style="height: 5px"></td>
+                                    </tr>
+                                     <tr>
+                                        <td><span class="labelClass">Vacancies</span></td>
+                                        <td>
+                                            <asp:TextBox ID="txtVacanciesGender" CssClass="clsTextBoxBlueSm" runat="server"></asp:TextBox>
+                                        </td>
+                                        <td>&nbsp;<span class="labelClass" id="spnVacanciesGender" runat="server"></span></td>
                                     </tr>
                                     <tr>
                                         <td colspan="3" style="height: 5px"></td>
@@ -215,6 +245,16 @@
                                     <tr>
                                         <td colspan="3" style="height: 5px"></td>
                                     </tr>
+                                     <tr>
+                                        <td><span class="labelClass">Vacancies</span></td>
+                                        <td>
+                                            <asp:TextBox ID="txtVacanciesRace" CssClass="clsTextBoxBlueSm" runat="server"></asp:TextBox>
+                                        </td>
+                                        <td>&nbsp;<span class="labelClass" id="spnVacanciesRace" runat="server"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" style="height: 5px"></td>
+                                    </tr>
                                     <tr>
                                         <td>
                                             <h3 class="panel-title">Ethnicity</h3>
@@ -224,7 +264,7 @@
                                     <tr>
                                         <td colspan="3" style="height: 5px"></td>
                                     </tr>
-                                    <tr>
+                                    <%--<tr>
                                         <td><span class="labelClass">Hispanic</span></td>
                                         <td>
                                             <asp:TextBox ID="txtHispanic" CssClass="clsTextBoxBlueSm" runat="server"></asp:TextBox>
@@ -243,13 +283,43 @@
                                     </tr>
                                     <tr>
                                         <td colspan="3" style="height: 5px"></td>
-                                    </tr>
+                                    </tr>--%>
                                     <tr>
                                         <td><span class="labelClass">UnKnown</span></td>
                                         <td>
                                             <asp:TextBox ID="txtUnknownEthnicity" CssClass="clsTextBoxBlueSm" runat="server"></asp:TextBox>
                                         </td>
                                         <td>&nbsp;<span class="labelClass" id="spnUnknownEthnicity" runat="server"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" style="height: 5px"></td>
+                                    </tr>
+                                     <tr>
+                                        <td><span class="labelClass">Latinx</span></td>
+                                        <td>
+                                            <asp:TextBox ID="txtLatinx" CssClass="clsTextBoxBlueSm" runat="server"></asp:TextBox>
+                                        </td>
+                                        <td>&nbsp;<span class="labelClass" id="spnLatinx" runat="server"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" style="height: 5px"></td>
+                                    </tr>
+                                     <tr>
+                                        <td><span class="labelClass">Non-Latinx</span></td>
+                                        <td>
+                                            <asp:TextBox ID="txtNonLatinx" CssClass="clsTextBoxBlueSm" runat="server"></asp:TextBox>
+                                        </td>
+                                        <td>&nbsp;<span class="labelClass" id="spnNonLatinx" runat="server"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" style="height: 5px"></td>
+                                    </tr>
+                                     <tr>
+                                        <td><span class="labelClass">Vacancies</span></td>
+                                        <td>
+                                            <asp:TextBox ID="txtVacanciesEthnicity" CssClass="clsTextBoxBlueSm" runat="server"></asp:TextBox>
+                                        </td>
+                                        <td>&nbsp;<span class="labelClass" id="spnVacanciesEthnicity" runat="server"></span></td>
                                     </tr>
                                     <tr>
                                         <td colspan="3" style="height: 5px"></td>
@@ -279,7 +349,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <h3 class="panel-title">Rent Restrictions</h3>
+                                            <h3 class="panel-title">Unit Restrictions</h3>
                                         </td>
                                     </tr>
                                     <tr>
@@ -416,17 +486,28 @@
             var MaleCount = parseInt($('#<%=txtMGender.ClientID%>').val(), 10);
             var FeMaleCount = parseInt($('#<%=txtFGender.ClientID%>').val(), 10);
             var UGender = parseInt($('#<%=txtUGender.ClientID%>').val(), 10);
+
+            var OGender = parseInt($('#<%=txtOtherGender.ClientID%>').val(), 10);
+            var NonBinary = parseInt($('#<%=txtNonbinary.ClientID%>').val(), 10);
+            var VacanciesGender = parseInt($('#<%=txtVacanciesGender.ClientID%>').val(), 10);
+
             var White = parseInt($('#<%=txtWhite.ClientID%>').val(), 10);
             var Black = parseInt($('#<%=txtBlack.ClientID%>').val(), 10);
             var Asian = parseInt($('#<%=txtAsian.ClientID%>').val(), 10);
             var Indian = parseInt($('#<%=txtIndian.ClientID%>').val(), 10);
             var Hawaiian = parseInt($('#<%=txtHawaiian.ClientID%>').val(), 10);
             var UnknownRace = parseInt($('#<%=txtUnknownRace.ClientID%>').val(), 10);
-            var Hispanic = parseInt($('#<%=txtHispanic.ClientID%>').val(), 10);
-            var NonHisp = parseInt($('#<%=txtNonHisp.ClientID%>').val(), 10);
+           <%-- var Hispanic = parseInt($('#<%=txtHispanic.ClientID%>').val(), 10);
+            var NonHisp = parseInt($('#<%=txtNonHisp.ClientID%>').val(), 10);--%>
             var UnknownEthnicity = parseInt($('#<%=txtUnknownEthnicity.ClientID%>').val(), 10);
             var Homeless = parseInt($('#<%=txtHomeless.ClientID%>').val(), 10);
             var MultiRacial = parseInt($('#<%=txtMultiRacial.ClientID%>').val(), 10);
+
+            var VacanciesRace = parseInt($('#<%=txtVacanciesRace.ClientID%>').val(), 10);
+            var Latinx = parseInt($('#<%=txtLatinx.ClientID%>').val(), 10);
+            var NonLatinx = parseInt($('#<%=txtNonLatinx.ClientID%>').val(), 10);
+            var VacanciesEthnicity = parseInt($('#<%=txtVacanciesEthnicity.ClientID%>').val(), 10);
+            
 
             var MarketRate = parseInt($('#<%=txtMarketRate.ClientID%>').val(), 10);
             var I100 = parseInt($('#<%=txtI100.ClientID%>').val(), 10);
@@ -440,15 +521,19 @@
 
             $('#<%= spnMale.ClientID%>').text(parseFloat((MaleCount / TotalUnits) * 100).toFixed(2) + ' %');
             $('#<%= spnFeMale.ClientID%>').text(parseFloat((FeMaleCount / TotalUnits) * 100).toFixed(2) + ' %');
-            $('#<%= spnUgender.ClientID%>').text(parseFloat((UGender / TotalUnits) * 100).toFixed(2) + ' %');
+            $('#<%= spnUGender.ClientID%>').text(parseFloat((UGender / TotalUnits) * 100).toFixed(2) + ' %');
+            $('#<%= spnOtherGender.ClientID%>').text(parseFloat((OGender / TotalUnits) * 100).toFixed(2) + ' %');
+            $('#<%= spnNonbinary.ClientID%>').text(parseFloat((NonBinary / TotalUnits) * 100).toFixed(2) + ' %');
+            $('#<%= spnVacanciesGender.ClientID%>').text(parseFloat((VacanciesGender / TotalUnits) * 100).toFixed(2) + ' %');
+
             $('#<%= spnWhite.ClientID%>').text(parseFloat((White / TotalUnits) * 100).toFixed(2) + ' %');
             $('#<%= spnBlack.ClientID%>').text(parseFloat((Black / TotalUnits) * 100).toFixed(2) + ' %');
             $('#<%= spnAsian.ClientID%>').text(parseFloat((Asian / TotalUnits) * 100).toFixed(2) + ' %');
             $('#<%= spnIndian.ClientID%>').text(parseFloat((Indian / TotalUnits) * 100).toFixed(2) + ' %');
             $('#<%= spnHawaiian.ClientID%>').text(parseFloat((Hawaiian / TotalUnits) * 100).toFixed(2) + ' %');
             $('#<%= spnUnknownRace.ClientID%>').text(parseFloat((UnknownRace / TotalUnits) * 100).toFixed(2) + ' %');
-            $('#<%= spnHispanic.ClientID%>').text(parseFloat((Hispanic / TotalUnits) * 100).toFixed(2) + ' %');
-            $('#<%= spnNonHisp.ClientID%>').text(parseFloat((NonHisp / TotalUnits) * 100).toFixed(2) + ' %');
+          <%--  $('#<%= spnHispanic.ClientID%>').text(parseFloat((Hispanic / TotalUnits) * 100).toFixed(2) + ' %');
+            $('#<%= spnNonHisp.ClientID%>').text(parseFloat((NonHisp / TotalUnits) * 100).toFixed(2) + ' %');--%>
             $('#<%= spnUnknownEthnicity.ClientID%>').text(parseFloat((UnknownEthnicity / TotalUnits) * 100).toFixed(2) + ' %');
             $('#<%= spnHomeless.ClientID%>').text(parseFloat((Homeless / TotalUnits) * 100).toFixed(2) + ' %');
             $('#<%= spnMultiRacial.ClientID%>').text(parseFloat((MultiRacial / TotalUnits) * 100).toFixed(2) + ' %');
@@ -461,6 +546,14 @@
             $('#<%= spnI50.ClientID%>').text(parseFloat((I50 / TotalUnits) * 100).toFixed(2) + ' %');
             $('#<%= spnI30.ClientID%>').text(parseFloat((I30 / TotalUnits) * 100).toFixed(2) + ' %');
             $('#<%= spnI20.ClientID%>').text(parseFloat((I20 / TotalUnits) * 100).toFixed(2) + ' %');
+
+            $('#<%= spnVacanciesRace.ClientID%>').text(parseFloat((VacanciesRace / TotalUnits) * 100).toFixed(2) + ' %');
+            
+
+            $('#<%= spnLatinx.ClientID%>').text(parseFloat((Latinx / TotalUnits) * 100).toFixed(2) + ' %');
+            $('#<%= spnNonLatinx.ClientID%>').text(parseFloat((NonLatinx / TotalUnits) * 100).toFixed(2) + ' %');
+            $('#<%= spnVacanciesEthnicity.ClientID%>').text(parseFloat((VacanciesEthnicity / TotalUnits) * 100).toFixed(2) + ' %');
+            
 
 
         };

@@ -120,7 +120,7 @@ namespace VHCBCommon.DataAccessLayer
         }
 
         public static AddFund AddFund(string name, string abbrv, int LkFundType, string account, 
-            int MIPFundNum, string DeptID, string VHCBCode, bool IsMitigationFund, bool Secondapproval)
+            int MIPFundNum, string DeptID, string VHCBCode, bool IsMitigationFund, bool Secondapproval, decimal BegAmt, DateTime AsOfDate, int Commit_Method, int LKMethod)
         {
             try
             {
@@ -140,6 +140,10 @@ namespace VHCBCommon.DataAccessLayer
                         command.Parameters.Add(new SqlParameter("MIPFundNum", MIPFundNum));
                         command.Parameters.Add(new SqlParameter("IsMitigationFund", IsMitigationFund));
                         command.Parameters.Add(new SqlParameter("Secondapproval", Secondapproval));
+                        command.Parameters.Add(new SqlParameter("BegAmt", BegAmt));
+                        command.Parameters.Add(new SqlParameter("AsOfDate", AsOfDate.ToShortDateString() == "1/1/0001" ? System.Data.SqlTypes.SqlDateTime.Null : AsOfDate));
+                        command.Parameters.Add(new SqlParameter("Commit_Method", Commit_Method));
+                        command.Parameters.Add(new SqlParameter("LKMethod", LKMethod));
 
                         if (DeptID != "NA")
                             command.Parameters.Add(new SqlParameter("DeptID", DeptID));
@@ -176,7 +180,7 @@ namespace VHCBCommon.DataAccessLayer
 
         public static void UpdateFund(int FundId, string abbrv, int LkFundType, string account,
             int MIPFundNum, string DeptID, string VHCBCode, bool IsRowActive, bool IsMitigationFund, 
-            bool Secondapproval, string name)
+            bool Secondapproval, string name, decimal BegAmt, DateTime AsOfDate, int Commit_Method, int LKMethod)
         {
             try
             {
@@ -201,6 +205,11 @@ namespace VHCBCommon.DataAccessLayer
                         command.Parameters.Add(new SqlParameter("IsMitigationFund", IsMitigationFund));
                         command.Parameters.Add(new SqlParameter("Secondapproval", Secondapproval));
                         command.Parameters.Add(new SqlParameter("IsRowActive", IsRowActive));
+                        command.Parameters.Add(new SqlParameter("BegAmt", BegAmt));
+                        command.Parameters.Add(new SqlParameter("AsOfDate", AsOfDate.ToShortDateString() == "1/1/0001" ? System.Data.SqlTypes.SqlDateTime.Null : AsOfDate));
+                        command.Parameters.Add(new SqlParameter("Commit_Method", Commit_Method));
+                        command.Parameters.Add(new SqlParameter("LKMethod", LKMethod));
+
 
                         command.CommandTimeout = 60 * 5;
 
@@ -212,6 +221,42 @@ namespace VHCBCommon.DataAccessLayer
             {
                 throw ex;
             }
+        }
+
+        public static DataRow GetLKMethod(int TypeId)
+        {
+            DataRow dt = null;
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["dbConnection"].ConnectionString))
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.CommandText = "GetLKMethod";
+
+                        command.Parameters.Add(new SqlParameter("TypeId", TypeId));
+
+                        command.CommandTimeout = 60 * 5;
+
+                        DataSet ds = new DataSet();
+                        var da = new SqlDataAdapter(command);
+                        da.Fill(ds);
+                        if (ds.Tables.Count == 1 && ds.Tables[0].Rows.Count > 0)
+                        {
+                            dt = ds.Tables[0].Rows[0];
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return dt;
         }
     }
 

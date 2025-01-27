@@ -207,6 +207,23 @@ namespace VHCBConservationFarm
             }
         }
 
+        private void BindLookUPTacticalBasin(DropDownList ddList, int LookupType)
+        {
+            try
+            {
+                ddList.Items.Clear();
+                ddList.DataSource = LookupValuesData.Getlookupvalues(LookupType);
+                ddList.DataValueField = "typeid";
+                ddList.DataTextField = "description";
+                ddList.DataBind();
+                ddList.Items.Insert(0, new ListItem("Select", "0"));
+            }
+            catch (Exception ex)
+            {
+                LogError(Pagename, "BindLookUP", "Control ID:" + ddList.ID, ex.Message);
+            }
+        }
+
         private void BindControls()
         {
             //BindLookUP(ddlConservationTrack, 7);
@@ -223,7 +240,8 @@ namespace VHCBConservationFarm
             //BindLookUP(ddlAllowedSpecialUses, 1271);
             BindHUC12CheckBoxList();
             BindcblHUC12SecCheckBoxList();
-            BindLookUP(ddlTacticalBasin, 2284);
+            //(ddlTacticalBasin, 2284);
+            BindLookUPTacticalBasin(ddlTacticalBasin, 2284);
             BindLookUP(ddlFormProducts, 106);
             BindLookUP(ddlProjectAttribute, 260);
             BindLookUP(ddlPA, 28);

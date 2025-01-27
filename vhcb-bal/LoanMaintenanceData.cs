@@ -558,7 +558,7 @@ namespace VHCBCommon.DataAccessLayer
             return dt;
         }
 
-        public static LoanResult AddLoanEvent(int LoanID, string Description, DateTime EventDate, int Event, string URL)
+        public static LoanResult AddLoanEvent(int LoanID, string Description, DateTime EventDate, int Event, string URL, DateTime AccruedIntDate, decimal AccruedAmt)
         {
             try
             {
@@ -577,6 +577,8 @@ namespace VHCBCommon.DataAccessLayer
                         command.Parameters.Add(new SqlParameter("EventDate", EventDate.ToShortDateString() == "1/1/0001" ? System.Data.SqlTypes.SqlDateTime.Null : EventDate));
                         command.Parameters.Add(new SqlParameter("Event", Event));
                         command.Parameters.Add(new SqlParameter("URL", URL));
+                        command.Parameters.Add(new SqlParameter("AccruedIntDate", AccruedIntDate.ToShortDateString() == "1/1/0001" ? System.Data.SqlTypes.SqlDateTime.Null : AccruedIntDate));
+                        command.Parameters.Add(new SqlParameter("AccruedAmt", AccruedAmt));
 
                         SqlParameter parmMessage = new SqlParameter("@isDuplicate", SqlDbType.Bit);
                         parmMessage.Direction = ParameterDirection.Output;
@@ -605,7 +607,7 @@ namespace VHCBCommon.DataAccessLayer
             }
         }
 
-        public static void UpdateLoanEvent(int LoanEventID, string Description, bool IsRowIsActive, DateTime EventDate, int Event, string URL)
+        public static void UpdateLoanEvent(int LoanEventID, string Description, bool IsRowIsActive, DateTime EventDate, int Event, string URL, DateTime AccruedIntDate, decimal AccruedAmt)
         {
             try
             {
@@ -625,7 +627,9 @@ namespace VHCBCommon.DataAccessLayer
                         command.Parameters.Add(new SqlParameter("Event", Event));
                         command.Parameters.Add(new SqlParameter("IsRowIsActive", IsRowIsActive));
                         command.Parameters.Add(new SqlParameter("URL", URL));
-                        
+                        command.Parameters.Add(new SqlParameter("AccruedIntDate", AccruedIntDate.ToShortDateString() == "1/1/0001" ? System.Data.SqlTypes.SqlDateTime.Null : AccruedIntDate));
+                        command.Parameters.Add(new SqlParameter("AccruedAmt", AccruedAmt));
+
                         command.CommandTimeout = 60 * 5;
 
                         command.ExecuteNonQuery();

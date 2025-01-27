@@ -46,6 +46,7 @@ namespace vhcbcloud
 
                 BindControls();
                 DisplayControlsbasedOnSelection();
+
                 if (Request.QueryString["ProjectId"] != null)
                 {
                     //ifProjectNotes.Src = "ProjectNotes.aspx?ProjectId=" + Request.QueryString["ProjectId"];
@@ -57,7 +58,7 @@ namespace vhcbcloud
                 }
                 //BindApplicantsForCurrentProject(ddlEventEntity);
                 //GetRoleAuth();
-                LoadProjectGoal();
+               
             }
 
             if (DataUtils.GetInt(hfProjectId.Value) != 0)
@@ -318,6 +319,7 @@ namespace vhcbcloud
             ddlApplicantRole.Items.Remove(ddlApplicantRole.Items.FindByValue("358"));
             //BindLookUP(ddlAddressType, 1);
             //BindLookUP(ddlProjectGoal, 201);
+          
             BindLookUP(ddlEntityRole, 170);
             BindTown();
             BindLookUP(ddlTargetYear, 2272);
@@ -772,6 +774,7 @@ namespace vhcbcloud
                 txtPrimaryApplicant.Text = drProjectDetails["AppName"].ToString();
                 //PopulateDropDown(ddlPrimaryApplicant, drProjectDetails["AppNameId"].ToString());
                 PopulateDropDown(ddlProjectType, drProjectDetails["LkProjectType"].ToString());
+                LoadProjectGoal();
                 chkApprove.Checked = Convert.ToBoolean(drProjectDetails["verified"].ToString());
 
 

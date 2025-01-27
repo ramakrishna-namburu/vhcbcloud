@@ -190,6 +190,7 @@
     <Content Include="AwardSummary.aspx" />
     <Content Include="CashRefundnew.aspx" />
     <Content Include="CheckRequestDates.aspx" />
+    <Content Include="CommitmentType.aspx" />
     <Content Include="ConservationAct250.aspx" />
     <Content Include="CashRefund.aspx" />
     <Content Include="Commitments_new.aspx" />
@@ -294,6 +295,7 @@
     <Content Include="Images\BtnSubmit2.png" />
     <Content Include="Images\vhcb_logo_1_rgb_sm.png" />
     <Content Include="MilestonesQuickentry.aspx" />
+    <Content Include="NewLookup.aspx" />
     <Content Include="packages.config" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -542,6 +544,13 @@
     </Compile>
     <Compile Include="CheckRequestDates.aspx.designer.cs">
       <DependentUpon>CheckRequestDates.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CommitmentType.aspx.cs">
+      <DependentUpon>CommitmentType.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CommitmentType.aspx.designer.cs">
+      <DependentUpon>CommitmentType.aspx</DependentUpon>
     </Compile>
     <Compile Include="Conservation\FarmOperationTownPlanning.aspx.cs">
       <DependentUpon>FarmOperationTownPlanning.aspx</DependentUpon>
@@ -1057,6 +1066,13 @@
       <DependentUpon>MilestonesQuickentry.aspx</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="NewLookup.aspx.cs">
+      <DependentUpon>NewLookup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NewLookup.aspx.designer.cs">
+      <DependentUpon>NewLookup.aspx</DependentUpon>
+    </Compile>
     <Compile Include="PerformanceMeasures.aspx.cs">
       <DependentUpon>PerformanceMeasures.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

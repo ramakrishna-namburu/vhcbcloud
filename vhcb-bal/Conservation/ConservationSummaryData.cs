@@ -11,7 +11,7 @@ namespace VHCBCommon.DataAccessLayer.Conservation
         public static void SubmitConserve(int ProjectId, int LkConsTrack, int NumEase, //int PrimStew, 
             decimal TotalAcres, decimal Wooded,
             decimal Prime, decimal Statewide, decimal Tillable, decimal Pasture, decimal Unmanaged, decimal FarmResident, decimal NaturalRec, decimal Sugarbush,
-            int UserID, int GeoSignificance, string TransferType, int TacticalBasin, decimal Hay, int Taps)
+            int UserID, int GeoSignificance, string TransferType, int TacticalBasin, decimal Hay, int Taps, decimal FTEHired)
         {
             try
             {
@@ -43,6 +43,7 @@ namespace VHCBCommon.DataAccessLayer.Conservation
                         command.Parameters.Add(new SqlParameter("TacticalBasin", TacticalBasin));
                         command.Parameters.Add(new SqlParameter("Hay", Hay));
                         command.Parameters.Add(new SqlParameter("Taps", Taps));
+                        command.Parameters.Add(new SqlParameter("FTEHired", FTEHired));
 
                         command.Parameters.Add(new SqlParameter("UserID", UserID));
                         command.Parameters.Add(new SqlParameter("GeoSignificance", GeoSignificance));
@@ -839,6 +840,36 @@ namespace VHCBCommon.DataAccessLayer.Conservation
                 throw ex;
             }
         }
+        public static void UpdateConserveTrails1(int ConserveTrailsID, decimal Miles, bool Protected, bool RowIsActive)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["dbConnection"].ConnectionString))
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.CommandText = "UpdateConserveTrails1";
+
+                        command.Parameters.Add(new SqlParameter("ConserveTrailsID", ConserveTrailsID));
+                        command.Parameters.Add(new SqlParameter("Miles", Miles));
+                        command.Parameters.Add(new SqlParameter("Protected", Protected));
+                        command.Parameters.Add(new SqlParameter("RowIsActive", RowIsActive));
+
+                        command.CommandTimeout = 60 * 5;
+
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
         public static Result AddConserveProducts(int ProjectID, int LKProduct, int Acres, bool Organic)
         {
@@ -930,6 +961,7 @@ namespace VHCBCommon.DataAccessLayer.Conservation
                 throw ex;
             }
         }
+
         public static void UpdateConserveTrails(int ConserveTrailsID, decimal Feet, bool Protected, bool RowIsActive)
         {
             try
@@ -960,7 +992,6 @@ namespace VHCBCommon.DataAccessLayer.Conservation
                 throw ex;
             }
         }
-
         public static void UpdateConserveProducts(int ConserveProductID, int Acres, bool Organic, bool RowIsActive)
         {
             try

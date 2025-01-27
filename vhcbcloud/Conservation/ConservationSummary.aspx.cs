@@ -201,6 +201,7 @@ namespace vhcbcloud.Conservation
                 txtSugarbush.Text = drConserve["Sugarbush"].ToString();
                 txtHay.Text = drConserve["Hay"].ToString();
                 txtTaps.Text = drConserve["Taps"].ToString();
+                txtFTEHired.Text = drConserve["FTEHired"].ToString();
 
                 pctWooded.InnerText = "0.0 %";
                 pctSugarBush.InnerText = "0.0 %";
@@ -306,7 +307,18 @@ namespace vhcbcloud.Conservation
             DataRow dr = ProjectMaintenanceData.GetProjectNameById(DataUtils.GetInt(hfProjectId.Value));
             ProjectNum.InnerText = dr["ProjNumber"].ToString();
             ProjName.InnerText = dr["ProjectName"].ToString();
-        }
+
+            if (dr["ProjNumber"].ToString().StartsWith("8900"))
+            {
+                spnFTE.Visible = true;
+                txtFTEHired.Visible = true;
+            }
+            else
+            {
+                spnFTE.Visible = false;
+                txtFTEHired.Visible = false;
+            }
+            }
 
         private void LogError(string pagename, string method, string message, string error)
         {
@@ -470,7 +482,8 @@ namespace vhcbcloud.Conservation
                 DataUtils.GetDecimal(txtTillable.Text), DataUtils.GetDecimal(txtPasture.Text), DataUtils.GetDecimal(txtUnManaged.Text),
                 DataUtils.GetDecimal(txtFarmResident.Text), DataUtils.GetDecimal(txtNaturalRec.Text), DataUtils.GetDecimal(txtSugarbush.Text),
                 GetUserId(),
-                DataUtils.GetInt(ddlGeoSignificance.SelectedValue.ToString()), transfetType, DataUtils.GetInt(ddlTacticalBasin.SelectedValue.ToString()), DataUtils.GetDecimal(txtHay.Text), DataUtils.GetInt(txtTaps.Text)) ;
+                DataUtils.GetInt(ddlGeoSignificance.SelectedValue.ToString()), transfetType, DataUtils.GetInt(ddlTacticalBasin.SelectedValue.ToString()), DataUtils.GetDecimal(txtHay.Text), DataUtils.GetInt(txtTaps.Text), 
+                DataUtils.GetDecimal(txtFTEHired.Text)) ;
 
             BindConConserveForm();
 
@@ -1099,7 +1112,7 @@ namespace vhcbcloud.Conservation
             bool RowIsActive = Convert.ToBoolean(((CheckBox)gvTrailMileage.Rows[rowIndex].FindControl("chkActive")).Checked);
             bool Protected = Convert.ToBoolean(((CheckBox)gvTrailMileage.Rows[rowIndex].FindControl("chkProtected")).Checked);
 
-            ConservationSummaryData.UpdateConserveTrails(ConserveTrailsID, Miles, Protected, RowIsActive);
+            ConservationSummaryData.UpdateConserveTrails1(ConserveTrailsID, Miles, Protected, RowIsActive);
             gvTrailMileage.EditIndex = -1;
 
             BindTrailMilesGrid();

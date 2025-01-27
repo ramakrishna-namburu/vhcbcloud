@@ -30,6 +30,7 @@ namespace vhcbcloud.Housing
                 PopulateProjectDetails();
                 BindControls();
                 GetRoleAccess();
+                IsButtonVisible();
                 //BindHousingUnitsForm();
             }
         }
@@ -105,6 +106,14 @@ namespace vhcbcloud.Housing
             btnSubmit.Visible = false;
         }
 
+        private void IsButtonVisible()
+        {
+            //One more check even though the default program is not Housing, but Housing is one of their VHCB Program then consider show this Update/Submit button.
+            if (UserSecurityData.IsUserHasHousingProgram(Context.User.Identity.Name))
+                btnSubmit.Visible = true;
+            else
+                btnSubmit.Visible = false;
+        }
         private void PopulateProjectDetails()
         {
             DataRow dr = ProjectMaintenanceData.GetProjectNameById(DataUtils.GetInt(hfProjectId.Value));
@@ -207,12 +216,14 @@ namespace vhcbcloud.Housing
             {
                     if (btnSubmit.Text.ToLower() == "save")
                     {
-                        PortfolioDataData.AddProjectPortfolio(DataUtils.GetInt(ddlPortfolioType.SelectedValue), ddlyear.SelectedItem.Text, DataUtils.GetInt(hfProjectId.Value), DataUtils.GetInt(txtTotalUnits.Text),
+                        PortfolioDataData.AddProjectPortfolio1(DataUtils.GetInt(ddlPortfolioType.SelectedValue), ddlyear.SelectedItem.Text, DataUtils.GetInt(hfProjectId.Value), DataUtils.GetInt(txtTotalUnits.Text),
                             DataUtils.GetInt(txtMGender.Text), DataUtils.GetInt(txtFGender.Text), DataUtils.GetInt(txtUGender.Text), DataUtils.GetInt(txtWhite.Text),
                             DataUtils.GetInt(txtBlack.Text), DataUtils.GetInt(txtAsian.Text), DataUtils.GetInt(txtIndian.Text), DataUtils.GetInt(txtHawaiian.Text), DataUtils.GetInt(txtMultiRacial.Text),
-                            DataUtils.GetInt(txtUnknownRace.Text), DataUtils.GetInt(txtHispanic.Text), DataUtils.GetInt(txtNonHisp.Text), DataUtils.GetInt(txtUnknownEthnicity.Text),
+                            DataUtils.GetInt(txtUnknownRace.Text), 0,0, //DataUtils.GetInt(txtHispanic.Text), DataUtils.GetInt(txtNonHisp.Text), 
+                            DataUtils.GetInt(txtUnknownEthnicity.Text),
                             DataUtils.GetInt(txtHomeless.Text), DataUtils.GetInt(txtMarketRate.Text), DataUtils.GetInt(txtI100.Text), DataUtils.GetInt(txtI80.Text),
-                            DataUtils.GetInt(txtI75.Text), DataUtils.GetInt(txtI60.Text), DataUtils.GetInt(txtI50.Text), DataUtils.GetInt(txtI30.Text), DataUtils.GetInt(txtI20.Text), false);
+                            DataUtils.GetInt(txtI75.Text), DataUtils.GetInt(txtI60.Text), DataUtils.GetInt(txtI50.Text), DataUtils.GetInt(txtI30.Text), DataUtils.GetInt(txtI20.Text), false,
+                            DataUtils.GetInt(txtOtherGender.Text), DataUtils.GetInt(txtNonbinary.Text), DataUtils.GetInt(txtVacanciesGender.Text), DataUtils.GetInt(txtVacanciesRace.Text), DataUtils.GetInt(txtLatinx.Text), DataUtils.GetInt(txtNonLatinx.Text), DataUtils.GetInt(txtVacanciesEthnicity.Text));
                         ClearForm();
                         ddlyear.SelectedIndex = -1;
                         ddlPortfolioType.SelectedIndex = -1;
@@ -221,12 +232,14 @@ namespace vhcbcloud.Housing
                     }
                     else
                     {
-                    PortfolioDataData.UpdateProjectPortfolio(DataUtils.GetInt(hfProjectPortfolioID.Value), DataUtils.GetInt(ddlPortfolioType.SelectedValue), ddlyear.SelectedItem.Text, DataUtils.GetInt(txtTotalUnits.Text),
+                    PortfolioDataData.UpdateProjectPortfolio1(DataUtils.GetInt(hfProjectPortfolioID.Value), DataUtils.GetInt(ddlPortfolioType.SelectedValue), ddlyear.SelectedItem.Text, DataUtils.GetInt(txtTotalUnits.Text),
                        DataUtils.GetInt(txtMGender.Text), DataUtils.GetInt(txtFGender.Text), DataUtils.GetInt(txtUGender.Text), DataUtils.GetInt(txtWhite.Text),
                        DataUtils.GetInt(txtBlack.Text), DataUtils.GetInt(txtAsian.Text), DataUtils.GetInt(txtIndian.Text), DataUtils.GetInt(txtHawaiian.Text), DataUtils.GetInt(txtMultiRacial.Text),
-                       DataUtils.GetInt(txtUnknownRace.Text), DataUtils.GetInt(txtHispanic.Text), DataUtils.GetInt(txtNonHisp.Text), DataUtils.GetInt(txtUnknownEthnicity.Text),
+                       DataUtils.GetInt(txtUnknownRace.Text), 0,0, //DataUtils.GetInt(txtHispanic.Text), DataUtils.GetInt(txtNonHisp.Text),
+                       DataUtils.GetInt(txtUnknownEthnicity.Text),
                        DataUtils.GetInt(txtHomeless.Text), DataUtils.GetInt(txtMarketRate.Text), DataUtils.GetInt(txtI100.Text), DataUtils.GetInt(txtI80.Text),
-                       DataUtils.GetInt(txtI75.Text), DataUtils.GetInt(txtI60.Text), DataUtils.GetInt(txtI50.Text), DataUtils.GetInt(txtI30.Text), DataUtils.GetInt(txtI20.Text), DataUtils.GetInt(hfProjectId.Value));
+                       DataUtils.GetInt(txtI75.Text), DataUtils.GetInt(txtI60.Text), DataUtils.GetInt(txtI50.Text), DataUtils.GetInt(txtI30.Text), DataUtils.GetInt(txtI20.Text), DataUtils.GetInt(hfProjectId.Value),
+                       DataUtils.GetInt(txtOtherGender.Text), DataUtils.GetInt(txtNonbinary.Text), DataUtils.GetInt(txtVacanciesGender.Text), DataUtils.GetInt(txtVacanciesRace.Text), DataUtils.GetInt(txtLatinx.Text), DataUtils.GetInt(txtNonLatinx.Text), DataUtils.GetInt(txtVacanciesEthnicity.Text));
 
                     LogMessage("Portfolio data updated successfully");
                     }
@@ -243,15 +256,26 @@ namespace vhcbcloud.Housing
             txtTotalUnits.Text = "";
             txtMGender.Text = ""; txtFGender.Text = ""; txtUGender.Text = ""; txtWhite.Text = "";
             txtBlack.Text = ""; txtAsian.Text = ""; txtIndian.Text = ""; txtHawaiian.Text = ""; txtMultiRacial.Text = "";
-            txtUnknownRace.Text = ""; txtHispanic.Text = ""; txtNonHisp.Text = ""; txtUnknownEthnicity.Text = "";
+            txtUnknownRace.Text = ""; //txtHispanic.Text = ""; txtNonHisp.Text = "";
+            txtUnknownEthnicity.Text = "";
             txtHomeless.Text = ""; txtMarketRate.Text = ""; txtI100.Text = ""; txtI80.Text = "";
             txtI75.Text = ""; txtI60.Text = ""; txtI50.Text = ""; txtI30.Text = ""; txtI20.Text = "";
+            
+            txtNonbinary.Text = "";
+            txtOtherGender.Text = "";
+            txtVacanciesGender.Text = "";
+
+            txtVacanciesRace.Text = "";
+            txtLatinx.Text = "";
+            txtNonLatinx.Text = "";
+            txtVacanciesEthnicity.Text = "";
+
 
             spnAsian.InnerHtml = "";
             spnBlack.InnerHtml = "";
             spnFeMale.InnerHtml = "";
             spnHawaiian.InnerHtml = "";
-            spnHispanic.InnerHtml = "";
+           // spnHispanic.InnerHtml = "";
             spnHomeless.InnerHtml = "";
             spnI100.InnerHtml = "";
             spnI20.InnerHtml = "";
@@ -262,13 +286,19 @@ namespace vhcbcloud.Housing
             spnI80.InnerHtml = "";
             spnIndian.InnerHtml = "";
             spnMale.InnerHtml = "";
-            spnNonHisp.InnerHtml = "";
+            //spnNonHisp.InnerHtml = "";
             spntMarketRate.InnerHtml = "";
-            spnUgender.InnerHtml = "";
+            spnOtherGender.InnerHtml = "";
+            spnUGender.InnerHtml = "";
+            spnVacanciesGender.InnerHtml = "";
             spnUnknownEthnicity.InnerHtml = "";
             spnUnknownRace.InnerHtml = "";
             spnWhite.InnerHtml = "";
             spnMultiRacial.InnerHtml = "";
+            spnVacanciesRace.InnerHtml = "";
+            spnLatinx.InnerHtml = "";
+            spnNonLatinx.InnerHtml = "";
+            spnVacanciesEthnicity.InnerHtml = "";
         }
 
         protected void cbActiveOnly_CheckedChanged(object sender, EventArgs e)
@@ -324,9 +354,17 @@ namespace vhcbcloud.Housing
                         decimal perFeMale = Math.Round((DataUtils.GetDecimal(drPortfolioData["FGender"].ToString()) / Totalunits) * 100, 2);
                         spnFeMale.InnerText = perFeMale.ToString() + " %";
 
+                        txtOtherGender.Text = drPortfolioData["OtherGender"].ToString();
+                        decimal perOtherGender = Math.Round((DataUtils.GetDecimal(drPortfolioData["OtherGender"].ToString()) / Totalunits) * 100, 2);
+                        spnOtherGender.InnerText = perOtherGender.ToString() + " %";
+
                         txtUGender.Text = drPortfolioData["UGender"].ToString();
                         decimal perUGender = Math.Round((DataUtils.GetDecimal(drPortfolioData["UGender"].ToString()) / Totalunits) * 100, 2);
-                        spnUgender.InnerText = perUGender.ToString() + " %";
+                        spnUGender.InnerText = perUGender.ToString() + " %";
+
+                        txtVacanciesGender.Text = drPortfolioData["VacanciesGender"].ToString();
+                        decimal perVacanciesGender = Math.Round((DataUtils.GetDecimal(drPortfolioData["VacanciesGender"].ToString()) / Totalunits) * 100, 2);
+                        spnVacanciesGender.InnerText = perVacanciesGender.ToString() + " %";
 
                         txtWhite.Text = drPortfolioData["White"].ToString();
                         decimal perWhite = Math.Round((DataUtils.GetDecimal(drPortfolioData["White"].ToString()) / Totalunits) * 100, 2);
@@ -356,17 +394,34 @@ namespace vhcbcloud.Housing
                         decimal perUnknownRace = Math.Round((DataUtils.GetDecimal(drPortfolioData["UnknownRace"].ToString()) / Totalunits) * 100, 2);
                         spnUnknownRace.InnerText = perUnknownRace.ToString() + " %";
 
-                        txtHispanic.Text = drPortfolioData["Hispanic"].ToString();
-                        decimal perHispanic = Math.Round((DataUtils.GetDecimal(drPortfolioData["Hispanic"].ToString()) / Totalunits) * 100, 2);
-                        spnHispanic.InnerText = perHispanic.ToString() + " %";
+                        txtVacanciesRace.Text = drPortfolioData["VacanciesRace"].ToString();
+                        decimal perVacanciesRace = Math.Round((DataUtils.GetDecimal(drPortfolioData["VacanciesRace"].ToString()) / Totalunits) * 100, 2);
+                        spnVacanciesRace.InnerText = perVacanciesRace.ToString() + " %";
 
-                        txtNonHisp.Text = drPortfolioData["NonHisp"].ToString();
-                        decimal perNonHisp = Math.Round((DataUtils.GetDecimal(drPortfolioData["NonHisp"].ToString()) / Totalunits) * 100, 2);
-                        spnNonHisp.InnerText = perNonHisp.ToString() + " %";
+
+                        //txtHispanic.Text = drPortfolioData["Hispanic"].ToString();
+                        //decimal perHispanic = Math.Round((DataUtils.GetDecimal(drPortfolioData["Hispanic"].ToString()) / Totalunits) * 100, 2);
+                        //spnHispanic.InnerText = perHispanic.ToString() + " %";
+
+                        //txtNonHisp.Text = drPortfolioData["NonHisp"].ToString();
+                        //decimal perNonHisp = Math.Round((DataUtils.GetDecimal(drPortfolioData["NonHisp"].ToString()) / Totalunits) * 100, 2);
+                        //spnNonHisp.InnerText = perNonHisp.ToString() + " %";
 
                         txtUnknownEthnicity.Text = drPortfolioData["UnknownEthnicity"].ToString();
                         decimal perUnknownEthnicity = Math.Round((DataUtils.GetDecimal(drPortfolioData["UnknownEthnicity"].ToString()) / Totalunits) * 100, 2);
                         spnUnknownEthnicity.InnerText = perUnknownEthnicity.ToString() + " %";
+
+                        txtLatinx.Text = drPortfolioData["Latinx"].ToString();
+                        decimal perLatinx = Math.Round((DataUtils.GetDecimal(drPortfolioData["Latinx"].ToString()) / Totalunits) * 100, 2);
+                        spnLatinx.InnerText = perLatinx.ToString() + " %";
+
+                        txtNonLatinx.Text = drPortfolioData["NonLatinx"].ToString();
+                        decimal perNonLatinx = Math.Round((DataUtils.GetDecimal(drPortfolioData["NonLatinx"].ToString()) / Totalunits) * 100, 2);
+                        spnNonLatinx.InnerText = perNonLatinx.ToString() + " %";
+
+                        txtVacanciesEthnicity.Text = drPortfolioData["VacanciesEthnicity"].ToString();
+                        decimal perVacanciesEthnicity = Math.Round((DataUtils.GetDecimal(drPortfolioData["VacanciesEthnicity"].ToString()) / Totalunits) * 100, 2);
+                        spnVacanciesEthnicity.InnerText = perVacanciesEthnicity.ToString() + " %";
 
                         txtHomeless.Text = drPortfolioData["Homeless"].ToString();
                         decimal perHomeless = Math.Round((DataUtils.GetDecimal(drPortfolioData["Homeless"].ToString()) / Totalunits) * 100, 2);
@@ -403,6 +458,10 @@ namespace vhcbcloud.Housing
                         txtI20.Text = drPortfolioData["I120"].ToString();
                         decimal perI120 = Math.Round((DataUtils.GetDecimal(drPortfolioData["I120"].ToString()) / Totalunits) * 100, 2);
                         spnI20.InnerText = perI120.ToString() + " %";
+
+                        txtNonbinary.Text = drPortfolioData["Nonbinary"].ToString();
+                        decimal nonBinary = Math.Round((DataUtils.GetDecimal(drPortfolioData["Nonbinary"].ToString()) / Totalunits) * 100, 2);
+                        spnNonbinary.InnerText = nonBinary.ToString() + " %";
 
                     }
                     btnSubmit.Text = "Update";

@@ -456,9 +456,25 @@ namespace vhcbcloud
                 if (URL != "")
                     URL = URL.Split('/').Last();
 
+                if(DataUtils.GetInt(ddlEvent.SelectedValue) == 33096)
+                {
+                    if (txtAccruedIntDate.Text == "")
+                    {
+                        LogMessage("Enter Accrued Date");
+                        txtAccruedIntDate.Focus();
+                        return;
+                    }
+                    if (txtAccruedAmount.Text == "" || DataUtils.GetDecimal(Regex.Replace(txtAccruedAmount.Text, "[^0-9a-zA-Z.]+", "")) == 0)
+                    {
+                        LogMessage("Enter Accrued Amount");
+                        txtAccruedAmount.Focus();
+                        return;
+                    }
+                }
+
                 LoanResult objLoanResult = LoanMaintenanceData.AddLoanEvent(DataUtils.GetInt(hfLoanId.Value),
                     txtEventDescription.Text, DataUtils.GetDate(txtEventDate.Text),
-                DataUtils.GetInt(ddlEvent.SelectedValue), URL);
+                DataUtils.GetInt(ddlEvent.SelectedValue), URL, DataUtils.GetDate(txtAccruedIntDate.Text), DataUtils.GetDecimal(Regex.Replace(txtAccruedAmount.Text, "[^0-9a-zA-Z.]+", "")));
 
                 if (objLoanResult.IsDuplicate && !objLoanResult.IsActive)
                     LogMessage("Milestone already exist as in-active");
@@ -1113,7 +1129,29 @@ namespace vhcbcloud
                 URL = NotesURL.Split('/').Last();
 
             DateTime EventDate = DataUtils.GetDate(((TextBox)gvLoanEvents.Rows[rowIndex].FindControl("txtEventDate")).Text);
-            LoanMaintenanceData.UpdateLoanEvent(LoanEventID, Description, RowIsActive, EventDate, EventId, URL);
+
+            DateTime AccruedIntDate = DataUtils.GetDate(((TextBox)gvLoanEvents.Rows[rowIndex].FindControl("txtAccruedIntDate")).Text);
+
+            string strAccruedIntDate = ((TextBox)gvLoanEvents.Rows[rowIndex].FindControl("txtAccruedIntDate")).Text;
+            string AccruedAmt = ((TextBox)gvLoanEvents.Rows[rowIndex].FindControl("txtAccruedAmt")).Text;
+
+            if (EventId == 33096)
+            {
+                if (strAccruedIntDate == "")
+                {
+                    LogMessage("Enter Accrued Date");
+                    txtAccruedIntDate.Focus();
+                    return;
+                }
+                if (AccruedAmt == "" || DataUtils.GetDecimal(Regex.Replace(AccruedAmt, "[^0-9a-zA-Z.]+", "")) == 0)
+                {
+                    LogMessage("Enter Accrued Amount");
+                    txtAccruedAmount.Focus();
+                    return;
+                }
+            }
+
+            LoanMaintenanceData.UpdateLoanEvent(LoanEventID, Description, RowIsActive, EventDate, EventId, URL, DataUtils.GetDate(strAccruedIntDate), DataUtils.GetDecimal(Regex.Replace(AccruedAmt, "[^0-9a-zA-Z.]+", "")));
             gvLoanEvents.EditIndex = -1;
 
             BindLoanEventsGrid();

@@ -1437,6 +1437,23 @@
                                         <td colspan="6" style="height: 5px"></td>
                                     </tr>
                                     <tr>
+                                         <td style="width: 150px"><span class="labelClass">Accrued Interest Date</span></td>
+                                        <td style="width: 100px">
+                                            <asp:TextBox ID="txtAccruedIntDate" CssClass="clsTextBoxBlue1" runat="server"></asp:TextBox>
+                                            <ajaxToolkit:CalendarExtender runat="server" ID="CalendarExtender23" TargetControlID="txtAccruedIntDate">
+                                            </ajaxToolkit:CalendarExtender>
+                                        </td>
+                                        <td style="width: 150px"><span class="labelClass">Accrued Interest</span></td>
+                                        <td style="width: 80px">
+                                           <asp:TextBox ID="txtAccruedAmount" CssClass="clsTextBoxBlue1" runat="server"></asp:TextBox>
+                                        </td>
+
+                                        <td colspan="2" style="height: 5px"></td>
+                                    </tr>
+                                     <tr>
+                                        <td colspan="6" style="height: 5px"></td>
+                                    </tr>
+                                    <tr>
                                         <td style="width: 50px"><span class="labelClass">Notes</span></td>
                                         <td colspan="4">
                                             <%--<asp:TextBox ID="" CssClass="clsTextBoxBlueSm" Width="200px" runat="server" Style="margin-left: 0px"></asp:TextBox>--%>
@@ -1495,12 +1512,33 @@
                                                 <asp:DropDownList ID="ddlEvent" CssClass="clsDropDown" runat="server"></asp:DropDownList>
                                             </EditItemTemplate>
                                         </asp:TemplateField>
+
+                                         <asp:TemplateField HeaderText="Accrued Interest Date">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lbltxtAccruedIntDate" runat="Server" Text='<%# Eval("AccruedIntDate", "{0:MM-dd-yyyy}") %>' />
+                                            </ItemTemplate>
+                                            <EditItemTemplate>
+                                                <asp:TextBox ID="txtAccruedIntDate" runat="Server" CssClass="clsTextBoxBlueSm" Text='<%# Eval("AccruedIntDate", "{0:MM-dd-yyyy}") %>'></asp:TextBox>
+                                                <ajaxToolkit:CalendarExtender runat="server" ID="acebdt1" TargetControlID="txtAccruedIntDate"></ajaxToolkit:CalendarExtender>
+                                            </EditItemTemplate>
+                                        </asp:TemplateField>
+                                         <asp:TemplateField HeaderText="Accrued Interest">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblAccruedAmt" runat="Server" Text='<%# Eval("AccruedAmt", "{0:c2}") %>' />
+                                            </ItemTemplate>
+                                            <EditItemTemplate>
+                                                <asp:TextBox ID="txtAccruedAmt" runat="Server" CssClass="clsTextBoxBlueSm" Text='<%# Eval("AccruedAmt") %>'></asp:TextBox>
+                                            </EditItemTemplate>
+                                            <FooterTemplate>
+                                                <asp:Label runat="server" ID="lblFooterTotalAmount" Text=""></asp:Label>
+                                            </FooterTemplate>
+                                        </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Notes">
                                             <ItemTemplate>
                                                 <asp:Label ID="lblDescription" runat="Server" Text='<%# Eval("Description") %>' />
                                             </ItemTemplate>
                                             <EditItemTemplate>
-                                                <asp:TextBox ID="txtDescription" TextMode="multiline" Text='<%# Eval("Description") %>' CssClass="clsTextBoxBlue1" Columns="50" Rows="2" runat="server" Width="480px" Height="60px" />
+                                                <asp:TextBox ID="txtDescription" TextMode="multiline" Text='<%# Eval("Description") %>' CssClass="clsTextBoxBlue1" Columns="20" Rows="2" runat="server" Width="200px" Height="60px" />
                                             </EditItemTemplate>
                                         </asp:TemplateField>
                                          <asp:TemplateField HeaderText="URL">
@@ -1646,6 +1684,11 @@
             <%--toCurrencyControl($('#<%= txtBalanceForward.ClientID%>').val(), $('#<%= txtBalanceForward.ClientID%>'));--%>
             
             //toCurrencyControl($('#<%= txtNoteAmountLoanDetails.ClientID%>').val(), $('#<%= txtNoteAmountLoanDetails.ClientID%>'));
+
+            $('#<%= txtAccruedAmount.ClientID%>').keyup(function () {
+                toCurrencyControl($('#<%= txtAccruedAmount.ClientID%>').val(), $('#<%= txtAccruedAmount.ClientID%>'));
+            });
+            toCurrencyControl($('#<%= txtAccruedAmount.ClientID%>').val(), $('#<%= txtAccruedAmount.ClientID%>'));
 
             $('#<%= ad_txtTransAmount.ClientID%>').keyup(function () {
                 toCurrencyControl($('#<%= ad_txtTransAmount.ClientID%>').val(), $('#<%= ad_txtTransAmount.ClientID%>'));

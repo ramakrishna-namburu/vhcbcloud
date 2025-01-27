@@ -86,7 +86,7 @@
                                 <span class="labelClass">Payee :</span>
                             </td>
                             <td style="width: 370px">
-                                <asp:DropDownList ID="ddlPayee" CssClass="clsDropDown" runat="server" Height="26px" Width="293px">
+                                <asp:DropDownList ID="ddlPayee" CssClass="clsDropDown" runat="server" Height="26px" Width="293px" AutoPostBack="true" OnSelectedIndexChanged="ddlPayee_SelectedIndexChanged">
                                 </asp:DropDownList>
                             </td>
                             <td style="width: 106px"><span class="labelClass">Program:</span></td>
@@ -188,6 +188,17 @@
                             </td>
                             <td style="vertical-align: top; width: 106px;"><span class="labelClass">Created By:</span></td>
                             <td><span class="labelClass" runat="server" id="spnCreatedBy"></span></td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" style="height: 5px"></td>
+                        </tr>
+                         <tr>
+                            <td><span class="labelClass" runat="server" id="spnACHActive" visible="false" style="color: red"><strong>ACH Active - Pay Via ACH?</strong></span></td>
+                            <td colspan="5">
+                                <asp:CheckBox ID="ckbACHActive" CssClass="ChkBox" runat="server" Text=""  Visible="false" />
+                            </td>
+                           
+                          
                         </tr>
                         <tr>
                             <td colspan="6" style="height: 5px"></td>

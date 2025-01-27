@@ -879,6 +879,7 @@ namespace vhcbcloud
                 if(!btnDelete.Visible)
                     updateSpan.Visible = true;
 
+                ckbACHActive.Checked = DataUtils.GetBool(dtEPCR.Rows[0]["ACH"].ToString());
                 //btnCRSubmit.Visible = true;
 
                 //EnableButton(btnPCRTransDetails);
@@ -1090,6 +1091,10 @@ namespace vhcbcloud
 
             lblAvailFund.Text = "0.00";
             lblAvailVisibleFund.Text = "0.00";
+
+            ckbACHActive.Checked = false;
+            ckbACHActive.Visible = false;
+            spnACHActive.Visible = false;
         }
 
         /// <summary>
@@ -1260,6 +1265,8 @@ namespace vhcbcloud
                 ddlPayee.DataBind();
                 if (ddlPayee.Items.Count > 1)
                     ddlPayee.Items.Insert(0, new ListItem("Select", "NA"));
+                else
+                    GetPayeeACHActiveVal();
             }
             catch (Exception ex)
             {
@@ -1690,7 +1697,7 @@ namespace vhcbcloud
                     dtPCR = ProjectCheckRequestData.SubmitPCR(int.Parse(hfProjId.Value), TransDate, int.Parse(ddlProgram.SelectedValue.ToString()),
                         chkLegalReview.Checked, txtVendorId.Text, EligibleAmt, MatchingGrant,
                         decimal.Parse(txtDisbursementAmt.Text), ddlPayee.Items.Count > 0 ? int.Parse(ddlPayee.SelectedValue.ToString()) : 0, int.Parse(ddlStatus.SelectedValue.ToString()),
-                        txtNotes.Text, GetUserId(), lbNODS, CRDate);
+                        txtNotes.Text, GetUserId(), lbNODS, CRDate, ckbACHActive.Checked);
 
                     if (dtPCR.Rows.Count > 0)
                     {
@@ -1730,7 +1737,7 @@ namespace vhcbcloud
                         dtPCR = ProjectCheckRequestData.UpdatePCR(int.Parse(PCRID), int.Parse(hfProjId.Value), TransDate, int.Parse(ddlProgram.SelectedValue.ToString()),
                         chkLegalReview.Checked, txtVendorId.Text, EligibleAmt, MatchingGrant,
                         decimal.Parse(txtDisbursementAmt.Text), int.Parse(ddlPayee.SelectedValue.ToString()), int.Parse(ddlStatus.SelectedValue.ToString()),
-                        txtNotes.Text, GetUserId(), lbNODS, CRDate);
+                        txtNotes.Text, GetUserId(), lbNODS, CRDate, ckbACHActive.Checked);
 
                         hfTransAmt.Value = txtDisbursementAmt.Text;
 
@@ -2472,6 +2479,27 @@ namespace vhcbcloud
             }
             else
                 lblCommittedAvailFunds.Text = CommonHelper.myDollarFormat("0.00");
+        }
+
+        protected void ddlPayee_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GetPayeeACHActiveVal();
+        }
+
+        private void GetPayeeACHActiveVal()
+        {
+            spnACHActive.Visible = false;
+            ckbACHActive.Visible = false;
+
+            if (ddlPayee.SelectedValue != "NA")
+            {
+                bool IsACHActive = ProjectCheckRequestData.GetACHActiveVal(int.Parse(ddlPayee.SelectedValue.ToString()));
+                if (IsACHActive)
+                {
+                    spnACHActive.Visible = true;
+                    ckbACHActive.Visible = true;
+                }
+            }
         }
     }
 }
