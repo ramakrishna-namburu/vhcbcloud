@@ -674,7 +674,7 @@ namespace vhcbcloud
                                 txtEmail.Text, HomePhoneNumber, WorkPhoneNumber, CellPhoneNumber, txtStateVendorId.Text, txtApplicantName.Text, txtFirstName.Text, txtLastName.Text, DataUtils.GetInt(ddlPosition.SelectedValue.ToString()),
                                 txtTitle.Text, null, 0, 0, 0,
                                 0, 0, 0, false, null, null,
-                                0, null, 1, ckbW9.Checked, cbTear1.Checked, cbFileHold.Checked, null, null, txtLegalName.Text, txtUEI.Text, ckbACHActive.Checked); //1=Individual
+                                0, null, 1, ckbW9.Checked, cbTear1.Checked, cbFileHold.Checked, null, null, txtLegalName.Text, txtUEI.Text, ckbACHActive.Checked, txtACHContact.Text, txtACHEmail.Text); //1=Individual
 
                             if (objEntityMaintResult.IsDuplicate)
                             {
@@ -699,7 +699,7 @@ namespace vhcbcloud
                                null, null, 0, 0, 0,
                                0, 0, 0, false, null, null,
                                0, DataUtils.GetInt(ddlDefaultRole.SelectedValue.ToString()), 2, ckbW9.Checked, cbTear1.Checked, cbFileHold.Checked,
-                               txtEIN.Text, txtDUNS.Text, txtLegalName.Text, txtUEI.Text, ckbACHActive.Checked); //2=Organization
+                               txtEIN.Text, txtDUNS.Text, txtLegalName.Text, txtUEI.Text, ckbACHActive.Checked, txtACHContact.Text, txtACHEmail.Text); //2=Organization
                             ClearForm();
                             PopulateEntity(objEntityMaintResult.ApplicantId, DataUtils.GetInt(ddlEntityRole.SelectedValue.ToString()));
                             LogMessage("New Entity Added Successfully");
@@ -710,7 +710,7 @@ namespace vhcbcloud
                                null, HomePhoneNumber, WorkPhoneNumber, CellPhoneNumber, txtStateVendorId.Text, txtApplicantName.Text, null, null, 0,
                                null, txtFarmName.Text, DataUtils.GetInt(ddlFarmType.SelectedValue.ToString()), DataUtils.GetInt(txtAcresInProduction.Text), DataUtils.GetInt(txtAcresOwned.Text),
                                DataUtils.GetInt(txtAcresLeased.Text), DataUtils.GetInt(txtAcresLeasedOut.Text), DataUtils.GetInt(txtTotalAcres.Text), cbIsNoLongerBusiness.Checked, txtNotes.Text, txtAgrEdu.Text,
-                               DataUtils.GetInt(txtYearsManagingForm.Text), DataUtils.GetInt(ddlDefaultRole.SelectedValue.ToString()), 3, ckbW9.Checked, cbTear1.Checked, cbFileHold.Checked, null, null, txtLegalName.Text, txtUEI.Text, ckbACHActive.Checked); //3=Farm
+                               DataUtils.GetInt(txtYearsManagingForm.Text), DataUtils.GetInt(ddlDefaultRole.SelectedValue.ToString()), 3, ckbW9.Checked, cbTear1.Checked, cbFileHold.Checked, null, null, txtLegalName.Text, txtUEI.Text, ckbACHActive.Checked, txtACHContact.Text, txtACHEmail.Text); //3=Farm
                             ClearForm();
                             PopulateEntity(objEntityMaintResult.ApplicantId, DataUtils.GetInt(ddlEntityRole.SelectedValue.ToString()));
                             LogMessage("New Entity Added Successfully");
@@ -736,7 +736,7 @@ namespace vhcbcloud
                                txtTitle.Text, txtFarmName.Text, DataUtils.GetInt(ddlFarmType.SelectedValue.ToString()), DataUtils.GetInt(txtAcresInProduction.Text), DataUtils.GetInt(txtAcresOwned.Text),
                                DataUtils.GetInt(txtAcresLeased.Text), DataUtils.GetInt(txtAcresLeasedOut.Text), DataUtils.GetInt(txtTotalAcres.Text), cbIsNoLongerBusiness.Checked, txtNotes.Text, txtAgrEdu.Text,
                                DataUtils.GetInt(txtYearsManagingForm.Text), DataUtils.GetInt(ddlDefaultRole.SelectedValue.ToString()), Operation, ckbW9.Checked, cbTear1.Checked, cbFileHold.Checked, cbMilestoneActive.Checked,
-                               txtEIN.Text, txtDUNS.Text, txtLegalName.Text, txtUEI.Text, ckbACHActive.Checked);
+                               txtEIN.Text, txtDUNS.Text, txtLegalName.Text, txtUEI.Text, ckbACHActive.Checked, txtACHContact.Text, txtACHEmail.Text);
                         ClearForm();
                         PopulateEntity(DataUtils.GetInt(ddlEntityName.SelectedValue.ToString()), DataUtils.GetInt(ddlEntityRole.SelectedValue.ToString()));
                         LogMessage("Entity Updated Successfully");
@@ -893,6 +893,21 @@ namespace vhcbcloud
             cbTear1.Checked = DataUtils.GetBool(drEntityData["Tier1"].ToString());
             cbFileHold.Checked = DataUtils.GetBool(drEntityData["FileHold"].ToString());
             ckbACHActive.Checked= DataUtils.GetBool(drEntityData["ACHActive"].ToString());
+
+            if (ckbACHActive.Checked)
+            {
+                txtACHContact.Enabled = true;
+                txtACHEmail.Enabled = true;
+                txtACHContact.Text = drEntityData["ACHContact"].ToString();
+                txtACHEmail.Text = drEntityData["ACHEmail"].ToString();
+            }
+            else
+            {
+                txtACHContact.Enabled = false;
+                txtACHEmail.Enabled = false;
+                txtACHContact.Text = "";
+                txtACHEmail.Text = "";
+            }
 
             if (drEntityData["LKApplicantRole"].ToString() == "358")//Primary Applicant
                 cbMilestoneActive.Enabled = false;
@@ -2363,6 +2378,22 @@ namespace vhcbcloud
                 gvNotes.DataBind();
             }
 
+        }
+
+        protected void ckbACHActive_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ckbACHActive.Checked)
+            {
+                txtACHContact.Enabled = true;
+                txtACHEmail.Enabled = true;
+            }
+            else
+            {
+                txtACHContact.Enabled = false;
+                txtACHEmail.Enabled = false;
+                txtACHContact.Text = "";
+                txtACHEmail.Text = "";
+            }
         }
     }
 }

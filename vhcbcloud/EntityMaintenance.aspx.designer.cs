@@ -546,6 +546,15 @@ namespace vhcbcloud
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl Span7;
 
         /// <summary>
+        /// txtACHContact control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtACHContact;
+
+        /// <summary>
         /// Span8 control.
         /// </summary>
         /// <remarks>
@@ -553,6 +562,15 @@ namespace vhcbcloud
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl Span8;
+
+        /// <summary>
+        /// txtACHEmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtACHEmail;
 
         /// <summary>
         /// dvFarm control.

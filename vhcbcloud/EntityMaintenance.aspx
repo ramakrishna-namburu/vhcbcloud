@@ -301,16 +301,20 @@
                                             <span class="labelClass" runat="server" id="Span6">ACH Active</span>
                                         </td>
                                         <td class="modal-sm" style="width: 264px">
-                                            <asp:CheckBox ID="ckbACHActive" CssClass="ChkBox" runat="server" Text="" Enabled="false" />
+                                            <asp:CheckBox ID="ckbACHActive" CssClass="ChkBox" runat="server" Text="" Enabled="false"  AutoPostBack="true" OnCheckedChanged="ckbACHActive_CheckedChanged"/>
                                         </td>
                                         <td>
-                                            <span class="labelClass" runat="server" id="Span7"></span>
+                                            <span class="labelClass" runat="server" id="Span7">ACH Contact</span>
                                         </td>
-                                        <td></td>
                                         <td>
-                                            <span class="labelClass" runat="server" id="Span8"></span>
+                                             <asp:TextBox ID="txtACHContact" runat="server" CssClass="clsTextBoxBlue1" MaxLength="50" Enabled="false"></asp:TextBox>
                                         </td>
-                                        <td></td>
+                                        <td>
+                                            <span class="labelClass" runat="server" id="Span8">ACH Email</span>
+                                        </td>
+                                        <td>
+                                            <asp:TextBox ID="txtACHEmail" runat="server" CssClass="clsTextBoxBlue1" MaxLength="50" Enabled="false"></asp:TextBox>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td colspan="6" style="height: 5px"></td>
